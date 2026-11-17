@@ -1,5 +1,5 @@
 // 程序合成的音效与氛围音乐（WebAudio，无音频文件）。
-type Sfx = 'click' | 'dice' | 'door' | 'card' | 'hurt' | 'gain' | 'step' | 'haunt' | 'win' | 'lose' | 'heart' | 'turn';
+type Sfx = 'hit' | 'clang' | 'click' | 'dice' | 'door' | 'card' | 'hurt' | 'gain' | 'step' | 'haunt' | 'win' | 'lose' | 'heart' | 'turn';
 
 const KEY = 'ghost-audio';
 export const audioPrefs: { muted: boolean; music: number; sfx: number } = (() => {
@@ -96,6 +96,16 @@ export function sfx(name: Sfx) {
       break;
     case 'card': noise(0.15, { freq: 4000, q: 0.7, vol: 0.15 }); tone(880, 0.2, { type: 'triangle', vol: 0.05, delay: 0.05 }); break;
     case 'hurt': tone(140, 0.35, { type: 'square', vol: 0.12, slide: 0.5 }); noise(0.2, { freq: 400, vol: 0.2 }); break;
+    case 'hit':
+      noise(0.25, { freq: 900, q: 0.8, vol: 0.45 });
+      tone(110, 0.3, { type: 'square', vol: 0.18, slide: 0.4 });
+      tone(55, 0.45, { type: 'sine', vol: 0.4, slide: 0.6 });
+      break;
+    case 'clang':
+      tone(1320, 0.6, { type: 'triangle', vol: 0.12, slide: 0.98 });
+      tone(1980, 0.4, { type: 'sine', vol: 0.06 });
+      noise(0.08, { freq: 5000, q: 2, vol: 0.2 });
+      break;
     case 'gain': tone(523, 0.15, { type: 'triangle', vol: 0.1 }); tone(784, 0.25, { type: 'triangle', vol: 0.1, delay: 0.08 }); break;
     case 'heart':
       tone(60, 0.18, { type: 'sine', vol: 0.4 });

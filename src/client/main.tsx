@@ -11,6 +11,7 @@ import { startMusic } from './audio';
 const Room = lazy<{ id: string }>(() => import('./pages/Room').then((m) => m.Room));
 const Codex = lazy(() => import('./pages/Codex').then((m) => m.Codex));
 const Credits = lazy(() => import('./pages/Credits').then((m) => m.Credits));
+const DevAttack = import.meta.env.DEV ? lazy(() => import('./dev/DevAttack').then((m) => m.DevAttack)) : null;
 
 function App() {
   useEffect(() => {
@@ -21,7 +22,8 @@ function App() {
   useEffect(() => { if (r.name !== 'room') startMusic('lobby'); }, [r.name]);
 
   let page;
-  if (r.name === 'codex') page = <Codex />;
+  if (r.name === 'dev' && DevAttack) page = <DevAttack />;
+  else if (r.name === 'codex') page = <Codex />;
   else if (r.name === 'credits') page = <Credits />;
   else if (u === undefined) page = <div class="hero"><div class="empty-hint">加载中…</div></div>;
   else if (!u) page = <Login />;

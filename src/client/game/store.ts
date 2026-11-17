@@ -23,6 +23,17 @@ export const focusFloor = signal<Floor>('G');
 export const fast = signal<boolean>(localStorage.getItem('ghost-fast') === '1');
 /** 当前回合事件中最近一次移动的格子（地图高亮用） */
 export const lastMoved = signal<string | null>(null);
+/** 刚受到伤害的棋子（p<seat> / m<id>），地图上闪红震动 */
+export const hits = signal<Record<string, number>>({});
+export function markHit(key: string, delay = 0) {
+  setTimeout(() => {
+    hits.value = { ...hits.value, [key]: Date.now() };
+    setTimeout(() => {
+      const { [key]: _, ...rest } = hits.value;
+      hits.value = rest;
+    }, 900);
+  }, fast.value ? delay / 2 : delay);
+}
 
 const queue: Overlay[] = [];
 let timer: ReturnType<typeof setTimeout> | undefined;
@@ -39,7 +50,7 @@ function duration(o: Overlay): number | null {
     case 'monsterTurn': return 1100 * k;
     case 'roll': return 1500 * k;
     case 'hauntRoll': return 2600 * k;
-    case 'attack': return 2200 * k;
+    case 'attack': return null; // 动画自己结束
     case 'card': return o.e.how === 'event' ? 3600 * k : 2200 * k;
     case 'haunt': return null; // 需要点击
     case 'end': return null;
@@ -51,7 +62,8 @@ function playNext() {
   const o = queue.shift() ?? null;
   overlay.value = o;
   if (!o) return;
-  if (o.kind === 'roll' || o.kind === 'hauntRoll' || o.kind === 'attack') sfx('dice');
+  if (o.kind === 'roll' || o.kind === 'hauntRoll') sfx('dice');
+  if (o.kind === 'attack' && o.e.loser) markHit('seat' in o.e.loser ? 'p' + o.e.loser.seat : 'm' + o.e.loser.monster, 3200);
   if (o.kind === 'card') sfx('card');
   if (o.kind === 'haunt') sfx('haunt');
   if (o.kind === 'turn' && o.mine) sfx('turn');
@@ -113,7 +125,11 @@ export function onGameMsg(m: GameMsg) {
       }
       case 'place': lastMoved.value = e.to; if (e.seat === m.you) focusFloor.value = parseKey(e.to).floor; break;
       case 'tile': sfx('door'); break;
-      case 'trait': if (e.seat === m.you) sfx(e.to > e.from ? 'gain' : 'hurt'); break;
+      case 'trait':
+        if (e.seat === m.you) sfx(e.to > e.from ? 'gain' : 'hurt');
+        if (e.to < e.from) markHit('p' + e.seat, queue.length ? 1500 : 0);
+        break;
+      case 'stun': markHit('m' + e.monster, queue.length ? 1500 : 0); break;
       case 'death': sfx('lose'); break;
     }
   }

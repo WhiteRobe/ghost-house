@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks';
 import { ROOMS, EXPLORERS } from '../../content';
 import { DX, DY, hasDoor, parseKey, tileKey, type Dir, type Floor, type GameState } from '../../shared/types';
 import { art } from '../art';
-import { lastMoved } from './store';
+import { lastMoved, hits } from './store';
 
 const T = 120; // 每格像素
 const WALL = 7;
@@ -169,11 +169,13 @@ export function MapView(p: MapProps) {
                 const ex = EXPLORERS[pl.explorer];
                 return (
                   <g key={o.id} class={`piece ${pl.dead ? 'dead' : ''} ${s.turn === pl.seat ? 'active' : ''} ${o.seat === p.you ? 'me' : ''}`} style={{ transform: `translate(${x}px,${y}px)` }}>
+                    <g class={hits.value['p' + o.seat] ? 'hit' : ''}>
                     <circle r="14" fill={ex?.color ?? '#888'} />
                     <clipPath id={`pc${o.seat}`}><circle r="12" /></clipPath>
                     {art.explorer(pl.explorer) ? <image href={art.explorer(pl.explorer)} x="-12" y="-12" width="24" height="24" clip-path={`url(#pc${o.seat})`} preserveAspectRatio="xMidYMin slice" /> : <text y="5" class="p-letter">{ex?.name.slice(0, 1)}</text>}
                     <circle r="14" class="ring" />
                     {pl.side === 'traitor' && <text y="-17" class="traitor-mark">☠</text>}
+                    </g>
                     <title>{pl.name}</title>
                   </g>
                 );
@@ -182,9 +184,11 @@ export function MapView(p: MapProps) {
               return (
                 <g key={o.id} class={`piece monster ${m.stunned ? 'stunned' : ''} ${p.pick?.includes('m' + m.id) ? 'pickable' : ''}`} style={{ transform: `translate(${x}px,${y}px)` }}
                   onClick={click(() => p.onTile?.('m' + m.id))}>
+                  <g class={`m-body ${hits.value['m' + m.id] ? 'hit' : ''}`}>
                   <rect x="-13" y="-13" width="26" height="26" rx="6" />
                   <clipPath id={`mc${m.id}`}><rect x="-11" y="-11" width="22" height="22" rx="5" /></clipPath>
                   {art.monster(m.icon) ? <image href={art.monster(m.icon)} x="-11" y="-11" width="22" height="22" clip-path={`url(#mc${m.id})`} /> : <text y="5" class="m-letter">{m.name.slice(0, 1)}</text>}
+                  </g>
                   {m.hp != null && <text y="26" class="m-hp">{m.hp}</text>}
                   <title>{m.name}{m.stunned ? '（眩晕）' : ''}</title>
                 </g>

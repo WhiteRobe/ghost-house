@@ -3,6 +3,7 @@ import { TRAIT_NAME, type GameState } from '../../shared/types';
 import type { Brief, RoomInfo } from '../../shared/protocol';
 import { CARDS, EXPLORERS, SCENARIOS } from '../../content';
 import { CardView, Die, Portrait } from './parts';
+import { AttackScene } from './AttackScene';
 import { dismissOverlay, overlay, fast } from './store';
 import { seatName, targetName } from './describe';
 import { art, SIDE_NAME } from '../art';
@@ -83,22 +84,8 @@ export function OverlayLayer({ s, you, side, brief, onOpenBrief, room, onRematch
         </div>
       );
     }
-    case 'attack': {
-      const e = o.e;
-      return (
-        <div class="ov ov-roll" onClick={close}>
-          <div class="ov-box wide">
-            <div class="ov-label">⚔ {targetName(s, e.from)} 攻击 {targetName(s, e.to)} · {TRAIT_NAME[e.trait]}</div>
-            <div class="vs">
-              <div><div class="muted small">{targetName(s, e.from)}</div><Dice dice={e.a} /><b>{e.a.reduce((a, b) => a + b, 0)}</b></div>
-              <div class="vs-x">VS</div>
-              <div><div class="muted small">{targetName(s, e.to)}</div><Dice dice={e.d} /><b>{e.d.reduce((a, b) => a + b, 0)}</b></div>
-            </div>
-            <div class="ov-total bad">{e.loser ? `${targetName(s, e.loser)} 受到 ${e.damage} 点伤害` : '势均力敌'}</div>
-          </div>
-        </div>
-      );
-    }
+    case 'attack':
+      return <AttackScene s={s} e={o.e} onDone={close} key={JSON.stringify(o.e)} />;
     case 'card': {
       const e = o.e;
       const c = CARDS[e.card];
