@@ -147,7 +147,7 @@ export class Game {
       console.error('engine crashed', e);
       this.errors.push('crash: ' + String((e as Error)?.stack ?? e));
       this.pending = null;
-      if (!this.state.winner) this.setWinner({ side: 'none', seats: [], title: '鬼屋吞没了一切', text: '（引擎出错，对局提前结束）' });
+      if (!this.state.winner) this.setWinner({ side: 'none', seats: [], title: '对局中断', text: '程序出错，这局只能提前结束了。' });
     }
     if (this.pending && this.checkWin()) this.pending = null;
     if (!this.pending && this.state.phase !== 'end') {
@@ -187,7 +187,7 @@ export class Game {
       }
       seat = next;
     }
-    this.setWinner({ side: 'none', seats: [], title: '漫漫长夜', text: '这一夜似乎永远不会结束。' });
+    this.setWinner({ side: 'none', seats: [], title: '天一直没亮', text: '对局拖得太久，按平局结束。' });
   }
 
   private *roundEnd(): Gen {
@@ -202,12 +202,12 @@ export class Game {
       s.haunt.round++;
       if (this.haunt?.onRoundEnd) yield* this.safe(this.haunt.onRoundEnd(this));
       if (s.haunt.round > HAUNT_ROUND_LIMIT && !s.winner) {
-        this.setWinner({ side: 'none', seats: [], title: '天亮了', text: '天亮之前谁也没能了结此事，鬼屋重归寂静。' });
+        this.setWinner({ side: 'none', seats: [], title: '天亮了', text: '熬到天亮，谁也没赢。' });
       }
     } else if (s.phase === 'explore') {
       const left = s.decks.rooms.B + s.decks.rooms.G + s.decks.rooms.U;
       if (left === 0 || s.round > EXPLORE_ROUND_LIMIT) {
-        this.log('房子再也藏不住它的秘密了……', 'haunt');
+        this.log('房间翻完了，异变强制开始。', 'haunt');
         const omen = this.secret.lastOmen ?? OMEN_IDS[this.rng.int(OMEN_IDS.length)];
         yield* this.beginHaunt((this.roundStart + this.n - 1) % this.n, this.hauntFor(omen));
       }
@@ -664,7 +664,7 @@ export class Game {
     const base = START_ROOMS[4][0];
     if (this.distance(hall, base) === Infinity) {
       this.link(hall, base);
-      this.log('走廊尽头的墙板松动了，后面是一道通往地下室的暗梯。', 'info');
+      this.log('走廊尽头有块墙板是活的，推开是下地下室的窄楼梯。', 'info');
     }
     for (const p of this.state.players) {
       if (!p.dead && this.distance(p.tile, hall) === Infinity) this.link(p.tile, hall);
@@ -904,8 +904,8 @@ export class Game {
           const ok = sum >= 5;
           this.emit({ t: 'hauntRoll', seat, dice, total: sum, need: `「${def.name}」· 5 点以上触发`, ok });
           if (ok) yield* this.beginHaunt(seat, def.haunt);
-          else this.log('……房子低语着，但时机未到。', 'haunt');
-        } else this.log('……房子低语着，但时机未到。', 'haunt');
+          else this.log('楼上咯吱响了一声，又没动静了。', 'haunt');
+        } else this.log('楼上咯吱响了一声，又没动静了。', 'haunt');
       }
       return id;
     }
@@ -1303,7 +1303,7 @@ export class Game {
     const ok = !early && (sum >= 5 || n >= total || (!!this.config.debugHaunt && n >= 2));
     this.emit({ t: 'hauntRoll', seat, dice, total: sum, need: n >= total ? '最后一个凶兆，必定触发' : '5 点以上触发', ok });
     if (ok) yield* this.beginHaunt(seat, this.hauntFor(this.secret.lastOmen!));
-    else this.log('房子还在沉睡……', 'haunt');
+    else this.log('这次没事。', 'haunt');
   }
 
   private *classicHauntRoll(seat: number): Gen {
@@ -1313,7 +1313,7 @@ export class Game {
     const ok = sum < n;
     this.emit({ t: 'hauntRoll', seat, dice, total: sum, need: `小于 ${n} 触发`, ok });
     if (ok) yield* this.beginHaunt(seat, this.hauntFor(this.secret.lastOmen!));
-    else this.log('房子还在沉睡……', 'haunt');
+    else this.log('这次没事。', 'haunt');
   }
 
   /** 异变开始 */
@@ -1335,8 +1335,8 @@ export class Game {
     s.haunt = { id: def.id, title: def.title, type: def.type, intro: def.intro, revealer, traitor, round: 1, vars: {}, revealed: [] };
     this.emit({ t: 'haunt', id: def.id, title: def.title, revealer, traitor });
     this.log(`异变降临：${def.title}`, 'haunt');
-    if (traitor != null) this.log(`${s.players[traitor].name} 成为了背叛者！`, 'haunt');
-    else if (def.type === 'hidden') this.log('你们之中藏着一个背叛者……', 'haunt');
+    if (traitor != null) this.log(`${s.players[traitor].name} 是背叛者。`, 'haunt');
+    else if (def.type === 'hidden') this.log('背叛者就在你们中间，但没人知道是谁。', 'haunt');
     this.ensureConnected();
     if (def.setup) yield* this.safe(def.setup(this));
     this.ensureConnected();
@@ -1388,7 +1388,7 @@ export class Game {
     this.secret.hidden = null;
     this.p(t).side = 'traitor';
     if (this.state.haunt) this.state.haunt.traitor = t;
-    this.log(`${this.p(t).name} 露出了真面目——背叛者！`, 'haunt');
+    this.log(`${this.p(t).name} 露馅了：他就是背叛者。`, 'haunt');
   }
 
   /** 把一条规则公开到日志（「执行即公开」） */
@@ -1441,7 +1441,7 @@ export class Game {
     const alive = this.alive();
     const type = this.haunt.type;
     if (!alive.length) {
-      this.win('none', '黑暗吞噬了每一个人。');
+      this.win('none', '没有一个人活着出来。');
       return true;
     }
     if (type === 'ffa') {

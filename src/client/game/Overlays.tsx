@@ -79,7 +79,7 @@ export function OverlayLayer({ s, you, side, brief, onOpenBrief, room, onRematch
           <div class="ov-box">
             <div class="ov-label">异变检定 · {e.need}</div>
             <Dice dice={e.dice} />
-            <div class={`ov-total ${e.ok ? 'bad' : ''}`}>{e.total}{e.ok ? ' —— 房子醒了' : ' —— 还在沉睡'}</div>
+            <div class={`ov-total ${e.ok ? 'bad' : ''}`}>{e.total}{e.ok ? '，异变开始' : '，没事'}</div>
           </div>
         </div>
       );

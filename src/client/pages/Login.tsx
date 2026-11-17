@@ -46,7 +46,7 @@ export function Login() {
       <div class="hero-bg"><Img src={art.ui('cover')} /></div>
       <div class="hero-card">
         <h1 class="hero-title">鬼屋</h1>
-        <div class="hero-sub">一栋老洋楼，一群闯入者，一个藏在你们之中的背叛者</div>
+        <div class="hero-sub">半夜进了老洋楼的几个人里，有一个会反水</div>
         <form class="panel" onSubmit={submit}>
           <div class="tabs">
             <button type="button" class={tab === 'login' ? 'on' : ''} onClick={() => setTab('login')}>登录</button>
