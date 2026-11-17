@@ -1,0 +1,993 @@
+{
+  "style": {
+    "suffix": "dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+    "setting": "1930s Shanghai concession Western-style mansion blending Chinese and Western design; modern-day intruders at midnight; Chinese folk horror",
+    "floors": {
+      "B": "basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains",
+      "G": "ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight",
+      "U": "upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows"
+    }
+  },
+  "items": [
+    {
+      "kind": "rooms",
+      "id": "entrance",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, grand entrance foyer, black-and-white encaustic tile floor in a geometric pattern, wrought-iron carved gate at one edge, umbrella stand, a small Chinese lacquer shrine table with an incense burner, scattered wet leaves blown in, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "hallway",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, long corridor with a faded red patterned runner carpet over teak floorboards, a stopped grandfather clock against the wall, narrow side tables with porcelain vases, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "stairs",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, grand curving teak staircase seen from above spiralling upward, carved banister thick with dust, art deco tile landing, a brass stair rod, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "upper-landing",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, square upstairs landing at the top of the stairs, four closed carved wooden doors on each side, worn Persian rug, a small lit oil lamp on a stand, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "basement-landing",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, bottom of wet stone stairs, puddles on uneven flagstones, rusted iron railings, a hanging bare bulb, rust-red stains, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "furnace",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, boiler room with a huge cast-iron furnace, glowing ember-red door half open, coal shovel, peeling scorched walls, pipes along the edges, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "wine-cellar",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, wine cellar with rows of oak barrels with faded foreign labels, one Chinese clay rice-wine jar with a fresh mud seal, straw on the stone floor, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "well",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, an old blue-brick well in the center of a stone room, faded red cords wrapped around the rim, black glossy water reflecting candlelight, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "morgue",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, old morgue with iron tables covered by yellowed white sheets showing still shapes beneath, wooden tags, tiled drain in the floor, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "crypt",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, low vaulted crypt with three vermilion-lacquered Chinese coffins side by side, peach-wood nails on the lids, one nail loose, paper money scattered, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "underground-river",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, a cold dark underground river flowing across the tile, stone banks on two sides, unlit paper river lanterns floating on black water, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "coal-room",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, coal storage room with a waist-high coal heap and a shovel stuck in it, coal dust with a trail of tiny bare footprints leading into a wall, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "water-prison",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, flooded water dungeon behind iron bars, waist-deep stagnant murky water filling the floor, rusted iron rings on the walls, ripples, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "cellar-hatch",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, wooden floorboards with an open trapdoor with a brass ring, steep stone steps descending into darkness, dust motes, a dropped lantern, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "kitchen",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, old kitchen with a brick Chinese stove and a large steaming iron wok, chopping board with a gleaming cleaver, hanging dried herbs, tiled floor, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "dining",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, long dining table set with twelve silver place settings, each with a bowl of heaped white rice with chopsticks standing upright in it, carved chairs, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "ballroom",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, ballroom with polished parquet floor, a cobwebbed crystal chandelier seen from above, a gramophone in the corner, scattered sheet music, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "ancestral-hall",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, ancestral hall with an offering altar crowded with black lacquered ancestor tablets, bronze incense burner with three half-burnt incense sticks, red cushions, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "garden",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, outdoor overgrown back garden, knee-high wild grass, a rockery, an empty swing, dark blood-red roses under moonlight, mossy flagstone path, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "opera-stage",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, a small traditional Chinese opera stage built inside the mansion, red silk curtains half open, gongs and drums on the boards, painted wooden pillars, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "servants",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, cramped servants' quarters with four narrow wooden plank beds, neatly folded quilts, yellow paper slips under each pillow, a washbasin, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "main-hall",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, high main hall draped with red silk, a faded red double-happiness paper motif on the floor rug, rosewood taishi armchairs, a tiny bridal gown draped on a chair, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "master-bedroom",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, master bedroom with a carved Chinese canopy bed with heavy drawn curtains, a body-shaped dent in the bedding, lacquered wardrobe, embroidered rug, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "nursery",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, nursery with a gently rocking wooden cradle, a rattle drum toy, crayon family drawings pinned on the walls, scattered wooden toys, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "attic",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, attic under sloped roof beams, stacked camphor-wood chests, one chest with deep scratch marks around the latch, dust and rafters, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "balcony",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, outdoor balcony with wrought-iron railings, cracked tiles, thick fog swallowing everything beyond the railing, a forgotten rattan chair, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "dressing",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, dressing room with a vanity table neatly arranged with rouge and powder boxes, an ivory comb with long hairs, an oval mirror clouded with mist, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "clock-tower",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, clock tower room filled with huge interlocking brass gears, a motionless pendulum, the back of a clock face with vermilion markings, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "library",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, study room with floor-to-ceiling bookshelves mixing Chinese thread-bound books and Western volumes, a desk with an open handwritten chronicle and inkstone, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "chapel",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, small Buddhist shrine room with an altar niche holding a statue whose head is covered by red cloth, a wooden fish drum, candles and offerings, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "storeroom",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, storeroom crowded with old furniture draped in white dust sheets, lumpy shapes of uneven heights, a few crates, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "collapsed",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, collapsed bedroom with half the floor caved into a gaping dark hole, charred roof beams slanting down, broken floorboards and debris, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "laundry-chute",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, laundry room with a dark metal laundry chute opening in the wall, mouldy bedsheets spilling out, wicker baskets, wet floor, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "dumbwaiter",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, small service room with a hand-cranked dumbwaiter box set into the wall, frayed hemp ropes with dark stains, a crank wheel, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "secret-passage",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, narrow secret passage behind a bookcase, a tight gap between walls, rolled yellow talisman papers stuffed in the cracks, cobwebs, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "drill-room",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, martial arts training room with worn blue-brick floor, plum-blossom wooden posts, a wooden training dummy with blade marks, stone weights in the corner, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "bathroom",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, bathroom with a Western cast-iron clawfoot bathtub full of water with floating flower petals, dripping brass faucet, hexagonal tiles, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "darkroom",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, photographic darkroom lit by a single red safelight, a row of dripping photographs hanging on a line, developing trays on a bench, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "music-room",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, music room with a black upright piano, a broken-stringed pipa lying on top, piano bench, fine incense ash on the keys, sheet music, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "guest-room",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, guest room with a freshly made bed, an old invitation card on the pillow, a small writing desk, lace curtains, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "conservatory",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, glass-domed conservatory overgrown with wild plants, vines climbing iron frames, potted ferns, pale finger-like roots poking from the soil, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "vault",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, small vault room with a half-open heavy German steel safe door, stacks of silver dollars, old deeds and red-paper bundles of joss paper, 1930s Shanghai concession-era Western-style mansion with Chinese elements, basement mood: damp stone brick floor, cold grey-teal tones, moss and water stains, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "junk-room",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, junk room piled to the ceiling with broken rattan chairs, legless tables and a chipped red bridal sedan chair, precarious heaps, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "gallery",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, portrait gallery corridor with oil portraits of a family hung on the walls, from a patriarch in a mandarin jacket to a young lady in Western dress, long rug, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "armory",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, armory with weapon racks of dusty Chinese swords, spears and halberds, an old hunting rifle mounted at the center, wooden floor, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "tea-room",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, tea room with a red sandalwood tea table, a gaiwan tea set freshly poured with a faint lipstick mark on one cup rim, a folding screen, 1930s Shanghai concession-era Western-style mansion with Chinese elements, upper floor mood: dark purple damask wallpaper edges, faded rugs, dusky violet shadows, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "rooms",
+      "id": "mirror-corridor",
+      "prompt": "top-down bird's-eye view of a single square room tile for a board game, looking straight down at the floor and furniture, walls visible only as a thin border around the edges, no people, no characters, corridor with walls lined with bronze mirrors of various sizes reflecting an endlessly long hallway, a tiny red figure far away in a reflection, 1930s Shanghai concession-era Western-style mansion with Chinese elements, ground floor mood: warm brown carved wood, patterned encaustic tiles, amber lamplight, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 768
+    },
+    {
+      "kind": "explorers",
+      "id": "lin",
+      "prompt": "portrait, upper body, facing viewer, 28-year-old Chinese man, popular ghost-hunting livestreamer, trendy hoodie and bomber jacket, phone gimbal and ring light in hand, forced brave grin hiding fear, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "zhao",
+      "prompt": "portrait, upper body, facing viewer, 58-year-old Chinese man, retired firefighter, sturdy build, grey crew cut, faded firefighter jacket over a work shirt, stern skeptical expression, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "su",
+      "prompt": "portrait, upper body, facing viewer, 24-year-old Chinese woman, history graduate student, glasses, long hair in a low ponytail, beige trench coat, holding an old notebook, curious and focused, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "chen",
+      "prompt": "portrait, upper body, facing viewer, 31-year-old Chinese man, cybersecurity engineer, short messy hair, black technical jacket, backpack with sensors and cables, a handheld EMF meter, calm analytical look, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "xiaoman",
+      "prompt": "portrait, upper body, facing viewer, 13-year-old Chinese middle-school kid, small and wiry, school tracksuit uniform, scraped knees, a flashlight, mischievous but nervous wide eyes, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "ajiu",
+      "prompt": "portrait, upper body, facing viewer, 22-year-old Chinese delivery rider, yellow food-delivery jacket and helmet pushed back, holding a takeout bag, wary confused expression, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "zhou",
+      "prompt": "portrait, upper body, facing viewer, 62-year-old Chinese auntie, square-dance team leader, permed short hair, bright floral padded jacket, a fan in hand, fearless determined expression, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "fang",
+      "prompt": "portrait, upper body, facing viewer, 45-year-old Chinese man, self-proclaimed feng shui master, tang-style jacket, prayer bead bracelet, holding a luopan compass, uneasy frowning face, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "xuanqing",
+      "prompt": "portrait, upper body, facing viewer, 50-year-old Taoist priest, grey Taoist robe, hair in a topknot with a wooden pin, a thin beard, an old wooden sword on his back, serene watchful gaze, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "anna",
+      "prompt": "portrait, upper body, facing viewer, 35-year-old woman of mixed Chinese and European heritage, psychotherapist, shoulder-length hair, knit sweater and wool coat, composed but unsettled expression, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "shen",
+      "prompt": "portrait, upper body, facing viewer, 30-year-old Chinese woman, stage actress, elegant features, modern black coat over a vintage qipao costume, red lipstick, haunted dreamy expression, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "explorers",
+      "id": "oldk",
+      "prompt": "portrait, upper body, facing viewer, 66-year-old Chinese man, antique dealer, bald with round spectacles, old cardigan and flat cap, a jeweler's loupe on a chain, sly knowing smile, modern-day clothing, background of a dim corridor in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, faded wallpaper and a flickering lamp behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 512,
+      "h": 640
+    },
+    {
+      "kind": "cards",
+      "id": "mirror",
+      "prompt": "card illustration, close-up still life, an antique round Chinese bronze mirror with a carved back, its polished face showing a blurred reflection that seems slightly out of sync, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "effigy",
+      "prompt": "card illustration, close-up still life, a Chinese paper funeral effigy figure with painted rosy cheeks and a faint curved smile, standing against a dark wall, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "watch",
+      "prompt": "card illustration, close-up still life, an old silver pocket watch with its hands stopped at 3:17, open lid, chain coiled on a velvet cloth, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "jade",
+      "prompt": "card illustration, close-up still life, a jade pendant with a thin red vein inside like a blood vessel, hanging from a red cord, faint inner glow, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "cat",
+      "prompt": "card illustration, close-up still life, a black cat with glowing amber eyes sitting on a carved wooden floor, looking up at the viewer, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "diary",
+      "prompt": "card illustration, close-up still life, an old leather-bound diary lying open, handwritten pages with still-wet ink, a dried flower pressed inside, no legible text, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "sword",
+      "prompt": "card illustration, close-up still life, a Taoist peach-wood sword with faded carved talisman runes, red tassel, resting on a lacquered table, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "shoe",
+      "prompt": "card illustration, close-up still life, a single embroidered red silk bound-style slipper, its sole damp, on a wet floorboard, puddle around it, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "veil",
+      "prompt": "card illustration, close-up still life, a red bridal veil draped over an empty chair, gold embroidered phoenix trim, softly rippling as if someone beneath it, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "axe",
+      "prompt": "card illustration, close-up still life, a red firefighter's axe with peeling paint and a gleaming sharp edge, leaning against a carved door frame, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "crowbar",
+      "prompt": "card illustration, close-up still life, a heavy steel crowbar lying across a half-pried wooden crate, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "flare-gun",
+      "prompt": "card illustration, close-up still life, an orange marine flare gun with one cartridge beside it, on a dusty floor, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "bell",
+      "prompt": "card illustration, close-up still life, a Taoist brass ritual bell with a three-pronged handle, faint ripples in the air around it, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "amulet",
+      "prompt": "card illustration, close-up still life, a small triangular folded talisman wrapped in red cloth on a red string, resting in an open palm, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "gloves",
+      "prompt": "card illustration, close-up still life, a pair of worn canvas work gloves with dark fingerprint smudges on the palms, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "sneakers",
+      "prompt": "card illustration, close-up still life, a pair of modern running shoes placed neatly side by side on an old tiled floor, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "notebook",
+      "prompt": "card illustration, close-up still life, a battered spiral notebook with the last pages torn out, sketches and scribbles, a pen clipped on, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "flashlight",
+      "prompt": "card illustration, close-up still life, a powerful tactical flashlight casting a bright beam into darkness, something shadowy shrinking away at the edge, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "compass",
+      "prompt": "card illustration, close-up still life, a Chinese luopan feng shui compass with concentric rings, the magnetic needle trembling, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "prayer-beads",
+      "prompt": "card illustration, close-up still life, a string of 108 wooden Buddhist prayer beads coiled on a temple cloth, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "lighter",
+      "prompt": "card illustration, close-up still life, a metal flip lighter with a small flame pushing back the darkness, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "helmet",
+      "prompt": "card illustration, close-up still life, a yellow plastic hard hat with a scuffed brim lying on rubble, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "headphones",
+      "prompt": "card illustration, close-up still life, modern over-ear noise-cancelling headphones resting on an antique carved table, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "medkit",
+      "prompt": "card illustration, close-up still life, a first-aid kit with a faded pink cross, open, fresh bandages inside, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "painkiller",
+      "prompt": "card illustration, close-up still life, a blister pack of painkiller tablets with two missing, beside a glass of water, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "talisman",
+      "prompt": "card illustration, close-up still life, a yellow Taoist talisman paper with vermilion cinnabar brush strokes, glowing faintly, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "matches",
+      "prompt": "card illustration, close-up still life, an old Chinese matchbox with a vintage qipao lady illustration, a few matches spilled, one lit, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "rope",
+      "prompt": "card illustration, close-up still life, a coil of modern climbing rope with a professional knot, carabiner attached, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "phone",
+      "prompt": "card illustration, close-up still life, a smartphone with a cracked screen showing a low-battery glow, lying on a dusty floor, lit eerie photos on screen, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "energy-drink",
+      "prompt": "card illustration, close-up still life, an aluminum energy drink can on a dusty windowsill, condensation droplets, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "incense",
+      "prompt": "card illustration, close-up still life, an unopened bundle of joss incense sticks wrapped in red paper, beside a small bronze censer, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "whisper",
+      "prompt": "card illustration, close-up still life, a shadowy pale shape leaning close behind a person's ear in a dark corridor, only the back of the listener visible, breath mist, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "rat",
+      "prompt": "card illustration, close-up still life, a swarm of rats streaming out of a crack in the baseboard in an orderly line across old floorboards, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "old-photo",
+      "prompt": "card illustration, close-up still life, a yellowed sepia family photograph of seven people in front of the mansion, a faint eighth figure in the back, lying on a desk, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "chandelier",
+      "prompt": "card illustration, close-up still life, a crystal chandelier swaying on a creaking iron chain, about to fall, shards glinting, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "stuck-door",
+      "prompt": "card illustration, close-up still life, a heavy carved wooden door with a brass handle, firmly shut, faint light under the gap, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "blood-handprint",
+      "prompt": "card illustration, close-up still life, rows of small red cinnabar handprints climbing a wall from floor to ceiling, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "old-radio",
+      "prompt": "card illustration, close-up still life, a 1930s wooden vacuum-tube radio glowing on its own on a side table, dial lit, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "footsteps",
+      "prompt": "card illustration, close-up still life, a dark ceiling with plaster dust falling, faint shadows of footsteps seen through floorboard gaps above, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "cold-hand",
+      "prompt": "card illustration, close-up still life, a pale long-nailed hand emerging from darkness gripping a wrist, subtle and not violent, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "rotten-floor",
+      "prompt": "card illustration, close-up still life, rotten wooden floorboards cracking and sagging into darkness below, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "shadow-puppet",
+      "prompt": "card illustration, close-up still life, a paper lattice window with Chinese shadow puppet figures performing on it with no light source, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "red-thread",
+      "prompt": "card illustration, close-up still life, a red thread winding across the floor and wrapping around an ankle, its other end vanishing under a door, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "mirror-face",
+      "prompt": "card illustration, close-up still life, a vanity mirror reflecting a smiling face that does not match the solemn viewer, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "crying-child",
+      "prompt": "card illustration, close-up still life, a small hole in a cracked plaster wall with a child's tiny shoe beside it, darkness inside, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "portrait-eyes",
+      "prompt": "card illustration, close-up still life, an oil portrait of an old patriarch in a long gown seated in a taishi chair, eyes subtly following the viewer, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "opera-mask",
+      "prompt": "card illustration, close-up still life, a wall covered with Peking opera face masks in red, white and black, all facing the doorway, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "camphor-chest",
+      "prompt": "card illustration, close-up still life, a camphor-wood chest with a paper seal strip across the lid, brass lock, dust, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "hidden-drawer",
+      "prompt": "card illustration, close-up still life, a rosewood desk with a hidden shallow drawer sliding open, a glint inside, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "tv-snow",
+      "prompt": "card illustration, close-up still life, an old black-and-white CRT television glowing with static snow, unplugged cord on the floor, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "long-hair",
+      "prompt": "card illustration, close-up still life, a porcelain sink with a mass of black hair rising slowly from the drain, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "cobweb",
+      "prompt": "card illustration, close-up still life, a room thick with veil-like cobwebs, an embroidered silk pouch hanging in the center, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "lullaby",
+      "prompt": "card illustration, close-up still life, an empty rocking chair beside a cradle in moonlight, a woman's faint silhouette on the wall, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "ancestor-tablet",
+      "prompt": "card illustration, close-up still life, rows of black lacquered ancestor tablets on an altar, the last one gleaming wet and new, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "bleeding-ceiling",
+      "prompt": "card illustration, close-up still life, a dark red stain spreading on an ornate plaster ceiling, a single drop falling, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "pushed",
+      "prompt": "card illustration, close-up still life, two faint pale handprints in frost on the back of a coat, a dark staircase ahead, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "cold-spot",
+      "prompt": "card illustration, close-up still life, a corner of a room covered with frost, breath vapor drifting in candlelight, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "selfie",
+      "prompt": "card illustration, close-up still life, a smartphone screen showing a group photo in a dark room with faint shadowy figures behind each person, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "sandalwood",
+      "prompt": "card illustration, close-up still life, a wisp of sandalwood incense smoke curling through a dim room, soft warm glow, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "mahjong",
+      "prompt": "card illustration, close-up still life, a mahjong table with tiles shuffling on their own, three empty chairs, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "wedding-candy",
+      "prompt": "card illustration, close-up still life, red paper-wrapped wedding candies on a table, the wrapper printed with a couple whose bride's face is scratched out, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "coin-divination",
+      "prompt": "card illustration, close-up still life, three old Chinese copper coins on a divination chart drawn in brush strokes, candle beside, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "ghost-fire",
+      "prompt": "card illustration, close-up still life, a floating green will-o'-the-wisp flame hovering in a doorway, lighting a dark corridor, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "bed-figure",
+      "prompt": "card illustration, close-up still life, a quilt on an old bed raised in the shape of a person, gently rising and falling, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "planchette",
+      "prompt": "card illustration, close-up still life, red paper covered with brush characters as ornament, an upturned porcelain dish in the center, moving slightly, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "warm-tea",
+      "prompt": "card illustration, close-up still life, a steaming teacup on a side table with a faded vintage lipstick mark on the rim, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "maid-shadow",
+      "prompt": "card illustration, close-up still life, the shadow of a maid in a 1930s side-buttoned jacket walking along a wall, holding out a small object, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "fallen-beam",
+      "prompt": "card illustration, close-up still life, a broken wooden roof beam split in two lying across a room, dust in the air, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "ever-lamp",
+      "prompt": "card illustration, close-up still life, a small old oil lamp burning with a perfectly steady flame in a dark corner, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "suona",
+      "prompt": "card illustration, close-up still life, a brass suona horn with red ribbons lying on a step, a faint distant wedding procession of lanterns in fog, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "blackout",
+      "prompt": "card illustration, close-up still life, an old fuse box with its lever pulled down in a pitch-dark hallway, one candle, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "midnight-call",
+      "prompt": "card illustration, close-up still life, a vintage black rotary telephone ringing on a hallway table, cut cord dangling, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "well-voice",
+      "prompt": "card illustration, close-up still life, looking down into a deep stone well, faint pale ripples on black water far below, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "cards",
+      "id": "opera-gong",
+      "prompt": "card illustration, close-up still life, an opera theater with every seat filled by faint translucent silhouettes, a gong on the empty stage, set in a 1930s Shanghai concession-era Western-style mansion with Chinese elements, Chinese folk horror, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 640,
+      "h": 480
+    },
+    {
+      "kind": "ui",
+      "id": "cover",
+      "prompt": "exterior night view of a 1930s Shanghai concession-era Western-style mansion with Chinese details, wrought-iron gate, rain pouring, wet cobblestones reflecting light, a single lit window on the upper floor, bare trees, overcast sky, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 1024,
+      "h": 640
+    },
+    {
+      "kind": "ui",
+      "id": "haunt",
+      "prompt": "the haunt begins: a long mansion corridor with a blood-red glow at the far end, twisted elongated shadows stretching toward the viewer, red silk ribbons and paper effigy silhouettes, flickering lamps, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 1024,
+      "h": 512
+    },
+    {
+      "kind": "ui",
+      "id": "scenario-live",
+      "prompt": "a ghost-hunting livestream team's gear at night outside a 1930s Western-style mansion, a phone on a gimbal with a glowing screen, ring light, the mansion looming behind, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 512
+    },
+    {
+      "kind": "ui",
+      "id": "scenario-will",
+      "prompt": "a sealed will envelope with a red wax seal and a lawyer's letter on a dusty rosewood table, a mantel clock near midnight, candle, inside an old Shanghai mansion, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 512
+    },
+    {
+      "kind": "ui",
+      "id": "scenario-missing",
+      "prompt": "a smartphone lying on wet ground showing a photo of a mansion entrance foyer, a dropped backpack, the dark mansion doorway beyond, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 512
+    },
+    {
+      "kind": "ui",
+      "id": "scenario-demolish",
+      "prompt": "a 1930s Western-style mansion at night on the eve of demolition, a bulldozer and construction fencing silhouetted in front, a large painted demolition mark on the wall, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 512
+    },
+    {
+      "kind": "ui",
+      "id": "scenario-curse",
+      "prompt": "an old family genealogy scroll and faded sepia photographs of servants in front of a mansion, ancestor tablet and incense, a century-old curse feeling, dark gothic painterly illustration, ink and gouache, muted sepia, deep teal and blood red accents, candlelight, eerie atmosphere, highly detailed, no text, no watermark",
+      "w": 768,
+      "h": 512
+    }
+  ]
+}

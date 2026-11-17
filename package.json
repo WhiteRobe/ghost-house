@@ -3,13 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "dev": "WRANGLER_CONFIG=./wrangler.local.jsonc vite",
+    "build": "tsc --noEmit && vite build && tsx scripts/check-bundle.ts",
     "test": "vitest run",
     "types": "wrangler types",
-    "deploy": "vite build && wrangler deploy",
-    "db:migrate:local": "wrangler d1 migrations apply DB --local",
-    "db:migrate": "wrangler d1 migrations apply DB --remote"
+    "deploy": "WRANGLER_CONFIG=./wrangler.local.jsonc vite build && tsx scripts/check-bundle.ts && wrangler deploy -c dist/ghost_house/wrangler.json",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local -c wrangler.local.jsonc",
+    "db:migrate": "wrangler d1 migrations apply DB --remote -c wrangler.local.jsonc",
+    "sim": "tsx scripts/sim.ts"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,6 +21,7 @@
     "@cloudflare/vite-plugin": "^1.69.1",
     "@cloudflare/workers-types": "^5.20261117.1",
     "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^26.6.6",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",

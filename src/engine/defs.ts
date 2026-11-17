@@ -61,7 +61,7 @@ export interface CardDef {
   text: string;
   flavor?: string;
   /** 武器：攻击时额外掷骰；ranged 可攻击视线内目标 */
-  weapon?: { trait: Trait; dice: number; ranged?: boolean };
+  weapon?: { trait: Trait; dice: number; ranged?: boolean; /** 用过一次就弃掉 */ once?: boolean };
   /** 获得 / 失去时（物品、凶兆） */
   onGain?: Fx;
   onLose?: Fx;

@@ -260,6 +260,10 @@ export class Game {
         const weapon = a.weapon ? CARDS[a.weapon] : undefined;
         if (a.weapon) this.used.add('weapon:' + a.weapon);
         yield* this.attack({ seat }, a.target, { trait: weapon?.weapon?.trait, weapon: a.weapon, ranged: !!weapon?.weapon?.ranged && !this.sameTile({ seat }, a.target) });
+        if (a.weapon && weapon?.weapon?.once && this.has(seat, a.weapon)) {
+          this.log(`「${weapon.name}」用掉了`, 'info', seat);
+          yield* this.loseCard(seat, a.weapon);
+        }
         return;
       }
       case 'trade': {
