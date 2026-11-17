@@ -17,18 +17,19 @@ export const h3: HauntDef = {
   title: '零点循环',
   type: 'coop',
   traitor: { type: 'none' },
-  intro: '所有人的手机同时跳回了 00:00。直播回放里，你们一遍又一遍地推开门厅的大门，每一遍都比上一遍少了点什么。怀表在走，可时间不肯往前。走廊尽头，一个和你们一样高的影子在模仿你们走路。',
+  intro: '所有人的手机同时跳回 00:00。直播回放里，你们一遍又一遍推开门厅的大门，每一遍人都少一个。怀表的秒针在走，分针一格没动。走廊尽头有个影子，和你们一样高，学着你们的步子走。',
   hero: {
-    goal: '在钟楼累计足够次数的知识检定成功（3 人局 5 次，4 人局 6 次，5/6 人局 7 次），拨停这场循环。',
+    goal: '在钟楼成功「拨停指针」足够次数：3 人局 5 次，4 人局 6 次，5/6 人局 7 次。',
     rules: [
-      '钟楼一定会出现在二楼（若无法放置，则改为二楼楼梯口）。',
-      '特殊行动「拨停指针」：在钟楼进行知识 5+ 检定，成功则计数轨 +1。每轮最多成功 2 次（时间只肯慢慢停下）。',
-      '特殊行动「对表」：与另一名探险者同处一室时，进行知识 3+ 检定，成功则你们二人下一次「拨停指针」各多掷 1 颗骰（不叠加）。',
-      '每轮结束时，随机一名存活的探险者被循环送回门厅，并失去 1 点理智。',
-      '「循环的影子」会追杀你们（一个守在钟楼，一个从走廊出发）；它受伤只会被击晕。第 3 轮和第 6 轮结束时各会多出一个影子。',
-      `第 8 轮结束时如果还没拨停时间，所有人都会永远困在这一夜。`,
+      '这是合作剧本，没有背叛者。所有人一起赢，或一起输。',
+      '钟楼会出现在二楼；放不下时，改用二楼楼梯口。位置会公开在日志里。',
+      '特殊行动「拨停指针」：在钟楼，知识检定 5+，成功则计数轨 +1。全队每轮最多成功 2 次。',
+      '特殊行动「对表」：和另一名探险者在同一个房间时，选一人，知识检定 3+：成功则你们两人下一次「拨停指针」各多掷 1 颗骰。不叠加；下一次拨停指针时无论成败都会用掉。',
+      '每轮结束时，随机一名活着的探险者被送回门厅，失去 1 点理智。',
+      '「循环的影子」一开始在钟楼和走廊各有一个，5 人以上再在地下室楼梯口放一个。第 3 轮、第 6 轮结束时，门厅各多出一个。影子受到伤害只会被击晕。',
+      '失败条件：第 8 轮结束时还没完成，或所有人都死了。',
     ],
-    win: '钟楼的指针在 00:01 停了一下，然后“咔”地走了下去。天边泛白，手机终于收到了一条推送。',
+    win: '钟楼的指针在 00:01 顿了一下，“咔”地往下走了。窗外发白，手机震了一下，收到一条天气推送。',
   },
   monsters: {
     shadow: { name: '循环的影子', icon: 'shadow', speed: 4, might: 4 },
@@ -46,14 +47,14 @@ export const h3: HauntDef = {
   },
   actions: [
     {
-      id: 'stop', side: 'hero', label: '拨停指针', desc: '知识 5+ 检定，成功则计数轨 +1',
+      id: 'stop', side: 'hero', label: '拨停指针', desc: '知识检定 5+：计数轨 +1（全队每轮最多成功 2 次）',
       can: (g, s) => g.p(s).tile === clockTile(g) && (g.hv.thisRound ?? 0) < 2,
       *run(g, s) {
         const p = g.p(s);
         const extra = p.flags.h3sync ? 1 : 0;
         p.flags.h3sync = false;
         const r = yield* g.check(s, 'knowledge', 5, '拨停指针 5+', extra);
-        if (r < 5) { g.log('指针从指尖滑开，又转了一圈', 'bad'); return; }
+        if (r < 5) { g.log('指针从指尖滑脱，又转回了原处', 'bad'); return; }
         g.hv.count = (g.hv.count ?? 0) + 1;
         g.hv.thisRound = (g.hv.thisRound ?? 0) + 1;
         g.setTrack('拨停指针', g.hv.count, need(g));
@@ -61,7 +62,7 @@ export const h3: HauntDef = {
       },
     },
     {
-      id: 'sync', side: 'hero', label: '对表', desc: '知识 3+ 检定，成功则你和同房间的一名探险者下一次拨停指针多掷 1 颗骰',
+      id: 'sync', side: 'hero', label: '对表', desc: '知识检定 3+：你和同房间的一名探险者下一次「拨停指针」各多掷 1 颗骰',
       can: (g, s) => g.alive().some((o) => o !== s && g.p(o).tile === g.p(s).tile) && !g.p(s).flags.h3sync,
       *run(g, s) {
         const others = g.alive().filter((o) => o !== s && g.p(o).tile === g.p(s).tile);
@@ -79,21 +80,21 @@ export const h3: HauntDef = {
     const alive = g.alive();
     if (alive.length) {
       const s = alive[g.rng.int(alive.length)];
-      g.moveTo(s, 'G:0,0', '被时间拽回了门厅');
-      g.log(`${g.p(s).name} 眨了眨眼，发现自己又站在门厅里`, 'bad');
+      g.moveTo(s, 'G:0,0', '被拽回了门厅');
+      g.log(`${g.p(s).name} 一眨眼，又站在了门厅里`, 'bad');
       yield* g.lose(s, 'sanity', 1);
     }
     const r = g.state.haunt!.round - 1; // 刚结束的轮
     if (r === 3 || r === 6) {
       g.spawn('shadow', 'G:0,0');
-      g.log('门厅的地板上，又多出一个影子', 'bad');
+      g.log('门厅地板上多了一个影子，没有人站在它上面', 'bad');
     }
     g.hv.loop = r;
     g.hv.thisRound = 0;
   },
   checkWin(g) {
     if ((g.hv.count ?? 0) >= need(g)) return { side: 'hero' };
-    if ((g.hv.loop ?? 0) >= limit(g)) return { side: 'none', text: '指针又一次跳回了 00:00。这一次，没有人再记得自己推开过那扇门。' };
+    if ((g.hv.loop ?? 0) >= limit(g)) return { side: 'none', text: '指针又跳回了 00:00。门厅的大门再一次被推开，推门的人不记得自己来过。' };
     return null;
   },
   ai: {

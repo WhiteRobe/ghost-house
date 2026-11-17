@@ -19,8 +19,8 @@ function chapelTile(g: Game): string {
 
 /** 同格对抗力量；返回 true 表示发起者胜出 */
 function* wrest(g: Game, s: number, o: number) {
-  const a = yield* g.check(s, 'might', undefined, '夺玉（力量对抗）');
-  const d = yield* g.check(o, 'might', undefined, '护玉（力量对抗）');
+  const a = yield* g.check(s, 'might', undefined, '夺玉：比力量');
+  const d = yield* g.check(o, 'might', undefined, '护玉：比力量');
   return a > d;
 }
 
@@ -30,27 +30,29 @@ export const h4: HauntDef = {
   title: '玉中魂',
   type: 'traitor',
   traitor: { type: 'highest', trait: 'sanity' },
-  intro: '玉佩里那缕红丝忽然游了起来，钻进了背叛者的掌心。他的眼神变得很旧，像是在看一百年前的人。墙缝里开始渗出低低的哭声——玉里的魂醒了，它要把这栋楼的冤魂都叫回来。',
+  intro: '玉佩里那缕红丝游了起来，钻进背叛者的掌心。他再抬头看人，眼神像在认一百年前的熟人。墙缝里有个女人在哭。',
   hero: {
-    goal: '把血沁玉佩从背叛者身上抢回来，带到佛堂封印。',
+    goal: '从背叛者身上抢回血沁玉佩，带到佛堂封印。',
     rules: [
-      '异变开始时，背叛者身上带着玉佩（以剧本状态记录，不是卡牌）。佛堂一定会出现（放不下时改为祠堂）。',
-      '特殊行动「夺玉」：与持玉者同处一室时，和他进行力量对抗检定（双方各掷力量），你点数更高就抢到玉佩；否则你受到 1 点物理伤害。',
-      '持玉者死亡时，玉佩掉在他所在的房间；任何人进入该房间会自动捡起它，已在房间里的人可以用行动「捡起玉佩」。',
-      '特殊行动「封印玉佩」：持玉者在佛堂进行理智 4+ 检定，成功即获胜。',
+      '背叛者开局带着玉佩（玉佩不是卡牌，看计数轨）。佛堂一定会出现，放不下时换成祠堂，位置会公开。',
+      '特殊行动「夺玉」：和带着玉佩的背叛者在同一房间时，双方各掷力量比点数。你更高就抢到玉佩；打平或更低，你受到 1 点物理伤害。',
+      '带着玉佩的人死亡，玉佩掉在他所在的房间。谁先进入这个房间就自动捡起；已经在房间里的人用特殊行动「捡起玉佩」。',
+      '特殊行动「封印玉佩」：你带着玉佩并且在佛堂时，理智检定 4+，成功你们就赢了。失败可以下回合再试。',
+      '杀死背叛者不算获胜，只会让玉佩掉在地上。背叛者也能把玉佩抢回去，带玉的人身边最好有同伴。',
       '怨灵受伤只会被击晕。',
     ],
-    win: '玉佩被按进佛前的香灰里，那缕红丝挣扎着褪成了白色。哭声停了，背叛者像大梦初醒般瘫坐在地上。',
+    win: '玉佩按进佛前的香灰里，红丝扭了两下，褪成白色。哭声停了，背叛者一屁股坐在地上。',
   },
   traitorSide: {
-    goal: '杀死所有幸存者，让玉中魂重新拥有一个家族。',
+    goal: '杀死所有幸存者，别让玉佩进佛堂。',
     rules: [
-      '你控制怨灵，它们在你的回合之后行动。',
-      '特殊行动「召魂」：你身上有玉佩时，在你所在房间召唤一个怨灵（场上最多若干个，3/4 人局 3 个，5/6 人局 4 个）。',
-      '特殊行动「夺玉」：与持玉的幸存者同处一室时，和他进行力量对抗，你点数更高就抢回玉佩。',
-      '持玉的幸存者死亡时，玉佩掉在他所在的房间，任何人进入该房间会自动捡起，已在房间里的人可以用行动「捡起玉佩」。',
+      '你控制怨灵（速度 3，力量 4），它们在你的回合之后行动。开局你身边有 1 个怨灵。',
+      '特殊行动「召魂」：你带着玉佩时，在你所在的房间召唤 1 个怨灵。场上怨灵最多 3 个，5、6 人局最多 4 个。',
+      '特殊行动「夺玉」：和带着玉佩的幸存者在同一房间时，双方各掷力量比点数，你更高就抢回玉佩；打平或更低什么也不发生。',
+      '带着玉佩的人死亡，玉佩掉在他所在的房间。谁先进入这个房间就自动捡起；已经在房间里的人用特殊行动「捡起玉佩」。',
+      '幸存者带着玉佩在佛堂通过理智检定 4+，你就输了。',
     ],
-    win: '玉佩又回到了你的心口。房子里多了几缕新的红丝，它们终于不再孤单。',
+    win: '玉佩又贴回了你的心口，里面多了几缕新的红丝。',
   },
   monsters: {
     wraith: { name: '怨灵', icon: 'wraith', speed: 3, might: 4 },
@@ -75,30 +77,30 @@ export const h4: HauntDef = {
       },
     },
     {
-      id: 'grab', side: 'hero', label: '夺玉', desc: '与持玉者进行力量对抗，胜则抢到玉佩，败则受 1 点物理伤害',
+      id: 'grab', side: 'hero', label: '夺玉', desc: '和持玉的背叛者比力量，你更高就抢到玉佩，否则受到 1 点物理伤害',
       can: (g, s) => { const h = holder(g); return h != null && h !== s && g.isTraitor(h) && g.p(h).tile === g.p(s).tile; },
       *run(g, s) {
         const h = holder(g)!;
         if (yield* wrest(g, s, h)) {
           setHolder(g, s);
           g.setTrack('玉佩在背叛者身上', 0, 1);
-          g.log(`${g.p(s).name} 从 ${g.p(h).name} 胸前扯下了玉佩！`, 'good');
+          g.log(`${g.p(s).name} 从 ${g.p(h).name} 胸前扯下了玉佩`, 'good');
         } else {
           yield* g.damage(s, 'physical', 1, '玉佩烫手', h);
         }
       },
     },
     {
-      id: 'seal', side: 'hero', label: '封印玉佩', desc: '在佛堂进行理智 4+ 检定，成功即获胜',
+      id: 'seal', side: 'hero', label: '封印玉佩', desc: '在佛堂理智检定 4+，成功即获胜',
       can: (g, s) => holder(g) === s && g.p(s).tile === chapelTile(g),
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '封印玉佩 4+');
         if (r >= 4) g.hv.sealed = true;
-        else g.log('玉佩在供桌上跳了一下，红丝还在游动', 'bad');
+        else g.log('玉佩在供桌上跳了一下，红丝还在游', 'bad');
       },
     },
     {
-      id: 'summon', side: 'traitor', label: '召魂', desc: '在你所在房间召唤一个怨灵',
+      id: 'summon', side: 'traitor', label: '召魂', desc: '在你所在的房间召唤 1 个怨灵',
       can: (g, s) => holder(g) === s && g.state.monsters.length < g.scale(3, 3, 4, 4),
       *run(g, s) {
         g.spawn('wraith', g.p(s).tile);
@@ -106,7 +108,7 @@ export const h4: HauntDef = {
       },
     },
     {
-      id: 'regrab', side: 'traitor', label: '夺玉', desc: '与持玉的幸存者进行力量对抗，胜则抢回玉佩',
+      id: 'regrab', side: 'traitor', label: '夺玉', desc: '和持玉的幸存者比力量，你更高就抢回玉佩',
       can: (g, s) => { const h = holder(g); return h != null && h !== s && g.p(h).tile === g.p(s).tile; },
       *run(g, s) {
         const h = holder(g)!;
@@ -130,7 +132,7 @@ export const h4: HauntDef = {
     if (holder(g) !== s) return;
     setHolder(g, null, g.p(s).tile);
     g.setTrack('玉佩在背叛者身上', 0, 1);
-    g.log('玉佩滚落在地上', 'info');
+    g.log('玉佩滚到了地上', 'info');
   },
   checkWin(g) {
     if (g.hv.sealed) return { side: 'hero' };

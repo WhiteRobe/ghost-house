@@ -27,5 +27,5 @@ export function* rollTable(g: Game, seat: number, trait: Trait, rows: [number, F
 }
 
 export const nothing: Fx = function* (g, s) {
-  g.log(`${g.p(s).name} 什么也没发生`, 'info');
+  g.log(`${g.p(s).name} 等了一会儿，什么事也没有`, 'info');
 };

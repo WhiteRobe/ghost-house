@@ -10,7 +10,7 @@ function ensureBasement(g: Game) {
   g.placeRoom('cellar-hatch');
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊尽头的地板塌开一个洞，露出通往地下室的石阶', 'info');
+    g.log('走廊尽头的地板塌了个洞，底下是去地下室的石阶', 'info');
   }
 }
 
@@ -29,28 +29,28 @@ export const h48: HauntDef = {
   title: '午夜来电',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '走廊里那台黑色的老式转盘电话响了，一声接一声，没有人去接它也不停。揭示者拿起听筒，里面传来自己的声音：“下一个是你。”他慢慢放下听筒，转过身来，嘴角挂着电话那头的笑。',
+  intro: '走廊里那台黑色转盘电话响了，一声接一声，没人接也不停。揭示者拿起听筒，里面是他自己的声音：“下一个是你。”他把听筒放回去，转过身，脸上在笑。',
   hero: {
-    goal: '找到电话线在地下室的另一头，把它剪断。',
+    goal: '拿到剪线钳，找出地下室里真正的线头，剪断它。',
     rules: [
-      '房子里有几台电话（标记）。地下室里有几处「电话线」标记，其中只有一处是真正的线头。',
-      '点名：每轮结束时，电话那头会点一名幸存者的名字。被点名的人受到精神伤害，伤害等于他被点名的总次数 +1（最多 4 点）。',
-      '特殊行动「接电话」：在有电话的房间进行知识 3+ 检定，成功则电话里的声音会说漏嘴，排除一处假的线头。但接过电话的人，必定是下一轮被点名的人。',
-      '背叛者用力量攻击时多掷 1 颗骰。',
-      '剪线钳（标记）放在二楼某处。特殊行动「拿起剪线钳」：在它所在的房间拿起它。持有者死亡时剪线钳掉在原地。',
-      '特殊行动「剪断电话线」：持有剪线钳时，在有电话线标记的房间进行力量 4+ 检定，成功则剪断它：如果是真的线头就获胜；假的就移除这个标记，并且你受到 1 点物理伤害。',
+      '房子里有 3 台电话标记（走廊一台，另外两台在地下室以外的随机房间）。地下室有「电话线」标记，3 人局 3 处，4/5 人局 4 处，6 人局 5 处（地下室房间不够时会少），只有一处是真线头。背叛者知道是哪一处。',
+      '点名：每轮结束时，背叛者点一名幸存者的名字（背叛者死了就随机点）。被点名的人受到精神伤害，点数等于他被点名的总次数 +1，最多 4 点。',
+      '特殊行动「接电话」：在有电话的房间、还剩假线头时执行，知识检定 3+，成功随机排除一处假线头。不管成没成，本轮结束时点名都会点你。',
+      '背叛者用力量攻击时多掷 1 颗骰。杀死背叛者不会让你们获胜。',
+      '剪线钳标记在二楼离地下室最远的房间。特殊行动「拿起剪线钳」：在它所在的房间执行，拿起它。拿着剪线钳的人死亡，剪线钳掉在原地。',
+      '特殊行动「剪断电话线」：拿着剪线钳在有电话线的房间执行，力量检定 4+。成功剪断：是真线头你们获胜；是假的就移除这个标记，你受到 1 点物理伤害。',
     ],
-    win: '钳子“咔”地咬断了线头，整栋楼的电话同时发出一声长长的忙音，然后彻底哑了。听筒里再也没有人说话。',
+    win: '钳子“咔”地咬断了线头。整栋楼的电话一起响了声长长的忙音，然后没声了。',
   },
   traitorSide: {
     goal: '杀死所有幸存者。',
     rules: [
-      '点名：每轮结束时，你点一名幸存者的名字（如果有人接过电话，就必须点他）。被点名的人受到精神伤害，伤害等于他被点名的总次数 +1（最多 4 点）。',
-      '特殊行动「顺着电话线」：当你在有电话或电话线标记的房间、且房间里没有幸存者时，可以立刻移动到另一处有幸存者的电话或电话线所在的房间。',
-      '你知道哪一处线头是真的。',
+      '点名：每轮结束时，你点一名幸存者的名字。本轮有人接过电话，就自动点他（几个人都接过，点最后接的那个）。被点名的人受到精神伤害，点数等于他被点名的总次数 +1，最多 4 点。',
+      '特殊行动「顺着电话线」：你在有电话或电话线标记的房间、且房间里没有幸存者时，立刻移动到另一处有电话或电话线、并且有幸存者的房间。',
+      '你知道哪一处线头是真的。幸存者剪断真线头，你失败；你死亡不算失败。',
       '你用力量攻击时多掷 1 颗骰。',
     ],
-    win: '电话又响了。这一次，屋子里已经没有活人可以接了。听筒自己抬了起来，里面传出很多人的声音：“下一个……”',
+    win: '电话又响了，楼里已经没有人能接。听筒自己抬了起来，里面好几个人一起说：“下一个。”',
   },
   *setup(g) {
     ensureBasement(g);
@@ -88,7 +88,7 @@ export const h48: HauntDef = {
   },
   actions: [
     {
-      id: 'take', side: 'hero', label: '拿起剪线钳', desc: '拿起本房间的剪线钳',
+      id: 'take', side: 'hero', label: '拿起剪线钳', desc: '拿起这个房间的剪线钳',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'pliers').length > 0,
       *run(g, s) {
         for (const t of g.tokensAt(g.p(s).tile, 'pliers')) g.removeToken(t.id);
@@ -97,29 +97,29 @@ export const h48: HauntDef = {
       },
     },
     {
-      id: 'answer', side: 'hero', label: '接电话', desc: '知识 3+ 检定，排除一处假线头；你会成为下一个被点名的人',
+      id: 'answer', side: 'hero', label: '接电话', desc: '知识检定 3+：排除一处假线头。本轮结束时你会被点名',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'phone').length > 0 && g.tokens('line').some((t) => t.tile !== g.hs.real),
       *run(g, s) {
         g.hv.forced = s;
         const r = yield* g.check(s, 'knowledge', 3, '接电话 3+');
         if (r < 3) {
-          g.log('听筒里只有沙沙的杂音，和一声轻笑', 'bad');
+          g.log('听筒里沙沙响，有人笑了一声', 'bad');
           return;
         }
         const fakes = g.tokens('line').filter((t) => t.tile !== g.hs.real);
         const f = fakes[g.rng.int(fakes.length)];
         g.removeToken(f.id);
-        g.log(`电话里的声音说漏了嘴：线头不在${g.tileName(f.tile)}`, 'good');
+        g.log(`电话那头说漏了嘴：线头不在${g.tileName(f.tile)}`, 'good');
         g.setTrack('剩余线头', g.tokens('line').length);
       },
     },
     {
-      id: 'cut', side: 'hero', label: '剪断电话线', desc: '持剪线钳，力量 4+ 检定，剪断本房间的电话线',
+      id: 'cut', side: 'hero', label: '剪断电话线', desc: '拿着剪线钳：力量检定 4+，剪断这个房间的电话线',
       can: (g, s) => g.hv.pliers === s && g.tokensAt(g.p(s).tile, 'line').length > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'might', 4, '剪断电话线 4+');
         if (r < 4) {
-          g.log('电话线比想象的粗，怎么也剪不断', 'bad');
+          g.log('电话线比看着粗，钳子咬不动', 'bad');
           return;
         }
         const here = g.p(s).tile;
@@ -128,14 +128,14 @@ export const h48: HauntDef = {
           return;
         }
         for (const t of g.tokensAt(here, 'line')) g.removeToken(t.id);
-        g.log('剪断了——可电话还在响。这不是那一根', 'bad');
-        yield* g.damage(s, 'physical', 1, '线头里窜出一股电流');
+        g.log('剪断了，可电话还在响。不是这一根', 'bad');
+        yield* g.damage(s, 'physical', 1, '线头窜出一股电');
         g.setTrack('剩余线头', g.tokens('line').length);
       },
     },
     {
-      id: 'wire', side: 'traitor', label: '顺着电话线', desc: '移动到另一处有幸存者的电话或电话线所在的房间',
-      publicText: '听筒里传来一阵忙音，背叛者的身影顺着电话线消失了！',
+      id: 'wire', side: 'traitor', label: '顺着电话线', desc: '移动到另一处有电话或电话线、并且有幸存者的房间',
+      publicText: '听筒里一阵忙音，背叛者不见了，另一台电话响了起来',
       can: (g, s) => {
         const here = g.p(s).tile;
         if (!g.tokensAt(here, 'phone').length && !g.tokensAt(here, 'line').length) return false;
@@ -144,7 +144,7 @@ export const h48: HauntDef = {
       },
       *run(g, s) {
         const to = yield* g.chooseTile(s, '顺着电话线去哪里？', wireTargets(g, s));
-        if (to) g.moveTo(s, to, '电话铃声里');
+        if (to) g.moveTo(s, to, '跟着电话铃声');
       },
     },
   ],
@@ -173,7 +173,7 @@ export const h48: HauntDef = {
     if (target == null) return;
     const c = calls(g);
     c[target] = (c[target] ?? 0) + 1;
-    g.log(`所有电话同时响了。听筒里一字一顿：“${g.p(target).name}。”`, 'haunt');
+    g.log(`所有电话一起响了。听筒里一个字一个字地念：“${g.p(target).name}。”`, 'haunt');
     yield* g.damage(target, 'mental', Math.min(4, c[target] + 1), '被点名');
   },
   rollBonus(g, s, trait, purpose) {

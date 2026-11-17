@@ -18,7 +18,7 @@ function ensureBasement(g: Game) {
   g.placeRoom('cellar-hatch');
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊尽头的地板塌开一个洞，露出通往地下室的石阶', 'info');
+    g.log('走廊尽头的地板塌了个洞，底下是去地下室的石阶', 'info');
   }
 }
 
@@ -48,28 +48,28 @@ export const h41: HauntDef = {
   title: '猫祟',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '一声凄厉的猫叫从屋梁上滚过，揭示者的瞳孔慢慢竖成了一条缝。老辈人说，这家人当年活埋过一只通灵的黑猫，它的怨气在祠堂下面压了一百年。今夜，它借了一副人身回来讨债。',
+  intro: '屋梁上一声猫叫，拖得很长。揭示者的瞳孔竖成了一条缝。老辈人说，这家人当年在祠堂底下活埋过一只黑猫，压了一百年。今晚它借了一副人身，回来讨债。',
   hero: {
-    goal: '找齐猫的三样遗物——铜铃项圈、猫仙牌位、安魂香，在祠堂供奉后为它超度。',
+    goal: '找齐猫的三样遗物（铜铃项圈、猫仙牌位、安魂香），在祠堂供上，再为它超度。',
     rules: [
-      '三样遗物以标记的形式散落在房子各处（祠堂若尚未出现，会立即出现在一楼）。',
-      '特殊行动「拾取遗物」：在有遗物标记的房间进行理智 4+ 检定，成功则拿起本房间的遗物，失败受到 1 点精神伤害。携带遗物的人死亡时，遗物掉落在他所在的房间。',
-      '特殊行动「供奉」：在祠堂把你携带的所有遗物摆上供桌。',
-      '特殊行动「超度」：三样遗物都已供奉时，在祠堂进行理智 5+ 检定，成功即获胜。',
-      '猫祟附身的背叛者速度极快，还能从 3 步之外扑到你身边；它用力量攻击时多掷 2 颗骰。尽量结伴行动。',
+      '三样遗物是标记，分散在离祠堂较远的房间里。祠堂还没发现的话，会直接放到地图上。',
+      '特殊行动「拾取遗物」：在有遗物的房间执行，理智检定 4+。成功拿起这个房间所有遗物，失败受到 1 点精神伤害。带着遗物的人死亡，遗物掉在原地。',
+      '特殊行动「供奉」：在祠堂执行，把你带着的遗物全部供上。',
+      '特殊行动「超度」：三样遗物都供上之后，在祠堂执行，理智检定 5+，成功你们获胜。杀死背叛者不会让你们获胜。',
+      '背叛者速度 +2、力量 +1，用力量攻击时多掷 2 颗骰，还能从 3 步以内扑到你所在的房间。背叛者在祠堂能把供上的遗物打翻到随机房间。',
     ],
-    win: '安魂香燃到了尽头，一缕青烟绕着牌位转了三圈，散了。屋梁上再没有猫叫，只有一只铜铃轻轻响了一下。',
+    win: '安魂香烧到了底，青烟绕着牌位转了三圈，散了。屋梁上没再有猫叫，项圈上的铜铃叮地响了一下。',
   },
   traitorSide: {
-    goal: '杀死所有幸存者，让这家人的后人一个也别想走出去。',
+    goal: '杀死所有幸存者。',
     rules: [
-      '异变开始时你的速度 +2、力量 +1。',
-      '猫爪：你用力量攻击时多掷 2 颗骰。',
-      '特殊行动「扑击」：选择 3 步以内（不在你所在房间）的一名幸存者，立刻扑到他所在的房间。之后你仍然可以攻击。你所在房间有幸存者时不能扑击。',
-      '特殊行动「打翻供品」：在祠堂进行理智 4+ 检定，成功则把一件已供奉的遗物甩到房子里随机一个房间。',
-      '你不能拾取遗物。',
+      '异变开始时，你的速度 +2、力量 +1。',
+      '你用力量攻击时多掷 2 颗骰。',
+      '特殊行动「扑击」：你的房间里没有幸存者时，选 3 步以内的一名幸存者，立刻移动到他的房间。扑完仍然可以攻击。',
+      '特殊行动「打翻供品」：在祠堂执行，理智检定 4+，成功把最后供上的那件遗物甩到随机一个房间。',
+      '你不能拾取遗物。幸存者超度成功，你失败；你死亡不算失败。',
     ],
-    win: '最后一个人倒下时，黑暗里亮起一双又一双绿莹莹的眼睛。猫叫声此起彼伏，像是在笑。',
+    win: '最后一个人倒下，屋梁上亮起一对对绿眼睛，一只接一只地叫起来。',
   },
   *setup(g) {
     const t = g.traitor()!;
@@ -99,7 +99,7 @@ export const h41: HauntDef = {
   },
   actions: [
     {
-      id: 'pickup', side: 'hero', label: '拾取遗物', desc: '理智 4+ 检定，拿起本房间的遗物',
+      id: 'pickup', side: 'hero', label: '拾取遗物', desc: '理智检定 4+：拿起这个房间的遗物',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'relic').length > 0,
       *run(g, s) {
         const roll = yield* g.check(s, 'sanity', 4, '拾取遗物 4+');
@@ -116,37 +116,37 @@ export const h41: HauntDef = {
       },
     },
     {
-      id: 'offer', side: 'hero', label: '供奉', desc: '把携带的遗物摆上祠堂供桌',
+      id: 'offer', side: 'hero', label: '供奉', desc: '在祠堂：把带着的遗物全部供上',
       can: (g, s) => g.p(s).tile === hallTile(g) && carrying(g, s).length > 0,
       *run(g, s) {
         for (const r of carrying(g, s)) {
           g.hv.carry[r] = null;
           (g.hv.offered as string[]).push(r);
-          g.log(`${g.p(s).name} 把「${RELIC_NAME[r]}」供在了牌位前`, 'good');
+          g.log(`${g.p(s).name} 把「${RELIC_NAME[r]}」摆在了牌位前`, 'good');
         }
         updateTrack(g);
       },
     },
     {
-      id: 'release', side: 'hero', label: '超度', desc: '理智 5+ 检定，三样遗物齐备时超度猫灵',
+      id: 'release', side: 'hero', label: '超度', desc: '三样遗物都供上后，在祠堂：理智检定 5+，获胜',
       can: (g, s) => g.p(s).tile === hallTile(g) && (g.hv.offered as string[]).length >= 3,
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 5, '超度 5+');
         if (r >= 5) g.hv.released = true;
-        else g.log('香灰簌簌落下，猫灵还不肯走', 'bad');
+        else g.log('香灰断了一截掉下来，猫还不肯走', 'bad');
       },
     },
     {
-      id: 'pounce', side: 'traitor', label: '扑击', desc: '扑到 3 步以内的一名幸存者身边',
-      publicText: '猫祟弓起背，一跃就扑过了几个房间！',
+      id: 'pounce', side: 'traitor', label: '扑击', desc: '移动到 3 步以内一名幸存者的房间',
+      publicText: '猫祟弓起背一蹿，越过了好几个房间',
       can: (g, s) => g.heroes().every((h) => g.p(h).tile !== g.p(s).tile) && pounceTargets(g, s).length > 0,
       *run(g, s) {
         const t = yield* g.choosePlayer(s, '扑向谁？', pounceTargets(g, s));
-        if (t != null) g.moveTo(s, g.p(t).tile, '一道黑影扑了过来');
+        if (t != null) g.moveTo(s, g.p(t).tile, '一团黑影扑了过来');
       },
     },
     {
-      id: 'knock', side: 'traitor', label: '打翻供品', desc: '理智 4+ 检定，把一件已供奉的遗物甩到随机房间',
+      id: 'knock', side: 'traitor', label: '打翻供品', desc: '在祠堂：理智检定 4+，把最后供上的遗物甩到随机房间',
       can: (g, s) => g.p(s).tile === hallTile(g) && (g.hv.offered as string[]).length > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '打翻供品 4+');
@@ -156,7 +156,7 @@ export const h41: HauntDef = {
         const tiles = Object.keys(g.state.tiles).filter((k) => k !== hallTile(g) && reachable(g, k));
         const to = tiles.length ? tiles[g.rng.int(tiles.length)] : 'G:0,0';
         g.token(to, 'relic', RELIC_NAME[relic], { icon: 'relic', data: { relic } });
-        g.log(`供桌被掀翻，「${RELIC_NAME[relic]}」滚落到了${g.tileName(to)}`, 'bad');
+        g.log(`供桌被掀翻，「${RELIC_NAME[relic]}」滚到了${g.tileName(to)}`, 'bad');
         updateTrack(g);
       },
     },

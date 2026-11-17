@@ -13,7 +13,7 @@ function ensureBasement(g: Game) {
   g.placeRoom('cellar-hatch');
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊尽头的地板塌开一个洞，露出通往地下室的石阶', 'info');
+    g.log('走廊尽头的地板塌了个洞，底下是去地下室的石阶', 'info');
   }
 }
 
@@ -40,32 +40,32 @@ export const h44: HauntDef = {
   title: '绣鞋娘子',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '湿漉漉的脚印从楼梯一路延伸上来，每一个都只有巴掌大，鞋尖绣着并蒂莲。揭示者低头看自己的脚——不知什么时候，已经穿上了一只红缎绣鞋。她生前只差一只鞋就能出嫁，如今她要找一双合脚的人。',
+  intro: '一串湿脚印从楼梯底下一路上来，每个只有巴掌大，鞋尖的位置印着朵并蒂莲。揭示者低头一看，自己左脚上多了只红缎绣鞋，鞋里全是水。她当年就差一只鞋没能出嫁。',
   hero: {
-    goal: '找齐一对绣花鞋（左脚、右脚），放回二楼梳妆间的梳妆台上配成一对。',
+    goal: '拿到左右两只绣鞋，放上梳妆间的梳妆台，配成一对。',
     rules: [
-      '左脚绣鞋穿在绣鞋娘子（背叛者）脚上；右脚绣鞋沉在房子里某一处水渍里（水渍以标记显示，只有一处是真的）。梳妆间若尚未出现，会立即出现在二楼。',
-      '特殊行动「摸索水渍」：在有水渍的房间进行知识 3+ 检定，成功则清掉这处水渍，如果鞋在这里你就拿到右脚绣鞋。',
-      '特殊行动「夺鞋」：与持鞋的对手在同一房间时，用力量攻击他；你赢了就夺下一只鞋（对方照常受伤）。这算作你本回合的攻击。',
-      '特殊行动「拾鞋」：在有绣鞋标记的房间拿起它（无需检定）。携带绣鞋的人死亡时，鞋掉在他所在的房间。',
-      '特殊行动「放回梳妆台」：在梳妆间把你携带的绣鞋放上梳妆台。两只都在台上时，进行理智 5+ 检定把它们配成一对，成功即获胜；失败则下回合可以再试。',
-      '湿鞋印：绣鞋娘子每个回合结束都会在她所在的房间留下一个湿鞋印。你进入有湿鞋印的房间时失去 1 点速度（不会因此降到最低格以下），鞋印消失，并且她会感知到你的位置。',
-      '绣鞋娘子用力量攻击时多掷 2 颗骰。',
+      '左脚绣鞋穿在背叛者（绣鞋娘子）脚上。右脚绣鞋沉在某一处水渍里：地图上有 3 处水渍标记（5/6 人局 4 处），只有一处有鞋。梳妆间还没发现的话，会直接放到地图上。',
+      '特殊行动「摸索水渍」：在有水渍的房间执行，知识检定 3+。成功清掉这处水渍，鞋在这里你就拿到右脚绣鞋。',
+      '特殊行动「夺鞋」：和带着绣鞋的背叛者在同一房间、本回合还没攻击过时执行，用力量攻击她。你赢了，她照常受到伤害，左脚绣鞋归你。这算作你本回合的攻击。',
+      '特殊行动「拾鞋」：在有绣鞋标记的房间执行，拿起这里的鞋，不用检定。带着绣鞋的人死亡，鞋掉在原地。',
+      '特殊行动「放回梳妆台」：在梳妆间执行，把你带着的绣鞋放上梳妆台。两只都在台上时，接着理智检定 5+，成功你们获胜；失败可以下回合再来执行。',
+      '背叛者每个回合结束时，在她的房间留下一个湿鞋印。你进入有湿鞋印的房间：鞋印消失，你失去 1 点速度（速度已在最低一格时不失去），她感知到你，之后可以「循迹」直接移动到你身边。',
+      '背叛者用力量攻击时多掷 2 颗骰。背叛者在梳妆间或有绣鞋标记的房间，能把一只鞋藏到随机房间。杀死背叛者不会让你们获胜，但她脚上的左脚绣鞋会掉在原地。',
     ],
-    win: '两只绣鞋并排摆在梳妆台上，鞋尖对着镜子。镜子里的新娘终于笑了一下，连同满地的水渍一起淡去了。',
+    win: '两只绣鞋并排摆在梳妆台上，鞋尖对着镜子。镜子里的新娘抿嘴笑了一下，人和地上的水渍一起没了。',
   },
   traitorSide: {
-    goal: '杀死所有幸存者，别让任何人把鞋配成一对。',
+    goal: '杀死所有幸存者，别让他们把鞋配成一对。',
     rules: [
       '你用力量攻击时多掷 2 颗骰。',
-      '你每个回合结束时自动在所在房间留下一个湿鞋印（已有则不再留）。场上鞋印有上限，超出时最早的那个干掉。',
-      '幸存者踩到湿鞋印会失去 1 点速度，并且你会感知到他。',
-      '特殊行动「循迹」：你所在房间没有幸存者时，立刻移动到最近一个被你感知到的幸存者所在的房间。',
-      '特殊行动「藏鞋」：在有绣鞋标记的房间，或在梳妆台上有鞋的梳妆间，进行理智 4+ 检定，成功则把一只鞋藏到房子里随机一个房间。',
-      '左脚绣鞋穿在你脚上。幸存者可以用「夺鞋」从你身上抢走它；你也可以用「夺鞋」攻击持鞋的幸存者：赢了就把左脚绣鞋穿回去，或把右脚绣鞋甩到随机房间。这算作你本回合的攻击。',
-      '你不能拾鞋，也不能摸索水渍。',
+      '你每个回合结束时，在你的房间留下一个湿鞋印（已有就不再留）。场上最多 4/5/6/6 个鞋印（3/4/5/6 人局），超出时最早的那个干掉。',
+      '幸存者进入有鞋印的房间，鞋印消失，他失去 1 点速度，你感知到他。你只记得最后一个踩到鞋印的人。',
+      '特殊行动「循迹」：你的房间里没有幸存者时，立刻移动到你最后感知到的那名幸存者的房间。用过之后要等下一个人踩到鞋印才能再用。',
+      '特殊行动「藏鞋」：在有绣鞋标记的房间，或梳妆台上有鞋时在梳妆间执行，理智检定 4+，成功把一只鞋藏到随机一个房间。',
+      '左脚绣鞋穿在你脚上，幸存者可以「夺鞋」抢走它。你也可以对同房间带着鞋的幸存者「夺鞋」：用力量攻击他，赢了就把左脚绣鞋穿回去，或者把右脚绣鞋甩到随机房间（他两只都带着时先抢左脚）。这算作你本回合的攻击。',
+      '你不能拾鞋，也不能摸索水渍。你死亡不算失败。',
     ],
-    win: '最后一个人也穿上了红缎绣鞋，一步一步走进了梳妆间的镜子。镜子里，送亲的队伍排得很长很长。',
+    win: '最后一个人也穿上了红缎绣鞋，一步一步走进梳妆间的镜子。镜子里送亲的队伍排到了看不见的地方。',
   },
   *setup(g) {
     ensureBasement(g);
@@ -90,12 +90,12 @@ export const h44: HauntDef = {
   },
   actions: [
     {
-      id: 'grope', side: 'hero', label: '摸索水渍', desc: '知识 3+ 检定，在本房间的水渍里摸索绣鞋',
+      id: 'grope', side: 'hero', label: '摸索水渍', desc: '知识检定 3+：在这个房间的水渍里摸鞋',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'puddle').length > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'knowledge', 3, '摸索水渍 3+');
         if (r < 3) {
-          g.log('水冷得刺骨，什么也没摸到', 'info');
+          g.log('水冰得扎手，什么也没摸到', 'info');
           return;
         }
         const here = g.p(s).tile;
@@ -108,7 +108,7 @@ export const h44: HauntDef = {
       },
     },
     {
-      id: 'snatch', side: 'any', label: '夺鞋', desc: '用力量攻击同一房间里持有绣鞋的对手，赢了就夺走一只鞋',
+      id: 'snatch', side: 'any', label: '夺鞋', desc: '用力量攻击同房间带着绣鞋的对手，赢了夺走一只鞋',
       can: (g, s) => !g.attacked && g.playersAt(g.p(s).tile).some((o) => o !== s && g.sideOf(o) !== g.sideOf(s) && mine(g, o).length > 0),
       *run(g, s) {
         g.attacked = true;
@@ -138,7 +138,7 @@ export const h44: HauntDef = {
       },
     },
     {
-      id: 'pick', side: 'hero', label: '拾鞋', desc: '拿起本房间的绣鞋',
+      id: 'pick', side: 'hero', label: '拾鞋', desc: '拿起这个房间的绣鞋',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'shoe').length > 0,
       *run(g, s) {
         for (const tk of g.tokensAt(g.p(s).tile, 'shoe')) {
@@ -150,7 +150,7 @@ export const h44: HauntDef = {
       },
     },
     {
-      id: 'restore', side: 'hero', label: '放回梳妆台', desc: '把携带的绣鞋放上梳妆台；两只都在时理智 5+ 检定配成一对',
+      id: 'restore', side: 'hero', label: '放回梳妆台', desc: '在梳妆间：放上带着的绣鞋；两只都在时理智检定 5+，获胜',
       can: (g, s) => g.p(s).tile === dressing(g) && (mine(g, s).length > 0 || table(g).length === 2),
       *run(g, s) {
         for (const shoe of mine(g, s)) {
@@ -162,12 +162,12 @@ export const h44: HauntDef = {
         if (table(g).length < 2) return;
         const r = yield* g.check(s, 'sanity', 5, '配成一对 5+');
         if (r >= 5) g.hv.paired = true;
-        else g.log('两只鞋怎么摆都摆不正，鞋尖总是朝着门外', 'bad');
+        else g.log('两只鞋怎么摆都摆不正，鞋尖总是转回去朝着门外', 'bad');
       },
     },
     {
-      id: 'track', side: 'traitor', label: '循迹', desc: '移动到被你感知到的幸存者身边',
-      publicText: '湿鞋印的主人顺着水渍找了过来！',
+      id: 'track', side: 'traitor', label: '循迹', desc: '移动到最后感知到的幸存者的房间',
+      publicText: '湿鞋印的主人顺着水迹找过来了',
       can: (g, s) => {
         const t = g.hv.sensed as number | null;
         return t != null && !g.p(t).dead && g.p(t).tile !== g.p(s).tile && g.heroes().every((h) => g.p(h).tile !== g.p(s).tile);
@@ -175,11 +175,11 @@ export const h44: HauntDef = {
       *run(g, s) {
         const t = g.hv.sensed as number;
         g.hv.sensed = null;
-        g.moveTo(s, g.p(t).tile, '水渍里浮出一双小脚');
+        g.moveTo(s, g.p(t).tile, '地上的水里冒出一双小脚');
       },
     },
     {
-      id: 'hide', side: 'traitor', label: '藏鞋', desc: '理智 4+ 检定，把一只鞋藏到随机房间',
+      id: 'hide', side: 'traitor', label: '藏鞋', desc: '理智检定 4+：把一只鞋藏到随机房间',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'shoe').length > 0 || (g.p(s).tile === dressing(g) && table(g).length > 0),
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '藏鞋 4+');
@@ -197,7 +197,7 @@ export const h44: HauntDef = {
         const pool = reachableTiles(g, [here, dressing(g)]);
         const to = pool.length ? pool[g.rng.int(pool.length)] : 'G:0,0';
         dropShoe(g, shoe, to);
-        g.log(`「${SHOE_NAME[shoe]}」不见了……有人说在${g.tileName(to)}听见了水声`, 'bad');
+        g.log(`「${SHOE_NAME[shoe]}」不见了。${g.tileName(to)}那边传来滴水声`, 'bad');
       },
     },
   ],
@@ -208,7 +208,7 @@ export const h44: HauntDef = {
     for (const t of prints) g.removeToken(t.id);
     if (g.p(s).traits.speed > 1) yield* g.lose(s, 'speed', 1);
     g.hv.sensed = s;
-    g.log(`${g.p(s).name} 踩进了湿鞋印，脚底一阵冰凉——有什么东西知道你在这里了`, 'bad');
+    g.log(`${g.p(s).name} 踩进了湿鞋印，脚底一凉。绣鞋娘子知道你在哪了`, 'bad');
   },
   *onTurnEnd(g, s) {
     if (!g.isTraitor(s)) return;

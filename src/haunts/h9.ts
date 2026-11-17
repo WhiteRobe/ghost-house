@@ -36,29 +36,35 @@ export const h9: HauntDef = {
   title: '直播冥婚',
   type: 'traitor',
   traitor: { type: 'oldest' },
-  intro: '红盖头飘起来，轻轻落在了最年长那位的头顶。再掀开时，他穿着一身簇新的长衫，胸前别着一朵纸扎的大红花。直播间里有人刷了一行字：“吉时已到。”门厅的大门砰地锁死了。',
+  intro: '红盖头飘起来，落在年纪最大的那个人头上。掀开时，他已经换了一身新长衫，胸前别着纸扎的大红花。直播间里有人刷了一行字：“吉时已到。”门厅的大门砰地锁上了。',
   hero: {
-    goal: '找到前门钥匙，打开门厅的大门，让超过一半的幸存者逃出去。',
+    goal: '找到前门钥匙，打开门厅的大门，让一半以上的幸存者逃出去。',
     rules: [
-      '房子里有几只「旧木匣」标记，其中一只装着前门钥匙。特殊行动「翻木匣」：在有木匣的房间进行知识 4+ 检定，成功则打开它。',
-      '持钥匙者在门厅可以执行特殊行动「开门」（力量 4+ 检定）。门开之后，任何幸存者在门厅都可以执行「逃出」，离开洋楼（不再参与游戏）。背叛者可以在门厅把门重新锁上。持钥匙者死亡时，钥匙掉在原地，其他幸存者进入该房间或用行动「捡钥匙」即可拿到。',
-      '背叛者会把幸存者押去正厅拜堂。被押住的人无法移动，背叛者移动时会带着他。',
-      '特殊行动「挣脱」：被押住时进行力量 4+ 检定，成功则挣脱，并可以正常移动。',
-      '特殊行动「解救」：与被押住的人以及背叛者同处一室时，与背叛者进行力量对抗，赢了就救下他。',
-      '如果背叛者在正厅与被押的人累计完成三次拜堂（换人也接着算），背叛者获胜。',
+      '获胜：逃出的人数超过幸存者总数（含死者）的一半。3、4 人局逃出 2 人，5、6 人局逃出 3 人。',
+      '失败：背叛者拜满 3 次堂；或者死的人太多，剩下的人全逃出去也凑不够。',
+      '房子里有几只「旧木匣」，其中一只装着前门钥匙。特殊行动「翻木匣」：在有木匣的房间做知识检定 4+，成功就打开它。被押住时不能用。',
+      '特殊行动「开门」：持钥匙的人在门厅做力量检定 4+，成功大门打开。',
+      '特殊行动「逃出」：大门开着时，在门厅执行。你离开洋楼，不再行动，不算死亡。持钥匙的人逃出，钥匙也跟着带走了。',
+      '背叛者可以在门厅把门重新锁上，之后要用钥匙再开一次。',
+      '持钥匙的人死亡时，钥匙掉在原地。走进那个房间会自动捡起，已经在房间里可以用「捡钥匙」。',
+      '背叛者会押人去正厅拜堂。被押的人回合开始时没有移动点，背叛者走到哪就被拖到哪。',
+      '特殊行动「挣脱」：被押住时做力量检定 4+，成功就挣脱，这回合还能正常移动。',
+      '特殊行动「解救」：你、被押的人和背叛者在同一房间时，和背叛者掷力量对抗，你点数更高就救下他。',
+      '拜堂次数不会清零，换一个人押去也接着算。被押的人死了，背叛者得另押一个。',
     ],
-    win: '沉重的大门终于开了一道缝，外面的夜风吹灭了满屋的红烛。身后传来一声长长的叹息，喜乐停了。',
+    win: '大门推开一道缝，夜风灌进来，满屋红烛灭了一半。身后的喜乐停在半句上。',
   },
   traitorSide: {
-    goal: '在正厅和一名幸存者完成三拜（计数轨），或者让逃不出去的幸存者多到他们无法获胜。',
+    goal: '押着幸存者在正厅拜满 3 次堂（看计数轨），或者杀掉足够多的幸存者，让他们逃不出一半以上。',
     rules: [
-      '异变开始时你的力量 +1。',
-      '特殊行动「押人」：与一名幸存者同处一室时进行力量对抗，赢了就押住他。被押住的人无法移动，你移动时会带着他（同一时间只能押一人）。',
-      '特殊行动「拜堂」：在正厅、并与被押的人同处一室时，进行理智 3+ 检定，成功则拜堂计数 +1；凑满三拜你就获胜。拜堂计数不会清零，换一个人押来也可以接着拜。',
-      '特殊行动「锁门」：大门敞开时，你在门厅进行理智 4+ 检定，成功则大门重新锁上（钥匙还在幸存者手里，可以再开）。',
-      '幸存者如果死亡过多，导致逃出的人不可能超过一半，你同样获胜。',
+      '异变开始时你的力量 +1。正厅的位置公开。',
+      '特殊行动「押人」：选同房间一名幸存者掷力量对抗，你点数更高就押住他（平局算他赢）。同一时间只能押一个人。被押的人回合开始没有移动点，你走到哪他被拖到哪。',
+      '特殊行动「拜堂」：你和被押的人都在正厅时，做理智检定 3+，成功拜堂次数 +1。拜满 3 次你获胜。次数不会清零，换一个人押来接着拜。',
+      '特殊行动「锁门」：大门开着时，你在门厅做理智检定 4+，成功大门重新锁上。幸存者要用钥匙再开一次。',
+      '幸存者死得太多，剩下的人全逃出去也不到一半以上时，你获胜。',
+      '你也可以正常攻击幸存者。',
     ],
-    win: '三拜礼成。红盖头底下的人不再挣扎，直播间的画面定格成一张泛黄的结婚照。',
+    win: '三拜礼成。红盖头底下的人不动了，直播间的画面停在一张发黄的结婚照上。',
   },
   *setup(g) {
     g.placeRoom('cellar-hatch');
@@ -80,16 +86,16 @@ export const h9: HauntDef = {
   },
   actions: [
     {
-      id: 'open-box', side: 'hero', label: '翻木匣', desc: '知识 4+ 检定，撬开本房间的旧木匣',
+      id: 'open-box', side: 'hero', label: '翻木匣', desc: '知识检定 4+，撬开本房间的旧木匣',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'h9-box').length > 0 && captive(g) !== s,
       *run(g, s) {
         const r = yield* g.check(s, 'knowledge', 4, '撬开木匣 4+');
-        if (r < 4) { g.log('木匣的铜扣锈死了，没能打开', 'bad'); return; }
+        if (r < 4) { g.log('铜扣锈死了，没撬开', 'bad'); return; }
         const tok = g.tokensAt(g.p(s).tile, 'h9-box')[0];
         g.removeToken(tok.id);
         if (tok.data?.i === g.hs.keyBox) {
           g.hv.key = s;
-          g.log(`${g.p(s).name} 在木匣里摸到了一把黄铜钥匙！`, 'good');
+          g.log(`${g.p(s).name} 在木匣里摸到一把黄铜钥匙！`, 'good');
         } else g.log('木匣里只有几张发黄的喜帖', 'info');
       },
     },
@@ -103,17 +109,17 @@ export const h9: HauntDef = {
       },
     },
     {
-      id: 'unlock', side: 'hero', label: '开门', desc: '在门厅用钥匙开门，力量 4+ 检定',
+      id: 'unlock', side: 'hero', label: '开门', desc: '在门厅用钥匙开门，力量检定 4+',
       can: (g, s) => g.hv.key === s && !g.hv.open && g.p(s).tile === ENTRANCE,
       *run(g, s) {
         const r = yield* g.check(s, 'might', 4, '扭开门锁 4+');
-        if (r < 4) { g.log('锁芯咯吱作响，就是转不动', 'bad'); return; }
+        if (r < 4) { g.log('钥匙插进去了，锁芯咯吱响，就是拧不动', 'bad'); return; }
         g.hv.open = true;
         g.reveal('门厅的大门被打开了！');
       },
     },
     {
-      id: 'escape', side: 'hero', label: '逃出', desc: '从敞开的大门逃出洋楼',
+      id: 'escape', side: 'hero', label: '逃出', desc: '从开着的大门逃出洋楼',
       can: (g, s) => !!g.hv.open && g.p(s).tile === ENTRANCE && captive(g) !== s,
       *run(g, s) {
         const p = g.p(s);
@@ -122,16 +128,16 @@ export const h9: HauntDef = {
         p.dead = true; // 离开洋楼，不再参与（不算死亡）
         p.cards = [];
         g.endTurn();
-        g.log(`${p.name} 冲出了大门，逃进了夜色里`, 'good');
+        g.log(`${p.name} 冲出大门，跑进了夜里`, 'good');
       },
     },
     {
-      id: 'break', side: 'hero', label: '挣脱', desc: '被押住时力量 4+ 检定，成功则挣脱',
+      id: 'break', side: 'hero', label: '挣脱', desc: '被押住时力量检定 4+，成功就挣脱',
       can: (g, s) => captive(g) === s,
       *run(g, s) {
         const r = yield* g.check(s, 'might', 4, '挣脱 4+');
-        if (r < 4) { g.log(`${g.p(s).name} 没能挣开`, 'bad'); return; }
-        free(g, `${g.p(s).name} 挣脱了束缚`);
+        if (r < 4) { g.log(`${g.p(s).name} 没挣开`, 'bad'); return; }
+        free(g, `${g.p(s).name} 一把扯掉红盖头，挣脱了`);
         g.state.moveLeft = g.value(s, 'speed');
       },
     },
@@ -140,7 +146,7 @@ export const h9: HauntDef = {
       can: (g, s) => { const c = captive(g); const t = g.traitor(); return c != null && c !== s && t != null && g.p(c).tile === g.p(s).tile && g.p(t).tile === g.p(s).tile; },
       *run(g, s) {
         if (yield* contest(g, s, g.traitor()!, '解救')) free(g, `${g.p(s).name} 把 ${g.p(captive(g)!).name} 抢了回来`);
-        else g.log('背叛者死死攥着不放', 'bad');
+        else g.log('背叛者攥着不撒手', 'bad');
       },
     },
     {
@@ -152,26 +158,26 @@ export const h9: HauntDef = {
         if (o == null) return;
         if (yield* contest(g, s, o, '押人')) {
           g.hv.captive = o;
-          g.log(`${g.p(s).name} 把红盖头蒙在了 ${g.p(o).name} 头上，押着他往正厅走`, 'bad');
+          g.log(`${g.p(s).name} 把红盖头蒙在 ${g.p(o).name} 头上，押着他往正厅走`, 'bad');
         } else g.log(`${g.p(o).name} 挣开了`, 'info');
       },
     },
     {
-      id: 'lock', side: 'traitor', label: '锁门', desc: '在门厅理智 4+ 检定，把敞开的大门重新锁上',
+      id: 'lock', side: 'traitor', label: '锁门', desc: '在门厅理智检定 4+，把开着的大门重新锁上',
       can: (g, s) => !!g.hv.open && g.p(s).tile === ENTRANCE,
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '锁门 4+');
         if (r < 4) return;
         g.hv.open = false;
-        g.reveal('大门“砰”地自己关上了，又得用钥匙重新打开');
+        g.reveal('大门“砰”地自己关上了，得用钥匙重新开');
       },
     },
     {
-      id: 'bow', side: 'traitor', label: '拜堂', desc: '在正厅与被押的人理智 3+ 检定，成功则拜堂 +1',
+      id: 'bow', side: 'traitor', label: '拜堂', desc: '在正厅与被押的人一起，理智检定 3+，成功拜堂 +1',
       can: (g, s) => { const c = captive(g); return c != null && g.p(s).tile === hallTile(g) && g.p(c).tile === g.p(s).tile; },
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 3, '拜堂 3+');
-        if (r < 3) { g.log('喜烛忽地灭了，这一拜不作数', 'good'); return; }
+        if (r < 3) { g.log('喜烛灭了一根，这一拜不作数', 'good'); return; }
         g.hv.bows = (g.hv.bows ?? 0) + 1;
         g.setTrack('拜堂', g.hv.bows, BOWS);
         g.log(['一拜天地', '二拜高堂', '夫妻对拜'][Math.min(2, g.hv.bows - 1)] + '……', 'bad');
@@ -192,7 +198,7 @@ export const h9: HauntDef = {
   },
   *onDeath(g, s) {
     if (escaped(g).includes(s)) return;
-    if (captive(g) === s) free(g, '被押的人倒下了，婚事只能另找新人');
+    if (captive(g) === s) free(g, '被押的人倒下了，背叛者得另找一个新人');
     if (g.hv.key === s) {
       g.hv.key = null;
       g.token(g.p(s).tile, 'h9-key', '前门钥匙', { icon: 'key' });

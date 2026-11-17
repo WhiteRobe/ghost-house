@@ -12,7 +12,7 @@ function* loseLives(g: Game, n: number, by: number | null) {
   const t = g.traitor();
   if (t == null || n <= 0) return;
   setLives(g, lives(g) - n);
-  g.log(`猫妖惨叫一声，掉了 ${n} 条命（还剩 ${lives(g)} 条）`, 'good');
+  g.log(`猫妖惨叫一声，掉了 ${n} 条命，还剩 ${lives(g)} 条`, 'good');
   if (lives(g) <= 0) {
     g.hv.slain = true;
     yield* g.kill(t, by);
@@ -56,7 +56,7 @@ function pounceTargets(g: Game, s: number): number[] {
 /** 对抗：双方掷力量，返回差值（正数表示发起者赢） */
 function* contest(g: Game, a: number, d: number, label: string) {
   const x = yield* g.check(a, 'might', undefined, label);
-  const y = yield* g.check(d, 'might', undefined, label + '（抵挡）');
+  const y = yield* g.check(d, 'might', undefined, label + '：抵挡');
   return x - y;
 }
 
@@ -66,26 +66,28 @@ export const h5: HauntDef = {
   title: '九命猫妖',
   type: 'traitor',
   traitor: { type: 'holder', card: 'cat' },
-  intro: '黑猫从背叛者怀里跳下来，影子却留在了他身上。他弓起背，瞳孔竖成一条线，指甲在地板上划出九道白痕。老人们说，猫有九条命——借来的那九条，总要有人还。',
+  intro: '黑猫从背叛者怀里跳下去，影子却留在了他身上。他弓起背，瞳孔竖成一条线，指甲在地板上划出九道白痕。',
   hero: {
-    goal: '把猫妖的九条命全部打光。',
+    goal: '把猫妖的 9 条命全部打光。',
     rules: [
-      '猫妖（背叛者）有 9 条命（见计数轨）。普通的攻击对它无效，你们不能对它发起普通攻击。',
-      '特殊行动「扑打猫妖」：与猫妖同处一室时，双方各掷力量对抗。你点数更高时，猫妖失去等于差值的命；否则你受到等于差值的物理伤害（平局无事）。',
-      '猫妖受到任何伤害都只会掉命，不会降低属性；命用完才会死。',
-      '猫妖可以穿墙：它能扑向同楼层、无视墙壁两格以内的幸存者。',
+      '背叛者是猫妖，有 9 条命（看计数轨），命扣到 0 你们就赢了。',
+      '这一局谁都不能发起普通攻击，只能用特殊行动。',
+      '特殊行动「扑打猫妖」：和猫妖在同一房间时，双方各掷力量比点数。你更高，猫妖失去等于差值的命；你更低，你受到等于差值的物理伤害；打平无事。',
+      '猫妖受到伤害或失去属性，都会在回合开始、回合结束和每轮结束时改成扣命：少几点属性就扣几条命，属性还原。',
+      '猫妖能穿墙：直接移动到同楼层、横竖距离合计 2 格以内的幸存者身边，不管墙和门，然后扑击你。',
     ],
-    win: '第九条命也被打散了。黑猫的影子从背叛者身上剥落，蹿进墙缝，再也没有出来。',
+    win: '第九条命打散了。黑猫的影子从背叛者身上剥下来，蹿进了墙缝。',
   },
   traitorSide: {
     goal: '杀死所有幸存者。',
     rules: [
-      '你有 9 条命（见计数轨）。你受到的伤害只扣命，不降低属性；命用完你才会死。',
-      '你与幸存者之间不能发起普通攻击，改用下面的特殊行动。',
-      '特殊行动「扑击」：与一名幸存者同处一室时，双方各掷力量对抗；你点数更高时对方受到差值 +1 的物理伤害，否则你失去等于差值的命（平局无事）。',
-      '特殊行动「穿墙」：移动到同楼层、无视墙壁和门、横竖距离合计不超过 2 格的一名幸存者所在的房间（不花移动）。',
+      '你有 9 条命（看计数轨）。你受到伤害或失去属性，都会在回合开始、回合结束和每轮结束时改成扣命：少几点属性就扣几条命，属性还原。命扣到 0 你就死了，你们输掉。',
+      '异变开始时，你的力量、速度低于 4 的各提升 1 格。',
+      '这一局谁都不能发起普通攻击，只能用特殊行动。',
+      '特殊行动「扑击」：选同一房间的一名幸存者，双方各掷力量比点数。你更高，对方受到差值 +1 点物理伤害；你更低，你失去等于差值的命；打平无事。',
+      '特殊行动「穿墙」：直接移动到同楼层、横竖距离合计 2 格以内一名幸存者所在的房间，不管墙和门，不花移动点。之后还能用「扑击」。',
     ],
-    win: '最后一声尖叫被猫叫盖了过去。洋楼里安安静静，只有一只黑猫在舔爪子，它的命又攒满了。',
+    win: '最后一声尖叫被猫叫盖了过去。楼里只剩一只黑猫蹲在楼梯上舔爪子。',
   },
   *setup(g) {
     g.placeRoom('cellar-hatch');
@@ -105,7 +107,7 @@ export const h5: HauntDef = {
   },
   actions: [
     {
-      id: 'swat', side: 'hero', label: '扑打猫妖', desc: '与猫妖力量对抗：赢则它失去差值条命，输则你受差值物理伤害',
+      id: 'swat', side: 'hero', label: '扑打猫妖', desc: '和猫妖比力量：你更高，它失去差值条命；你更低，你受到差值点物理伤害',
       can: (g, s) => { const t = g.traitor(); return t != null && !g.p(t).dead && g.p(t).tile === g.p(s).tile; },
       *run(g, s) {
         const t = g.traitor()!;
@@ -116,7 +118,7 @@ export const h5: HauntDef = {
       },
     },
     {
-      id: 'pounce', side: 'traitor', label: '扑击', desc: '与同房间一名幸存者力量对抗：赢则对方受差值 +1 物理伤害，输则你失去差值条命',
+      id: 'pounce', side: 'traitor', label: '扑击', desc: '和同房间一名幸存者比力量：你更高，对方受到差值 +1 点物理伤害；你更低，你失去差值条命',
       can: (g, s) => g.heroes().some((o) => g.p(o).tile === g.p(s).tile),
       *run(g, s) {
         const hs = g.heroes().filter((o) => g.p(o).tile === g.p(s).tile).sort((a, b) => g.value(a, 'might') - g.value(b, 'might'));
@@ -125,11 +127,11 @@ export const h5: HauntDef = {
         const d = yield* contest(g, s, o, '扑击');
         if (d > 0) yield* g.damage(o, 'physical', d + 1, '猫妖扑击', s);
         else if (d < 0) yield* loseLives(g, -d, o);
-        else g.log(`${g.p(o).name} 堪堪躲过了一爪`, 'info');
+        else g.log(`${g.p(o).name} 往后一缩，躲过了这一爪`, 'info');
       },
     },
     {
-      id: 'phase', side: 'traitor', label: '穿墙', desc: '无视墙壁，移动到同楼层两格以内一名幸存者所在的房间',
+      id: 'phase', side: 'traitor', label: '穿墙', desc: '不管墙和门，移动到同楼层 2 格以内一名幸存者所在的房间',
       can: (g, s) => pounceTargets(g, s).length > 0,
       *run(g, s) {
         const o = yield* g.choosePlayer(s, '穿墙扑向谁？', pounceTargets(g, s));

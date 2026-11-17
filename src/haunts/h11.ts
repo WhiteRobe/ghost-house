@@ -8,7 +8,7 @@ function bridge(g: Game) {
     const to = g.distance('B:0,-2', p.tile) < Infinity ? 'B:0,-2' : p.tile;
     if (g.distance('G:0,0', to) === Infinity) {
       g.link('G:0,-1', to);
-      g.log('走廊的地板裂开，露出一道通往下面的暗梯', 'info');
+      g.log('走廊的地板裂开，底下是一道往下的暗梯', 'info');
     }
   }
 }
@@ -72,29 +72,30 @@ export const h11: HauntDef = {
   title: '替身诅咒',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '遗嘱宣读到一半，律师念出了一句奇怪的话：“凡在场者，各留一身，代受其过。”屋里各处的角落，悄悄多出了一个个纸扎小人，眉眼和你们一模一样。揭示者手里多了一根长长的银针。',
+  intro: '遗嘱念到一半，律师念出一句怪话：“凡在场者，各留一身，代受其过。”屋里好几个角落多了纸扎的小人，眉眼画得和你们一模一样。揭示者手里捏着一根长银针，针尖上沾着红纸屑。',
   hero: {
-    goal: '找到属于你自己的纸人替身，把它烧掉。所有活着的幸存者都烧掉自己的替身时，你们获胜；但如果死去的幸存者达到一半（向上取整；3 人局为 2 人），你们就输了。',
+    goal: '找到自己的纸人替身，带到有火的房间烧掉。所有活着的幸存者都烧掉了自己的替身，你们获胜。死的幸存者太多你们就输：3 人局 2 人，4、5 人局 2 人，6 人局 3 人。',
     rules: [
-      '房子里散落着若干个「纸人」标记，数量比幸存者多三个：每名幸存者各有一个替身，其余是空纸人。只有背叛者知道哪个是谁的。',
-      '特殊行动「翻看纸人」：在有未翻开纸人的房间执行，翻开这里所有纸人，公开它们属于谁；空纸人直接被移除。',
-      '特殊行动「收起替身」：在你自己（已翻开的）替身所在的房间，把它揣进怀里，它会跟着你移动。',
-      '特殊行动「烧替身」：带着自己的替身到有火的房间（标有「火」的房间：锅炉房，没有锅炉房则是厨房），进行理智 3+ 检定，成功则烧掉它。烧掉后背叛者再也不能通过它伤害你。',
-      '背叛者站在某个替身所在的房间或相邻房间时，可以对它施咒，替身的主人会直接受到伤害——不管他身在何处。',
-      '幸存者死亡后，他的替身随之化为纸灰。',
-      '背叛者躲在纸人后面：他防御时多掷 2 颗骰。就算杀了他，扎进纸人里的针也不会自己掉出来。',
+      '房子里有一批「纸人」，比幸存者多 3 个：每名幸存者有一个替身，其余是空纸人。只有背叛者知道哪个是谁的。',
+      '烧替身要分三步：翻开、收起、烧掉。',
+      '特殊行动「翻看纸人」：翻开本房间所有没翻开的纸人，公开它们是谁的替身。空纸人直接移除。',
+      '特殊行动「收起替身」：在你自己已翻开的替身所在的房间，把它揣进怀里，之后它跟着你走。',
+      '特殊行动「烧替身」：带着自己的替身到标着「火」的房间（通常是锅炉房或厨房），理智检定 3+，成功就烧掉。烧掉后背叛者再也不能扎它。',
+      '背叛者在替身所在的房间或相邻房间，就能扎这个替身，主人不管在哪都会受伤。揣在你身上的替身也能被扎，所以别在他附近久留。',
+      '幸存者死亡后，他的替身也没了。',
+      '背叛者防御时多掷 2 颗骰。杀死背叛者不能直接获胜，但他死了就没人再扎纸人。',
     ],
-    win: '最后一个纸人在火苗里蜷成一团黑灰。那根银针“叮”地一声掉在地上，再也没人去捡。',
+    win: '最后一个纸人在火里蜷成一团黑灰。那根银针“叮”一声掉在地上。',
   },
   traitorSide: {
-    goal: '用替身扎死至少一半的幸存者（向上取整：3 人局 2 人，4/5 人局 2 人，6 人局 3 人）。',
+    goal: '让足够多的幸存者死掉：3 人局 2 人，4、5 人局 2 人，6 人局 3 人。扎死、打死都算。',
     rules: [
-      '你能看到每个纸人属于谁（带「替身」字样的标记只有你看得见）。',
-      '特殊行动「扎纸人」（每回合一次）：对你所在房间或相邻房间里一个未烧掉的替身（包括被幸存者揣在身上的）进行知识检定，替身的主人受到伤害（由他自己分配到任意属性）：0–1 点为 1 点，2–3 点为 2 点，4–5 点为 3 点，6 点以上为 4 点。',
-      '特殊行动「藏纸人」（每回合一次）：把你所在房间里一个尚未被翻开的替身带到相邻房间。',
-      '你被攻击时防御多掷 2 颗骰。',
+      '你知道每个纸人是谁的（写着「某某的替身」的标记只有你看得见）。幸存者全部烧掉替身时你就输了。',
+      '特殊行动「扎纸人」：选你所在房间或相邻房间里一个替身（揣在幸存者身上的也行），做知识检定，替身的主人不管在哪都受到伤害，由他自己分到任意属性上：0–1 点受 1 点，2–3 点受 2 点，4–5 点受 3 点，6 点以上受 4 点。',
+      '特殊行动「藏纸人」：把你所在房间里一个还没被翻开的替身挪到相邻房间。',
+      '你防御时多掷 2 颗骰。你也可以正常攻击幸存者。',
     ],
-    win: '最后一根银针扎下去，纸人的眼睛里渗出了一滴墨。屋里又安静了。',
+    win: '最后一针扎下去，纸人的眼角渗出一滴墨。',
   },
   *setup(g) {
     bridge(g);
@@ -134,7 +135,7 @@ export const h11: HauntDef = {
   *onTurnEnd(g) { sync(g); },
   actions: [
     {
-      id: 'inspect', side: 'hero', label: '翻看纸人', desc: '翻开这里所有纸人，公开它们属于谁',
+      id: 'inspect', side: 'hero', label: '翻看纸人', desc: '翻开本房间所有纸人，公开它们是谁的',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'effigy').some((t) => !t.data?.shown),
       *run(g, s) {
         const own = owners(g);
@@ -143,17 +144,17 @@ export const h11: HauntDef = {
           const o = own[t.id];
           if (o == null || o < 0) {
             g.removeToken(t.id);
-            g.log(`${g.p(s).name} 翻开一个纸人——脸是空白的，一碰就散了`, 'info');
+            g.log(`${g.p(s).name} 翻开一个纸人，脸是空白的，一碰就散了`, 'info');
           } else {
             t.data = { ...t.data, shown: true };
             t.label = `${g.p(o).name}的替身`;
-            g.log(`${g.p(s).name} 翻开纸人：那是 ${g.p(o).name} 的脸！`, 'haunt');
+            g.log(`${g.p(s).name} 翻开纸人：画的是 ${g.p(o).name} 的脸！`, 'haunt');
           }
         }
       },
     },
     {
-      id: 'pick', side: 'hero', label: '收起替身', desc: '把这里属于你的替身揣进怀里',
+      id: 'pick', side: 'hero', label: '收起替身', desc: '把本房间你自己的替身揣进怀里',
       can: (g, s) => {
         const e = effigyOf(g, s);
         return !!e && !!e.data?.shown && e.data?.carry == null && e.tile === g.p(s).tile;
@@ -163,11 +164,11 @@ export const h11: HauntDef = {
         if (!e) return;
         e.data = { ...e.data, carry: s };
         e.label = `${g.p(s).name}的替身（被带走）`;
-        g.log(`${g.p(s).name} 把自己的替身揣进了怀里，它冰凉冰凉的`, 'info');
+        g.log(`${g.p(s).name} 把自己的替身揣进怀里，纸是凉的`, 'info');
       },
     },
     {
-      id: 'burn', side: 'hero', label: '烧替身', desc: '在有火的房间理智 3+ 检定，烧掉身上的替身',
+      id: 'burn', side: 'hero', label: '烧替身', desc: '在有火的房间理智检定 3+，烧掉身上的替身',
       can: (g, s) => {
         const e = effigyOf(g, s);
         return !!e && e.data?.carry === s && fire(g).includes(g.p(s).tile);
@@ -177,18 +178,18 @@ export const h11: HauntDef = {
         if (!e) return;
         const r = yield* g.check(s, 'sanity', 3, '烧替身 3+');
         if (r < 3) {
-          g.log(`火苗舔到纸人就灭了，${g.p(s).name} 的手在发抖`, 'bad');
+          g.log(`火苗一碰纸人就灭了，${g.p(s).name} 的手在抖`, 'bad');
           return;
         }
         if (e.data?.mark != null) g.removeToken(e.data.mark as number);
         g.removeToken(e.id);
         g.p(s).flags.h11burned = true;
         g.setTrack('未烧掉的替身', g.tokens('effigy').filter((t) => (owners(g)[t.id] ?? -1) >= 0).length);
-        g.log(`${g.p(s).name} 烧掉了自己的替身，胸口一松`, 'good');
+        g.log(`${g.p(s).name} 烧掉了自己的替身，胸口那根刺没了`, 'good');
       },
     },
     {
-      id: 'curse', side: 'traitor', label: '扎纸人', desc: '知识检定，伤害这里某个替身的主人',
+      id: 'curse', side: 'traitor', label: '扎纸人', desc: '知识检定，伤害本房间或相邻房间某个替身的主人',
       can: (g, s) => cursable(g, s).length > 0,
       *run(g, s) {
         const here = cursable(g, s);
@@ -196,12 +197,12 @@ export const h11: HauntDef = {
         if (target == null) return;
         const r = yield* g.check(s, 'knowledge', undefined, '扎纸人');
         const n = r >= 6 ? 4 : r >= 4 ? 3 : r >= 2 ? 2 : 1;
-        g.log(`${g.p(target).name} 浑身一阵刺痛，像被无数根针扎进了骨头`, 'bad');
+        g.log(`${g.p(target).name} 胳膊上冒出一排细小的针眼`, 'bad');
         yield* g.damage(target, 'general', n, '替身诅咒', s);
       },
     },
     {
-      id: 'hide', side: 'traitor', label: '藏纸人', desc: '把这里一个未被翻开的替身带到相邻房间',
+      id: 'hide', side: 'traitor', label: '藏纸人', desc: '把本房间一个没翻开的替身挪到相邻房间',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'effigy').some((t) => !t.data?.shown && (owners(g)[t.id] ?? -1) >= 0) && g.neighbors(g.p(s).tile).length > 0,
       ai: () => false,
       *run(g, s) {
@@ -212,7 +213,7 @@ export const h11: HauntDef = {
         t.tile = to;
         const m = g.state.tokens.find((x) => x.id === t.data?.mark);
         if (m) m.tile = to;
-        g.log('一阵风吹过，纸人似乎换了个地方', 'info');
+        g.log('有个纸人不在原来的地方了', 'info');
       },
     },
   ],

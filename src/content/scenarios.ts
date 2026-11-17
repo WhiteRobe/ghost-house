@@ -8,11 +8,11 @@ function table(base: number): Record<string, number> {
 }
 
 export const SCENARIOS: ScenarioDef[] = [
-  { id: 'live', name: '探灵直播', text: '你们是一支小有名气的探灵直播团队。今晚，直播间的人数一路飙升，弹幕催你们去那栋民国洋楼。', table: table(1) },
-  { id: 'will', name: '遗嘱宣读', text: '一位素未谋面的远房亲戚去世了，律师函上写着：遗嘱将在老宅里、午夜时分宣读。', table: table(10) },
-  { id: 'missing', name: '失踪的朋友', text: '三天前，你们的朋友在这附近失踪。他发来的最后一张照片，拍的就是这栋楼的门厅。', table: table(19) },
-  { id: 'demolish', name: '拆迁前夜', text: '这栋楼明天一早就要拆了。你们趁夜溜进来，想在推土机之前看看它藏着什么。', table: table(28) },
-  { id: 'curse', name: '百年诅咒', text: '你们的祖辈都曾在这栋楼里做过事。家族里流传一个说法：每过一百年，房子就要收回点什么。', table: table(37) },
+  { id: 'live', name: '探灵直播', text: '你们是个小有名气的探灵直播团队。今晚直播间人数一路往上涨，弹幕全在刷：去那栋民国洋楼。', table: table(1) },
+  { id: 'will', name: '遗嘱宣读', text: '一个从没见过的远房亲戚死了。律师函上写着：遗嘱午夜在老宅宣读，本人须到场。', table: table(10) },
+  { id: 'missing', name: '失踪的朋友', text: '三天前，你们的朋友在这附近不见了。他发来的最后一张照片，拍的就是这栋楼的门厅。', table: table(19) },
+  { id: 'demolish', name: '拆迁前夜', text: '这栋楼明天一早就拆。你们趁夜溜进来，想赶在推土机前面看看里头有什么。', table: table(28) },
+  { id: 'curse', name: '百年诅咒', text: '你们的祖辈都在这栋楼里做过事。家里老人说，这房子每过一百年，要收一回人。', table: table(37) },
 ];
 
 export { OMEN_ORDER };

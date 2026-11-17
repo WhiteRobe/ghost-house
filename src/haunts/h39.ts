@@ -9,7 +9,7 @@ const NAMES = ['扎了红绳的草人', '写着生辰八字的木牌', '一缕�
 function connect(g: Game) {
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊的地板塌出一个洞，露出通往地下室的石阶', 'haunt');
+    g.log('走廊地板塌了个洞，底下是去地下室的石阶', 'haunt');
   }
 }
 
@@ -32,17 +32,17 @@ export const h39: HauntDef = {
   title: '百年钟声',
   type: 'coop',
   traitor: { type: 'none' },
-  intro: '停了一百年的怀表忽然“嗒”地走了一格，楼顶传来一声闷钟。老辈人说过：这栋楼每过一百年要收一回人，钟敲够了数，就得有人留下。除非，你们给它找到替身。',
+  intro: '停了一百年的怀表“嗒”地走了一格，楼顶跟着闷闷响了一声钟。老辈人说，这栋楼每一百年收一回人，钟敲够了数就得有人留下，除非给它找够替身。',
   hero: {
-    goal: '在钟声敲够之前，把足够多的替身献到钟楼。',
+    goal: '房子收走太多人之前，把足够的替身献到钟楼。',
     rules: [
-      '每轮结束时钟响一次：每名活着的幸存者各掷 1 颗骰，点数总和再加上刚结束的轮数（钟声越来越急），累加到计数轨上。累计达到上限（3 人 6、4 人 7、5 人 8、6 人 9）时，房子收走理智最低的一名幸存者（他立即死亡），计数轨扣除上限后继续累计。',
-      '替身（标记）散落在房子各处。特殊行动「请替身」：在有替身的房间进行理智 4+ 检定，成功则拿起 1 个。一个人可以带多个替身；持有替身的人死亡时，替身掉在原地。',
-      '钟楼（若未发现则会出现在二楼）。特殊行动「献替身」：在钟楼把你身上所有的替身献出去。',
-      '特殊行动「按住钟摆」：在钟楼进行力量 4+ 检定，成功则钟声计数 -2。',
-      '献出的替身达到要求（3/4 人 4 个，5/6 人 5 个）时你们获胜。房子收走第 2 个人（5/6 人局为第 3 个人）时，你们失败。',
+      '每轮结束时钟响一次：活着的幸存者每人 1 颗骰，掷出的总点数加上刚结束的是第几轮，累加到钟声计数上。计数达到上限（3/4/5/6 人局分别为 6/7/8/9），理智最低的幸存者立即死亡，计数减去上限后继续累加。',
+      '替身标记散在离钟楼较远的房间里，比需要的数量多 1 个。特殊行动「请替身」：在有替身的房间执行，理智检定 4+，成功拿起 1 个。一个人可以带好几个替身。带着替身的人死亡，替身掉在原地。',
+      '钟楼是放着「百年铜钟」标记的房间。特殊行动「献替身」：在钟楼执行，献出你身上所有的替身。',
+      '特殊行动「按住钟摆」：钟声计数大于 0 时在钟楼执行，力量检定 4+，成功钟声计数 -2。',
+      '献出的替身达到 4 个（3/4 人局）或 5 个（5/6 人局），你们获胜。钟声收走第 2 个人（5/6 人局第 3 个人），你们失败。因为别的原因死亡的人不算被收走。',
     ],
-    win: '最后一个替身摆上钟楼的横梁，钟锤悬在半空，再也没有落下来。怀表的指针轻轻一跳，停回了三点十七分。',
+    win: '最后一个替身挂上钟楼的横梁，钟锤停在半空，没落下来。怀表的指针往回一跳，停在三点十七分。',
   },
   *setup(g) {
     connect(g);
@@ -78,12 +78,12 @@ export const h39: HauntDef = {
       },
     },
     {
-      id: 'take', side: 'hero', label: '请替身', desc: '理智 4+：拿起本房间的 1 个替身',
+      id: 'take', side: 'hero', label: '请替身', desc: '理智检定 4+：拿起这个房间的 1 个替身',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'sub').length > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '请替身 4+');
         if (r < 4) {
-          g.log(`${g.p(s).name} 的手刚碰到替身，就像被烫了一下缩了回来`, 'bad');
+          g.log(`${g.p(s).name} 的手刚碰到替身就被烫得缩了回来`, 'bad');
           return;
         }
         const t = g.tokensAt(g.p(s).tile, 'sub')[0];
@@ -93,7 +93,7 @@ export const h39: HauntDef = {
       },
     },
     {
-      id: 'hold', side: 'hero', label: '按住钟摆', desc: '在钟楼：力量 4+，钟声计数 -2',
+      id: 'hold', side: 'hero', label: '按住钟摆', desc: '在钟楼：力量检定 4+，钟声计数 -2',
       can: (g, s) => g.p(s).tile === g.hv.tower && g.hv.toll > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'might', 4, '按住钟摆 4+');
@@ -114,12 +114,12 @@ export const h39: HauntDef = {
     const alive = g.alive();
     const sum = (yield* g.roll(alive.length, '百年钟声')) + (g.state.haunt!.round - 1);
     g.hv.toll += sum;
-    g.log(`钟声响了，余音在楼里回荡（+${sum}）`, 'haunt');
+    g.log(`楼顶的钟响了（+${sum}）`, 'haunt');
     while (g.hv.toll >= g.hv.limit && g.alive().length && !g.hv.lost) {
       g.hv.toll -= g.hv.limit;
       const list = [...g.alive()].sort((a, b) => g.value(a, 'sanity') - g.value(b, 'sanity') || a - b);
       const v = list[0];
-      g.log(`钟敲够了数——${g.p(v).name} 的影子被钟声卷走了`, 'bad');
+      g.log(`钟敲够了数，${g.p(v).name} 地上的影子没了`, 'bad');
       g.hv.taken++;
       yield* g.kill(v, null);
       if (g.hv.taken >= g.hv.maxTaken) g.hv.lost = true;
@@ -128,7 +128,7 @@ export const h39: HauntDef = {
   },
   checkWin(g) {
     if (g.hv.offered >= g.hv.need) return { side: 'hero' };
-    if (g.hv.lost) return { side: 'none', text: '钟声停了，楼里安静得出奇。房子收够了它的人，大门吱呀一声打开，只是再也没有人从里面走出来。' };
+    if (g.hv.lost) return { side: 'none', text: '钟不响了。房子收够了人，大门吱呀一声自己开了，没有人从里面走出来。' };
     return null;
   },
   ai: {

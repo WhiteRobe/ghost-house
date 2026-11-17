@@ -59,27 +59,29 @@ export const h21: HauntDef = {
   title: '冻结的时间',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '怀表的秒针“咔”地一声停住，窗外飘落的槐花也停在半空。你们失踪的朋友就站在走廊尽头，一动不动，像一张被冲洗坏了的照片。揭示者手里的怀表开始倒着走，他的影子却没有跟着动。',
+  intro: '怀表的秒针“咔”地停了，窗外落到一半的槐花就挂在半空。失踪的朋友站在走廊尽头，抬着一只脚，一直没放下来。揭示者手里的怀表开始倒着走，他人走开了，影子还留在原地。',
   hero: {
-    goal: '找回散落在三层楼里的三枚怀表零件，带到钟楼装回去，让时间重新走起来。',
+    goal: '把 3 枚怀表零件全部带到钟楼装回去，或者杀死背叛者。',
     rules: [
-      '三枚零件（标记）分别藏在地下室、一楼、二楼的某个房间里。钟楼若尚未被发现，异变开始时会出现。',
-      '特殊行动「拾零件」：在有零件的房间里直接拿起它（可以同时携带多枚）。',
-      '特殊行动「装零件」：在钟楼携带零件时进行知识 5+ 检定，成功则装回一枚。',
-      '携带零件的人死亡时，零件掉落在他倒下的房间里。',
-      '被背叛者「定格」的人会跳过自己的下一个回合；刚被定格过的人在下一次自己的回合开始前不会再被定格。',
-      '你们可以正常攻击背叛者和「停摆人」；停摆人被击败时只会被击晕。',
+      '地下室、一楼、二楼各有 1 枚「怀表零件」标记。钟楼还没被发现的话，异变开始时会直接放出来。',
+      '特殊行动「拾零件」：拿起你所在房间的 1 枚零件，不用检定。一个人可以带好几枚。',
+      '特殊行动「装零件」：在钟楼、身上带着零件时，知识检定 5+。成功：装回 1 枚。',
+      '带着零件的人死亡时，零件掉在他死去的房间里，别人可以再捡。',
+      '背叛者会「定格」你：理智检定 4+，失败就跳过你的下一个回合。跳过之后，到你再下一个回合开始前，他不能再定格你。',
+      '背叛者带着停摆人（3/4 人局 1 个，5 人局 2 个，6 人局 3 个）。你们可以攻击背叛者和停摆人，停摆人被击败时只会被击晕。',
+      '装回第 3 枚零件，或者背叛者死亡时，你们获胜。死去的幸存者达到 2 人（5/6 人局 3 人）时，你们失败。',
     ],
-    win: '最后一枚齿轮咬合，钟楼的大钟“当”地响了一声。半空中的槐花落了地，朋友眨了眨眼，喊出了你的名字。',
+    win: '最后一枚齿轮咬上，钟楼的大钟“当”地响了一声。半空里的槐花落了一地，朋友那只脚踩了下来，喊出了你的名字。',
   },
   traitorSide: {
-    goal: '让时间永远停在今夜：杀死足够多的幸存者（3/4 人局 2 人，5/6 人局 3 人；或者杀光所有幸存者）。',
+    goal: '杀死 2 名幸存者（5/6 人局 3 名），赶在他们装回 3 枚零件之前。',
     rules: [
-      '你控制「停摆人」，它们在你的回合之后行动，被击败时只会被击晕。',
-      '特殊行动「定格」（每回合一次）：选择距离你 4 步以内的一名幸存者，他进行理智 4+ 检定，失败则跳过他的下一个回合。刚被定格过的人在他下一次自己的回合开始前不能再被定格。',
-      '零件掉落在地上时你可以看到它们，但无法毁掉它们。',
+      '你控制停摆人（3/4 人局 1 个，5 人局 2 个，6 人局 3 个），开始时在你的房间。它们在你的回合之后行动，被击败时只会被击晕。',
+      '特殊行动「定格」：选 4 步以内一名幸存者，他理智检定 4+，失败就跳过他的下一个回合。他跳过之后，到他再下一个回合开始前，你不能再定格他。',
+      '幸存者带着零件死去时，零件掉在原地。你看得到零件，但不能拿走或毁掉。',
+      '幸存者装回第 3 枚零件，或者你死亡时，你失败。',
     ],
-    win: '所有的钟都停在三点十七分。房子里多了几张一动不动的人像，它们会一直站在那里，等下一批客人。',
+    win: '房子里所有的钟都停在三点十七分。走廊里多了几个人，抬手的抬手，张嘴的张嘴，一个都没动过。',
   },
   monsters: {
     still: { name: '停摆人', icon: 'still', speed: 3, might: 4 },
@@ -106,33 +108,33 @@ export const h21: HauntDef = {
   },
   actions: [
     {
-      id: 'pick', side: 'hero', label: '拾零件', desc: '拿起本房间的怀表零件',
+      id: 'pick', side: 'hero', label: '拾零件', desc: '拿起你所在房间的 1 枚零件',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'part').length > 0,
       *run(g, s) {
         const t = g.tokensAt(g.p(s).tile, 'part')[0];
         if (!t) return;
         g.removeToken(t.id);
         g.p(s).flags.parts = parts(g, s) + 1;
-        g.log(`${g.p(s).name} 拾起了一枚怀表零件`, 'good');
+        g.log(`${g.p(s).name} 捡起了一枚怀表零件`, 'good');
       },
     },
     {
-      id: 'install', side: 'hero', label: '装零件', desc: '在钟楼进行知识 5+ 检定，成功装回一枚零件',
+      id: 'install', side: 'hero', label: '装零件', desc: '在钟楼知识检定 5+。成功：装回 1 枚零件',
       can: (g, s) => g.p(s).tile === g.hv.clock && parts(g, s) > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'knowledge', 5, '装零件 5+');
         if (r < 5) {
-          g.log('齿轮怎么也对不上齿……', 'info');
+          g.log('齿轮对了半天，就是咬不上', 'info');
           return;
         }
         g.p(s).flags.parts = parts(g, s) - 1;
         g.hv.fixed = (g.hv.fixed ?? 0) + 1;
         track(g);
-        g.log(`${g.p(s).name} 装回了一枚零件，钟摆轻轻晃了一下`, 'good');
+        g.log(`${g.p(s).name} 装回了一枚零件，钟摆晃了一下`, 'good');
       },
     },
     {
-      id: 'freeze', side: 'traitor', label: '定格', desc: '选择 4 步内一名幸存者：他理智 4+ 检定，失败则跳过下一回合',
+      id: 'freeze', side: 'traitor', label: '定格', desc: '选 4 步内一名幸存者，他理智检定 4+，失败就跳过下一个回合',
       can: (g, s) => g.heroes().some((h) => !g.p(h).flags.frozen && !g.p(h).flags.immune && g.distance(g.p(s).tile, g.p(h).tile) <= 4),
       *run(g, s) {
         const list = g.heroes().filter((h) => !g.p(h).flags.frozen && !g.p(h).flags.immune && g.distance(g.p(s).tile, g.p(h).tile) <= 4);
@@ -140,10 +142,10 @@ export const h21: HauntDef = {
         list.sort((a, b) => parts(g, b) - parts(g, a) || g.distance(g.p(a).tile, clock) - g.distance(g.p(b).tile, clock));
         const h = yield* g.choosePlayer(s, '定格谁？', list);
         if (h == null) return;
-        g.reveal('背叛者可以「定格」4 步内的幸存者：理智 4+ 检定失败就会跳过下一回合。');
+        g.reveal('背叛者可以「定格」4 步内的幸存者：理智检定 4+，失败就跳过下一个回合。');
         const r = yield* g.check(h, 'sanity', 4, '抵抗定格 4+');
         if (r >= 4) {
-          g.log(`${g.p(h).name} 咬破舌尖，挣脱了停滞的时间`, 'good');
+          g.log(`${g.p(h).name} 一口咬破舌尖，脚又能动了`, 'good');
           return;
         }
         g.p(h).flags.frozen = true;
@@ -156,7 +158,7 @@ export const h21: HauntDef = {
     if (p.flags.frozen) {
       p.flags.frozen = false;
       p.flags.immune = true;
-      g.log(`${p.name} 一动不动，这一回合被时间吞掉了`, 'bad', s);
+      g.log(`${p.name} 定在原地，这一回合动不了`, 'bad', s);
       g.endTurn();
       return;
     }
@@ -170,7 +172,7 @@ export const h21: HauntDef = {
     if (n <= 0) return;
     g.p(s).flags.parts = 0;
     for (let i = 0; i < n; i++) g.token(g.p(s).tile, 'part', '怀表零件', { icon: 'gear' });
-    g.log('零件叮叮当当地滚落在地上', 'info');
+    g.log('零件叮叮当当滚了一地', 'info');
   },
   checkWin(g) {
     if ((g.hv.fixed ?? 0) >= 3) return { side: 'hero' };

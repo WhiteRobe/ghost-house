@@ -12,7 +12,7 @@ function ensureBasement(g: Game) {
   g.placeRoom('cellar-hatch');
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊尽头的地板塌开一个洞，露出通往地下室的石阶', 'info');
+    g.log('走廊尽头的地板塌了个洞，底下是去地下室的石阶', 'info');
   }
 }
 
@@ -28,7 +28,7 @@ function pickBride(g: Game) {
   }
   const b = hs[g.rng.int(hs.length)];
   g.hv.bride = b;
-  g.log(`一方红盖头飘飘悠悠，落在了 ${g.p(b).name} 的头上——鬼新郎选中了新娘`, 'haunt');
+  g.log(`一块红盖头飘下来，正好盖在 ${g.p(b).name} 头上。鬼新郎选好新娘了`, 'haunt');
 }
 
 function updateTrack(g: Game) {
@@ -40,32 +40,32 @@ export const h45: HauntDef = {
   title: '百年婚约',
   type: 'traitor',
   traitor: { type: 'left' },
-  intro: '红盖头底下压着一纸泛黄的婚约，落款是一百年前的今天。正厅里的红烛自己点亮了，一位穿长袍马褂、没有脸的新郎官端坐在太师椅上，等着拜堂。揭示者身边的那个人站了起来，脸上挂着媒婆一样的笑。',
+  intro: '红盖头底下压着张发黄的婚约，落款是一百年前的今天。正厅的红烛自己着了，太师椅上坐着个穿长袍马褂的新郎官，脸上什么都没有。揭示者左手边那人站起来，冲大家笑得像个媒婆。',
   hero: {
-    goal: '找到真正的婚书并撕毁它，同时保护被选中的新娘别被押去正厅拜完三拜。',
+    goal: '找到真婚书，撕满 3 道口子。别让新娘在正厅拜满 3 拜。',
     rules: [
-      '异变开始时随机一名幸存者被选为新娘。新娘死亡时，鬼新郎会另选一名幸存者（已拜的次数保留）。',
-      '房子里有若干份「婚书」标记（3/4 人局 4 份，5/6 人局 5 份，分散在各层），其中只有一份是真的。',
-      '正厅里挂满了红绸：任何人离开正厅都要多花 1 点移动。',
-      '特殊行动「搜查婚书」：在有婚书标记的房间进行知识 3+ 检定，成功则拿起它看个究竟：假的当场烧掉，真的就由你保管。',
-      `特殊行动「撕毁婚书」：持有真婚书时进行力量 4+ 检定，成功则撕开一道口子；累计 ${TEARS} 道（口子不会复原，换人持有也算）即获胜。持有者死亡时婚书掉在他所在的房间，可以再搜查拿起。`,
-      '鬼新郎从正厅出发，它无法被伤害，会追杀持有真婚书的人。',
-      `背叛者可以把新娘押到正厅；新娘在正厅时背叛者可以拜堂，拜满 ${BOWS} 拜则背叛者获胜。`,
+      '异变开始时随机一名幸存者当新娘，所有人都知道是谁。新娘死亡，鬼新郎随机另选一名幸存者，已拜的次数保留。',
+      '房子里有「婚书」标记（3/4 人局 4 份，5/6 人局 5 份，尽量分在三层），只有一份是真的。',
+      '正厅挂满了红绸：谁离开正厅都要多花 1 点移动。',
+      '特殊行动「搜查婚书」：在有婚书的房间执行，知识检定 3+，成功拿起来看：假的当场化成灰，真的归你拿着。',
+      `特殊行动「撕毁婚书」：拿着真婚书时在哪都能执行，力量检定 4+，成功撕开 1 道口子。口子不会复原，换人拿着也接着算，累计 ${TEARS} 道你们获胜。拿着婚书的人死亡，婚书掉在原地，要再「搜查婚书」才能拿起。`,
+      '鬼新郎（速度 3、力量 4）从正厅出发，打不伤，专追拿着真婚书的人。',
+      `背叛者和新娘在同一房间时，可以跟她各掷理智，点数更高就把她押到正厅。两人都在正厅时背叛者可以拜堂，拜满 ${BOWS} 拜背叛者获胜。杀死背叛者不会让你们获胜。`,
     ],
-    win: '婚书在手里撕成两半，墨迹像血一样淌了一地。正厅的红烛齐齐熄灭，太师椅上只剩一件空荡荡的马褂。',
+    win: '婚书在手里撕成了两半，墨顺着纸边往下滴。正厅的红烛一下全灭了，太师椅上只剩一件马褂搭着。',
   },
   traitorSide: {
     goal: `替鬼新郎把新娘押进正厅，拜满 ${BOWS} 拜；或者杀死所有幸存者。`,
     rules: [
-      '正厅若尚未出现，会立即出现在一楼。新娘是谁所有人都知道。正厅里挂满了红绸：任何人离开正厅都要多花 1 点移动。',
-      `幸存者要在真婚书上撕满 ${TEARS} 道口子才能获胜。`,
-      '特殊行动「押新娘」：与新娘在同一房间（不在正厅）时，你和她各掷理智对抗；你的点数更高就把她和你一起带到正厅。',
-      `特殊行动「拜堂」：你和新娘都在正厅时进行理智 4+ 检定，成功则拜下一拜。拜满 ${BOWS} 拜你获胜。`,
-      '新娘死亡时，鬼新郎会另选一名幸存者为新娘，已拜的次数保留。',
-      '你控制鬼新郎（无法被伤害），它在你的回合之后行动，会去追杀持有真婚书的人。',
+      '正厅还没发现的话，会直接放到地图上。新娘是谁所有人都知道。正厅挂满了红绸：谁离开正厅都要多花 1 点移动。',
+      `幸存者在真婚书上撕满 ${TEARS} 道口子，你失败。你死亡不算失败。`,
+      '特殊行动「押新娘」：和新娘在同一房间、且不在正厅时执行，你和她各掷理智，你点数更高就把你们俩一起移到正厅。',
+      `特殊行动「拜堂」：你和新娘都在正厅时执行，理智检定 4+，成功拜 1 拜。拜满 ${BOWS} 拜你获胜。幸存者全部死亡你也获胜。`,
+      '新娘死亡，鬼新郎随机另选一名幸存者当新娘，已拜的次数保留。',
+      '你控制鬼新郎（速度 3、力量 4，打不伤），它在你的回合之后行动。',
       '你不能搜查或撕毁婚书。',
     ],
-    win: '三拜已毕，鬼新郎牵起新娘的手，两人一同走进了墙上的旧照片里。照片里的宾客，一个个都是你们的脸。',
+    win: '三拜拜完，鬼新郎牵起新娘，两个人走进了墙上那张旧合影。照片里坐着的宾客，长着你们的脸。',
   },
   monsters: {
     groom: { name: '鬼新郎', icon: 'groom', speed: 3, might: 4, sanity: 4, stun: false },
@@ -96,12 +96,12 @@ export const h45: HauntDef = {
   },
   actions: [
     {
-      id: 'search', side: 'hero', label: '搜查婚书', desc: '知识 3+ 检定，拿起本房间的婚书看个究竟',
+      id: 'search', side: 'hero', label: '搜查婚书', desc: '知识检定 3+：拿起这个房间的一份婚书看真假',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'contract').length > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'knowledge', 3, '搜查婚书 3+');
         if (r < 3) {
-          g.log('纸页粘在一起，怎么也揭不开', 'info');
+          g.log('纸页粘在一起，揭不开', 'info');
           return;
         }
         const here = g.p(s).tile;
@@ -111,12 +111,12 @@ export const h45: HauntDef = {
         if (tk.data?.real || (g.hs.real === here && !g.hs.found)) {
           g.hs.found = true;
           g.hv.contract = s;
-          g.log(`${g.p(s).name} 找到了真正的婚书！`, 'good');
-        } else g.log('这是一张假婚书，一碰就化成了纸灰', 'info');
+          g.log(`${g.p(s).name} 找到了真婚书`, 'good');
+        } else g.log('是张假婚书，一碰就成了纸灰', 'info');
       },
     },
     {
-      id: 'tear', side: 'hero', label: '撕毁婚书', desc: `力量 4+ 检定，在真婚书上撕开一道口子（共需 ${TEARS} 道）`,
+      id: 'tear', side: 'hero', label: '撕毁婚书', desc: `力量检定 4+：在真婚书上撕开 1 道口子（共需 ${TEARS} 道）`,
       can: (g, s) => contract(g) === s,
       *run(g, s) {
         const r = yield* g.check(s, 'might', 4, '撕毁婚书 4+');
@@ -124,11 +124,11 @@ export const h45: HauntDef = {
           g.hv.tears = (g.hv.tears ?? 0) + 1;
           g.log(`婚书被撕开了一道口子（${g.hv.tears}/${TEARS}）`, 'good');
           if (g.hv.tears >= TEARS) g.hv.torn = true;
-        } else g.log('百年的婚书韧得像牛皮，纹丝不动', 'bad');
+        } else g.log('婚书韧得像牛皮，撕不动', 'bad');
       },
     },
     {
-      id: 'drag', side: 'traitor', label: '押新娘', desc: '与新娘理智对抗，赢了就把她带到正厅',
+      id: 'drag', side: 'traitor', label: '押新娘', desc: '和新娘各掷理智，你点数更高就把她押到正厅',
       can: (g, s) => {
         const b = bride(g);
         return b != null && !g.p(b).dead && g.p(b).tile === g.p(s).tile && g.p(s).tile !== hall(g);
@@ -138,15 +138,15 @@ export const h45: HauntDef = {
         const a = yield* g.check(s, 'sanity', undefined, '押新娘（理智）');
         const d = yield* g.check(b, 'sanity', undefined, '挣扎（理智）');
         if (a > d) {
-          g.moveTo(s, hall(g), '唢呐声里');
+          g.moveTo(s, hall(g), '跟着唢呐声');
           g.moveTo(b, hall(g), '被红绸牵着');
           g.log(`${g.p(b).name} 被押进了正厅`, 'bad');
         } else g.log(`${g.p(b).name} 挣开了红绸`, 'good');
       },
     },
     {
-      id: 'bow', side: 'traitor', label: '拜堂', desc: '理智 4+ 检定，让新娘拜下一拜',
-      publicText: '“一拜天地——”正厅里响起了不知是谁的唱喏声。',
+      id: 'bow', side: 'traitor', label: '拜堂', desc: '在正厅：理智检定 4+，新娘拜 1 拜',
+      publicText: '正厅里有人拖着嗓子喊：“一拜天地——”',
       can: (g, s) => {
         const b = bride(g);
         return b != null && !g.p(b).dead && g.p(b).tile === hall(g) && g.p(s).tile === hall(g);
@@ -154,12 +154,12 @@ export const h45: HauntDef = {
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '拜堂 4+');
         if (r < 4) {
-          g.log('红烛的火苗晃了晃，这一拜没拜下去', 'good');
+          g.log('红烛的火苗晃了一下，这一拜没拜下去', 'good');
           return;
         }
         g.hv.bows = (g.hv.bows ?? 0) + 1;
         const words = ['一拜天地', '二拜高堂', '夫妻对拜'];
-        g.log(`“${words[Math.min(2, g.hv.bows - 1)]}！”新娘的腰不由自主地弯了下去（${g.hv.bows}/${BOWS}）`, 'bad');
+        g.log(`“${words[Math.min(2, g.hv.bows - 1)]}！”新娘的腰自己弯了下去（${g.hv.bows}/${BOWS}）`, 'bad');
         updateTrack(g);
       },
     },

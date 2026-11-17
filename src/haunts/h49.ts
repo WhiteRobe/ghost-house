@@ -10,7 +10,7 @@ function ensureBasement(g: Game) {
   g.placeRoom('cellar-hatch');
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊尽头的地板塌开一个洞，露出通往地下室的石阶', 'info');
+    g.log('走廊尽头的地板塌了个洞，底下是去地下室的石阶', 'info');
   }
 }
 
@@ -36,27 +36,27 @@ export const h49: HauntDef = {
   title: '井',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '地下室那口古井里传来有人在唱歌的声音，调子很老，像哄孩子睡觉。揭示者听着听着就笑了，转身朝你们走来，手上湿淋淋的，指缝里全是青苔。井里的东西饿了一百年，它要一个一个地收回去。',
+  intro: '地下室那口古井里有人在唱歌，老调子，哄孩子睡觉的那种。揭示者听了一会儿，笑了，转身朝你们走过来。他两只手湿淋淋的，指缝里塞满了青苔。',
   hero: {
-    goal: '把麻绳和足够的石板搬到古井，把井封死。',
+    goal: '把麻绳和所有石板搬到古井，把井封死。',
     rules: [
-      '古井在地下室（若尚未出现会立即出现；放不下就以地下室楼梯口为井口）。',
-      '房子里散落着一捆麻绳和若干块石板（标记；3 人局 2 块，4/5 人局 3 块，6 人局 4 块）。',
-      '特殊行动「搬取」：在有麻绳或石板的房间拿起一件。拿麻绳无需检定；搬石板需要力量 3+ 检定。每人最多同时搬一块石板。携带者死亡时东西掉在原地。',
-      '特殊行动「封井」：在古井把你携带的一件东西用上：压石板需要力量 4+ 检定，捆麻绳需要知识 3+ 检定，失败则东西还在你手里。麻绳和全部石板都用上后井就封死了，你们获胜。',
-      '井边很危险：背叛者可以把同一房间的人拖到井边，并在井边把人推下去（推下去的人直接死亡）。',
-      '在古井结束回合时，进行理智 4+ 检定，失败受到 1 点精神伤害（井里的歌声）。',
+      '古井在地下室，有「井口」标记（古井放不进地图时，地下室楼梯口就是井口）。',
+      '房子里有 1 捆麻绳和几块石板，都是标记，大多离井较远。石板 3 人局 2 块，4/5 人局 3 块，6 人局 4 块。',
+      '特殊行动「搬取」：在有麻绳或石板的房间执行，拿起一件。房间里有麻绳就拿麻绳，不用检定；没有麻绳才搬石板，力量检定 3+。每人身上最多 1 块石板。带着东西的人死亡，东西掉在原地。',
+      '特殊行动「封井」：在古井执行，用掉你带着的一件东西，身上有石板就先用石板。压石板：力量检定 4+；捆麻绳：知识检定 3+。失败东西还在你手里。麻绳和全部石板都用上，你们获胜。',
+      '背叛者能和同房间的你各掷力量，点数更高就把你拖到古井；在古井再赢一次，就把你推下井，你直接死亡。被推下井的人数达到 2 人（3/4 人局）或 3 人（5/6 人局），背叛者获胜。',
+      '回合结束时在古井：理智检定 4+，失败受到 1 点精神伤害。杀死背叛者不会让你们获胜。',
     ],
-    win: '最后一块石板压上井口，麻绳一圈圈缠紧。井底的歌声闷了几声，终于停了，只剩下水滴的回音。',
+    win: '最后一块石板压上井口，麻绳一圈圈勒紧。井底的歌又哼了两句，闷住了，后来只听得见滴水。',
   },
   traitorSide: {
     goal: '把幸存者推下井（3/4 人局 2 人，5/6 人局 3 人），或者杀死所有幸存者。',
     rules: [
-      '特殊行动「拖向井边」：与一名幸存者在同一房间（不在古井）时，你和他各掷力量检定；你点数更高就把他和你一起拖到古井。',
-      '特殊行动「推下井」：在古井时，与同一房间的一名幸存者各掷力量检定；你点数更高就把他推下井，他立即死亡。',
-      '你无视古井的歌声。你不能搬取麻绳和石板。',
+      '特殊行动「拖向井边」：你不在古井、房间里有幸存者时执行，选一名幸存者，你和他各掷力量，你点数更高就把你们俩一起移到古井。',
+      '特殊行动「推下井」：在古井、房间里有幸存者时执行，选一名幸存者，你和他各掷力量，你点数更高他立即死亡，算推下井 1 人。',
+      '回合结束时在古井的理智检定，你不用做。你不能搬取麻绳和石板。井封死你就失败；你死亡不算失败。',
     ],
-    win: '井水漫了上来，一张张泡得发白的脸浮在水面，齐声唱着那支老调子。今夜，井不会再饿了。',
+    win: '井水漫上了井沿，水面浮着几张泡白的脸，一起哼着那支老调子。',
   },
   *setup(g) {
     ensureBasement(g);
@@ -82,7 +82,7 @@ export const h49: HauntDef = {
   },
   actions: [
     {
-      id: 'take', side: 'hero', label: '搬取', desc: '拿起本房间的麻绳，或力量 3+ 检定搬起一块石板',
+      id: 'take', side: 'hero', label: '搬取', desc: '拿起这个房间的麻绳；没有麻绳时力量检定 3+，搬起一块石板',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'part').some((t) => t.data?.part === 'rope' || !mine(g, s).includes('slab')),
       *run(g, s) {
         const here = g.tokensAt(g.p(s).tile, 'part');
@@ -98,7 +98,7 @@ export const h49: HauntDef = {
         if (!slab || list.includes('slab')) return;
         const r = yield* g.check(s, 'might', 3, '搬石板 3+');
         if (r < 3) {
-          g.log('石板太沉了，挪都挪不动', 'bad');
+          g.log('石板太沉，挪都挪不动', 'bad');
           return;
         }
         g.removeToken(slab.id);
@@ -107,7 +107,7 @@ export const h49: HauntDef = {
       },
     },
     {
-      id: 'seal', side: 'hero', label: '封井', desc: '把一件携带的东西用在井口：麻绳需知识 3+，石板需力量 4+',
+      id: 'seal', side: 'hero', label: '封井', desc: '在古井：用掉一件带着的东西。石板力量检定 4+，麻绳知识检定 3+',
       can: (g, s) => g.p(s).tile === well(g) && mine(g, s).length > 0,
       *run(g, s) {
         const list = mine(g, s);
@@ -121,12 +121,12 @@ export const h49: HauntDef = {
         list.splice(list.indexOf(part), 1);
         if (part === 'rope') g.hv.rope = true;
         else g.hv.slabs = (g.hv.slabs ?? 0) + 1;
-        g.log(`${g.p(s).name} 把${PART_NAME[part]}压在了井口`, 'good');
+        g.log(`${g.p(s).name} 把${PART_NAME[part]}用在了井口`, 'good');
         updateTrack(g);
       },
     },
     {
-      id: 'drag', side: 'traitor', label: '拖向井边', desc: '与同一房间的幸存者比力量，赢了就把他拖到古井',
+      id: 'drag', side: 'traitor', label: '拖向井边', desc: '和同房间一名幸存者各掷力量，你点数更高就把他拖到古井',
       can: (g, s) => g.p(s).tile !== well(g) && heroesAt(g, g.p(s).tile).length > 0,
       *run(g, s) {
         const opts = heroesAt(g, g.p(s).tile).sort((a, b) => g.value(a, 'might') - g.value(b, 'might'));
@@ -135,15 +135,15 @@ export const h49: HauntDef = {
         const a = yield* g.check(s, 'might', undefined, '拖拽（力量）');
         const d = yield* g.check(v, 'might', undefined, '挣扎（力量）');
         if (a > d) {
-          g.moveTo(s, well(g), '湿淋淋的手');
+          g.moveTo(s, well(g), '被一双湿手拽着');
           g.moveTo(v, well(g), '被一路拖行');
-          g.log(`${g.p(v).name} 被拖到了井边！`, 'bad');
+          g.log(`${g.p(v).name} 被拖到了井边`, 'bad');
         } else g.log(`${g.p(v).name} 挣脱了那双湿手`, 'good');
       },
     },
     {
-      id: 'push', side: 'traitor', label: '推下井', desc: '在古井与一名幸存者比力量，赢了就把他推下去',
-      publicText: '井里的歌声突然拔高——有人被推向了井口！',
+      id: 'push', side: 'traitor', label: '推下井', desc: '在古井和一名幸存者各掷力量，你点数更高就把他推下井',
+      publicText: '井里的歌一下子唱高了，有人被推到了井沿上',
       can: (g, s) => g.p(s).tile === well(g) && heroesAt(g, well(g)).length > 0,
       *run(g, s) {
         const opts = heroesAt(g, well(g)).sort((a, b) => g.value(a, 'might') - g.value(b, 'might'));

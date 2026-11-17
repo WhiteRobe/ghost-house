@@ -31,25 +31,28 @@ export const h6: HauntDef = {
   title: '预言日记',
   type: 'traitor',
   traitor: { type: 'revealer' },
-  intro: '旧日记自己翻到了空白的一页，墨迹慢慢洇出来，写的是今晚的日期和一个房间的名字。背叛者捧着日记，嘴唇跟着字迹一张一合。日记里写下的事，从来没有不应验的。',
+  intro: '旧日记自己翻到了空白的一页，墨迹一点点洇出来：今晚的日期，后面跟着一个房间的名字。背叛者捧着日记，嘴唇跟着字一张一合。',
   hero: {
-    goal: '收集散落的日记残页，然后在书房把日记烧掉。',
+    goal: '凑齐日记残页，然后在书房把日记烧掉。',
     rules: [
-      '房子里散落着若干张「日记残页」标记，特殊行动「拾起残页」：在有残页的房间进行知识 4+ 检定，成功则捡起一张（大家共用计数轨）。',
-      '书房一定会出现（放不下时改为茶室或走廊）。残页收集够数后，特殊行动「焚烧日记」：在书房进行理智 4+ 检定，成功即获胜。',
-      '背叛者每轮会秘密写下一条预言：一个此刻有幸存者所在的房间。预言写下后的下一轮结束时，留在被预言房间的每名幸存者受到 4 点通用伤害，然后预言公开。',
-      '提示：不要在同一个房间停留太久。',
+      '房子里散落着「日记残页」标记，比你们要凑的数量多 1 张。要凑的数量看计数轨：3 人局 4 张，4 人局 5 张，5、6 人局 6 张。',
+      '特殊行动「拾起残页」：在有残页的房间知识检定 4+，成功捡起 1 张，计数轨大家共用。',
+      '书房一定会出现（放不下时换成茶室或别的房间），位置会公开。',
+      '残页凑够后，特殊行动「焚烧日记」：在书房理智检定 4+，成功你们就赢了。杀死背叛者不算获胜。',
+      '背叛者每轮可以秘密写下一个有幸存者的房间。写下后的那一轮结束时预言公开，留在那个房间的每名幸存者受到 4 点伤害（可以分摊到任意属性）。日志里出现「日记上又多了一行字」，就说明有人被写上了。',
+      '别在同一个房间连着待两轮。',
     ],
-    win: '日记在火盆里卷成一团黑蝶，最后一页上的字迹还没写完就被烧没了。预言落空了。',
+    win: '日记扔进火盆，纸页卷起来，最后一行字没写完就烧没了。',
   },
   traitorSide: {
-    goal: '让日记里的预言应验：杀死足够多的幸存者（3 人局 1 人，4/5 人局 2 人，6 人局 3 人）。',
+    goal: '杀死足够多的幸存者：3 人局 1 人，4、5 人局 2 人，6 人局 3 人。',
     rules: [
-      '特殊行动「写下预言」：每轮一次，秘密选择一个此刻有幸存者所在的房间。预言在写下后的下一轮结束时应验：留在那里的每名幸存者受到 4 点通用伤害，然后预言公开。',
-      '特殊行动「撕毁残页」：在有残页标记的房间进行知识 4+ 检定，成功则把它撕碎（移出游戏）；场上剩余残页不能少于幸存者还需要的数量。',
+      '特殊行动「写下预言」：秘密选择一个此刻有幸存者的房间。写下后的那一轮结束时预言公开，留在那里的每名幸存者受到 4 点伤害（可以分摊到任意属性）。结算前不能再写新的。',
+      '特殊行动「撕毁残页」：在有残页的房间知识检定 4+，成功把它撕掉。场上剩下的残页只比幸存者还缺的数量多时才能撕。',
       '你可以正常攻击幸存者。',
+      '幸存者凑齐残页后在书房通过理智检定 4+，你就输了。',
     ],
-    win: '最后一行字写完了。日记合上，封皮上多出了几个名字，墨迹还是湿的。',
+    win: '最后一行字写完了。日记合上，封皮上多了几个名字，墨还没干。',
   },
   *setup(g) {
     g.placeRoom('cellar-hatch');
@@ -69,7 +72,7 @@ export const h6: HauntDef = {
   },
   actions: [
     {
-      id: 'prophecy', side: 'traitor', label: '写下预言', desc: '秘密选择一个此刻有幸存者的房间，下一轮结束时在那里的幸存者受 4 点伤害',
+      id: 'prophecy', side: 'traitor', label: '写下预言', desc: '秘密选择一个此刻有幸存者的房间，下一轮结束时留在那里的幸存者受到 4 点伤害',
       can: (g) => !g.hs.prophecy && g.heroes().length > 0,
       *run(g, s) {
         const tiles = [...new Set(g.heroes().map((o) => g.p(o).tile))];
@@ -79,30 +82,30 @@ export const h6: HauntDef = {
         if (!k) return;
         g.hs.prophecy = k;
         g.log(`你在日记上写下了「${g.tileName(k)}」`, 'haunt', s, 'traitor');
-        g.log('日记上又多了一行字……', 'haunt');
+        g.log('日记上又多了一行字', 'haunt');
       },
     },
     {
-      id: 'tear', side: 'traitor', label: '撕毁残页', desc: '知识 4+ 检定，撕碎本房间的残页',
+      id: 'tear', side: 'traitor', label: '撕毁残页', desc: '知识检定 4+，撕掉本房间的残页',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'h6-page').length > 0 && g.tokens('h6-page').length > pagesNeed(g) - (g.hv.pages ?? 0),
       *run(g, s) {
         const r = yield* g.check(s, 'knowledge', 4, '撕毁残页 4+');
         if (r < 4) return;
         g.removeToken(g.tokensAt(g.p(s).tile, 'h6-page')[0].id);
-        g.log('一张日记残页被撕成了碎片', 'bad');
+        g.log('一张日记残页被撕碎了', 'bad');
       },
     },
     {
-      id: 'pick', side: 'hero', label: '拾起残页', desc: '知识 4+ 检定，辨认并捡起本房间的一张日记残页',
+      id: 'pick', side: 'hero', label: '拾起残页', desc: '知识检定 4+，捡起本房间的 1 张残页',
       can: (g, s) => g.tokensAt(g.p(s).tile, 'h6-page').length > 0,
       *run(g, s) {
         const r = yield* g.check(s, 'knowledge', 4, '辨认残页 4+');
         if (r >= 4) pick(g, s);
-        else g.log('纸上的字迹在眼前游动，怎么也认不出来', 'bad');
+        else g.log('纸上的字一看就往旁边跑，认不出来', 'bad');
       },
     },
     {
-      id: 'burn', side: 'hero', label: '焚烧日记', desc: '在书房进行理智 4+ 检定，成功即获胜',
+      id: 'burn', side: 'hero', label: '焚烧日记', desc: '在书房理智检定 4+，成功即获胜',
       can: (g, s) => (g.hv.pages ?? 0) >= pagesNeed(g) && g.p(s).tile === libraryTile(g),
       *run(g, s) {
         const r = yield* g.check(s, 'sanity', 4, '焚烧日记 4+');
@@ -118,7 +121,7 @@ export const h6: HauntDef = {
     if (!k) return;
     g.reveal(`日记上的预言：「${g.tileName(k)}」`);
     const victims = g.heroes().filter((o) => g.p(o).tile === k);
-    if (!victims.length) { g.log('预言落空了，那个房间里空无一人', 'good'); return; }
+    if (!victims.length) { g.log('预言落空了，那个房间里没人', 'good'); return; }
     for (const v of victims) yield* g.damage(v, 'general', 4, '预言应验', g.traitor());
   },
   checkWin(g) {

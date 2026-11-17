@@ -8,7 +8,7 @@ function bridge(g: Game) {
     const to = g.distance('B:0,-2', p.tile) < Infinity ? 'B:0,-2' : p.tile;
     if (g.distance('G:0,0', to) === Infinity) {
       g.link('G:0,-1', to);
-      g.log('走廊的地板裂开，露出一道通往下面的暗梯', 'info');
+      g.log('走廊地板裂开一条缝，底下是一道往下走的暗梯', 'info');
     }
   }
 }
@@ -51,18 +51,20 @@ export const h14: HauntDef = {
   title: '猫的继承人',
   type: 'coop',
   traitor: { type: 'none' },
-  intro: '律师念完最后一句，所有人都愣住了：老太太把全部家产留给了那只黑猫。门外传来砸门声——那些闻讯赶来的远房亲戚，眼睛都红了。黑猫“喵”了一声，跳进了你们怀里。',
+  intro: '律师念完最后一句，屋里没人说话：老太太把全部家产留给了那只黑猫。前门被拍得砰砰响，远房亲戚们听到消息赶来了。黑猫“喵”了一声，跳进你们中间一个人的怀里。',
   hero: {
-    goal: '保护黑猫，让它活过足够多的轮数（3/4/5 人局 6 轮，6 人局 7 轮）。',
+    goal: '护住黑猫，撑过规定轮数（3/4/5 人局 6 轮，6 人局 7 轮）。',
     rules: [
-      '一名幸存者抱着黑猫（持有黑猫凶兆的人；没人持有时由揭示者抱着）。',
-      '「贪心的亲戚」从餐厅（或正厅、门厅）涌进来，每三轮多来一个。他们只追抱猫的人，也只攻击抱猫的人。亲戚被击败时只会被击晕。',
-      '特殊行动「递猫」：把黑猫交给同一房间的另一名幸存者。',
-      '特殊行动「撒猫粮」（每人每局一次）：在你所在的房间撒一把猫粮。亲戚们闻到味道会互相争抢：这一轮里，进入这个房间的亲戚立刻被击晕。',
-      '抱猫的人死去时，黑猫会跳到同一房间的另一名幸存者怀里；如果没人接住，黑猫被亲戚抓走，你们失败。',
-      '所有人都死亡时你们失败。',
+      '所有人一起合作，没有背叛者。计数轨「黑猫撑过的轮数」到达目标，你们获胜。',
+      '持有黑猫凶兆的人抱着黑猫；没人持有时由揭示者抱着。',
+      '「贪心的亲戚」开局在餐厅出现（没有餐厅就在正厅，再没有就在门厅），3 人局 2 个，4 人以上 3 个。第 2、5、8……轮结束时再来 1 个。',
+      '亲戚只追抱猫的人，也只攻击抱猫的人。亲戚被打败只会被击晕，跳过下一次行动。',
+      '特殊行动「递猫」：把黑猫交给同一房间的另一个人。',
+      '特殊行动「撒猫粮」（每人每局一次）：在你所在的房间撒猫粮，这里的亲戚立刻被击晕。本轮结束前，每个回合开始时待在这里的亲戚也会被击晕。亲戚刚走进来的那次怪物阶段还能攻击。',
+      '抱猫的人死了，黑猫跳到同一房间的另一个人怀里；没人接住，黑猫被抓走，你们失败。',
+      '所有人都死了，你们失败。',
     ],
-    win: '天亮了，亲戚们骂骂咧咧地散去。黑猫舔了舔爪子，蹲在遗嘱上睡着了——这栋楼从今天起，是它的。',
+    win: '天亮了，亲戚们骂骂咧咧地走了。黑猫舔了舔爪子，趴在遗嘱上睡着了。',
   },
   monsters: {
     kin: { name: '贪心的亲戚', icon: 'kin', speed: 3, might: 3 },
@@ -79,7 +81,7 @@ export const h14: HauntDef = {
   },
   actions: [
     {
-      id: 'pass', side: 'hero', label: '递猫', desc: '把黑猫交给同一房间的另一名幸存者',
+      id: 'pass', side: 'hero', label: '递猫', desc: '把黑猫交给同一房间的另一个人',
       can: (g, s) => catSeat(g) === s && g.playersAt(g.p(s).tile).some((o) => o !== s),
       ai: () => false,
       *run(g, s) {
@@ -88,11 +90,11 @@ export const h14: HauntDef = {
         const o = yield* g.choosePlayer(s, '把黑猫交给谁？', others);
         if (o == null) return;
         g.hv.cat = o;
-        g.log(`${g.p(s).name} 把黑猫塞进了 ${g.p(o).name} 怀里`, 'info');
+        g.log(`${g.p(s).name} 把黑猫塞进 ${g.p(o).name} 怀里`, 'info');
       },
     },
     {
-      id: 'bait', side: 'hero', label: '撒猫粮', desc: '每人每局一次：本轮进入这里的亲戚立刻被击晕',
+      id: 'bait', side: 'hero', label: '撒猫粮', desc: '每人每局一次：这里的亲戚立刻被击晕；本轮内每个回合开始时还在这里的亲戚也被击晕',
       can: (g, s) => !g.p(s).flags.h14bait,
       ai: () => false,
       *run(g, s) {
@@ -101,7 +103,7 @@ export const h14: HauntDef = {
         (g.hv.bait as Record<string, number>)[k] = g.state.round;
         g.token(k, 'bait', '猫粮', { icon: 'bait' });
         for (const m of g.monstersAt(k)) g.stun(m.id);
-        g.log(`${g.p(s).name} 撒了一地猫粮，亲戚们扑上去抢`, 'good');
+        g.log(`${g.p(s).name} 撒了一地猫粮，亲戚们趴在地上抢`, 'good');
       },
     },
   ],
@@ -113,7 +115,7 @@ export const h14: HauntDef = {
     const r = g.state.haunt?.round ?? 1;
     if (r % 3 === 0) {
       g.spawn('kin', spawnAt(g));
-      g.log('又一个亲戚挤进了门', 'bad');
+      g.log('门又被挤开，进来一个拎着行李箱的亲戚', 'bad');
     }
   },
   *onTurnStart(g) {
@@ -129,7 +131,7 @@ export const h14: HauntDef = {
       g.log(`黑猫跳进了 ${g.p(others[0]).name} 怀里`, 'haunt');
     } else {
       g.hv.cat = -1;
-      g.log('黑猫被亲戚一把揪住尾巴拎走了！', 'bad');
+      g.log('一个亲戚揪住黑猫的尾巴，把它拎走了', 'bad');
     }
   },
   canAttack(g, s, t) {
@@ -137,7 +139,7 @@ export const h14: HauntDef = {
     return t.monster != null;
   },
   checkWin(g) {
-    if (catSeat(g) < 0) return { side: 'none', text: '黑猫被拎走了。亲戚们挥舞着遗嘱，在楼梯上吵成一团，谁也没注意到墙上的影子越来越多。' };
+    if (catSeat(g) < 0) return { side: 'none', text: '黑猫被拎走了。亲戚们抢那张遗嘱，在楼梯上扭成一团。' };
     if ((g.state.haunt?.round ?? 1) - 1 >= need(g)) return { side: 'hero' };
     return null;
   },

@@ -8,7 +8,7 @@ const START = ['G:0,0', 'G:0,-1', 'G:0,-2', 'U:0,-2', 'B:0,-2'];
 function connect(g: Game) {
   if (g.distance('G:0,0', 'B:0,-2') === Infinity) {
     g.link('G:0,-1', 'B:0,-2');
-    g.log('走廊的地板塌出一个洞，露出通往地下室的石阶', 'haunt');
+    g.log('走廊地板塌了个洞，底下是去地下室的石阶', 'haunt');
   }
 }
 
@@ -39,29 +39,29 @@ export const h37: HauntDef = {
   title: '照妖镜',
   type: 'hidden',
   traitor: { type: 'hidden' },
-  intro: '铜镜背面的铭文忽然发烫：“百年一劫，妖附人身。”镜面里映出你们几个人的脸——其中一张，嘴角比别人多弯了一点。镜子一晃，那张脸又不见了。',
+  intro: '铜镜背面的铭文烫手：“百年一劫，妖附人身。”镜子里是你们几个人的脸，其中一张的嘴角比别人多弯了一点。镜子一晃，再看又都一样了。',
   hero: {
     goal: '用照妖镜照出藏在你们中间的妖物。',
     rules: [
-      '你们之中藏着一个被妖物附身的背叛者。他需要和幸存者单独相处来完成献祭。',
-      '照妖镜：异变开始时由持有铜镜的幸存者拿着；如果没有，它会出现在某个房间里（标记），幸存者进入或在那里开始回合时自动拿起。持镜者死亡时镜子掉在原地。',
-      '特殊行动「照镜」：持镜者对同一房间里一名还没被照过的探险者进行理智 5+ 检定。成功时：若他是妖物，他被照出原形，你们立即获胜；否则他被公开证明清白。',
-      '照镜很耗心神：持镜者每次照镜失败受到 1 点精神伤害。',
-      '在这场异变中，任何人都不能攻击别人。',
-      '如果有人在某个房间里只和另一个人独处时打了个寒战（日志里会出现），那多半是献祭——但你未必知道是谁干的。',
+      '你们中间藏着一个被妖物附身的背叛者。他要趁和一名幸存者单独待在一个房间时献祭，献祭满 3 次他就获胜。献祭次数只有他自己知道。',
+      '照妖镜：异变开始时，手里有铜镜的幸存者拿着它；没有这样的人，照妖镜会掉在随机一个房间（有标记），幸存者进入那里或在那里开始回合时自动拿起。持镜者死亡，镜子掉在原地。',
+      '特殊行动「照镜」：持镜者选同房间一名还没被证明清白的探险者，理智检定 5+。成功：他是妖物，你们立即获胜；不是，公开证明他清白。',
+      '照镜失败：持镜者受到 1 点精神伤害。',
+      '这场异变里谁都不能攻击别人。背叛者因为别的原因死亡，你们也获胜。',
+      '日志里有人「打了个寒战」，就是他刚被献祭了一次。当时和他单独待在同一个房间的，就是妖物。',
     ],
-    win: '镜光一照，那人的影子在墙上扭成了一只长尾的东西，尖叫着缩进了镜子里。铜镜“咔”地裂开一道缝，再也照不出任何东西。',
+    win: '镜子一照，那人墙上的影子拖出一条长尾巴，尖叫着钻进了镜子。铜镜“咔”地裂了道缝。',
   },
   traitorSide: {
-    goal: '在被照出原形之前，完成 3 次献祭。',
+    goal: '被照出原形之前，完成 3 次献祭。',
     rules: [
-      '你是隐藏的背叛者，其他人看你仍然是幸存者。你不能拿照妖镜。',
-      '特殊行动「献祭」：当你所在的房间里只有你和一名幸存者（没有其他人）时，进行理智 3+ 检定。成功则献祭 +1，那名幸存者受到 1 点精神伤害（日志只会说他打了个寒战）。',
-      '完成 3 次献祭时你立即获胜。同一名幸存者可以被献祭多次。所有幸存者死亡你也获胜。',
-      '持镜者对你「照镜」成功（理智 5+）时你会被照出原形，立即失败。',
-      '在这场异变中，任何人都不能攻击别人。',
+      '你是隐藏的背叛者，在别人看来你还是幸存者。你捡不起照妖镜。',
+      '特殊行动「献祭」：你的房间里只有你和一名幸存者时，理智检定 3+。成功献祭 +1，他受到 1 点精神伤害，日志会公开说他打了个寒战，但不会说是谁干的。',
+      '完成 3 次献祭，你立即获胜。同一名幸存者可以被献祭多次。幸存者全部死亡你也获胜。',
+      '持镜者对你「照镜」成功（理智检定 5+），你被照出原形，立即失败。你死亡也算失败。',
+      '这场异变里谁都不能攻击别人。',
     ],
-    win: '第三滴血落进香炉的时候，照妖镜里所有人的脸都换成了同一张。百年一劫，这一次，它赢了。',
+    win: '第三滴血落进香炉，照妖镜里每个人的脸都变成了同一张，嘴角多弯了一点。',
   },
   *setup(g) {
     connect(g);
@@ -77,13 +77,13 @@ export const h37: HauntDef = {
       const tiles = Object.keys(g.state.tiles).filter((k) => !START.includes(k));
       const k = tiles.length ? tiles[g.rng.int(tiles.length)] : 'G:0,-1';
       g.token(k, 'mirror', '照妖镜', { icon: 'mirror' });
-      g.log(`照妖镜从持有者手中飞出，落在了「${g.tileName(k)}」`, 'haunt');
+      g.log(`照妖镜从持有者手里滑脱，掉在了「${g.tileName(k)}」`, 'haunt');
     }
     track(g);
   },
   actions: [
     {
-      id: 'shine', side: 'hero', label: '照镜', desc: '理智 5+：照同房间一名未被照过的人',
+      id: 'shine', side: 'hero', label: '照镜', desc: '理智检定 5+：照同房间一名没被证明清白的人',
       can: (g, s) => g.hv.holder === s && g.playersAt(g.p(s).tile).some((o) => o !== s && !clear(g, o)),
       *run(g, s) {
         const list = g.playersAt(g.p(s).tile).filter((o) => o !== s && !clear(g, o));
@@ -91,23 +91,23 @@ export const h37: HauntDef = {
         if (t == null) return;
         const r = yield* g.check(s, 'sanity', 5, '照镜 5+');
         if (r < 5) {
-          g.log(`镜面一片模糊，${g.p(s).name} 头痛欲裂`, 'bad');
+          g.log(`镜面糊成一片，${g.p(s).name} 太阳穴一跳一跳地疼`, 'bad');
           yield* g.damage(s, 'mental', 1, '照镜反噬');
           return;
         }
         if (g.isTraitor(t)) {
-          g.log(`镜中映出的不是 ${g.p(t).name}，而是一张长满白毛的脸！`, 'haunt');
+          g.log(`镜子里没有 ${g.p(t).name}，只有一张长满白毛的脸`, 'haunt');
           g.revealTraitor();
           g.hv.exposed = true;
         } else {
           g.p(t).flags.clear = true;
-          g.log(`镜中的 ${g.p(t).name} 就是 ${g.p(t).name} 本人，清白`, 'good');
+          g.log(`镜子里就是 ${g.p(t).name} 本人，清白`, 'good');
           track(g);
         }
       },
     },
     {
-      id: 'sacrifice', side: 'traitor', label: '献祭', desc: '与一名幸存者独处：理智 3+，献祭 +1',
+      id: 'sacrifice', side: 'traitor', label: '献祭', desc: '和一名幸存者单独在一个房间：理智检定 3+，献祭 +1',
       can: (g, s) => {
         const here = g.playersAt(g.p(s).tile);
         return here.length === 2 && here.some((o) => o !== s && !g.isTraitor(o));
@@ -118,7 +118,7 @@ export const h37: HauntDef = {
         if (r < 3) return;
         g.hs.sac++;
         g.p(v).flags.chilled = true;
-        g.log(`${g.p(v).name} 忽然打了个寒战，觉得有什么东西从身上被抽走了`, 'bad');
+        g.log(`${g.p(v).name} 打了个寒战，后脖子凉了一下`, 'bad');
         g.log(`献祭完成（${g.hs.sac}/${g.hv.need}）`, 'bad', s, 'traitor');
         yield* g.damage(v, 'mental', 1, '一阵寒意');
       },
@@ -139,7 +139,7 @@ export const h37: HauntDef = {
     if ((g.hs.sac ?? 0) >= g.hv.need) return { side: 'traitor' };
     if (g.heroes().length === 0) return { side: 'traitor' };
     const t = g.traitor();
-    if (t != null && g.p(t).dead) return { side: 'hero', text: '妖物附着的那具身体倒下了，一缕白烟从七窍里钻出来，被铜镜吸了进去。' };
+    if (t != null && g.p(t).dead) return { side: 'hero', text: '妖物附着的那具身体倒下了，一缕白烟从鼻孔里钻出来，被铜镜吸了进去。' };
     return null;
   },
   ai: {
