@@ -358,3 +358,27 @@ p { line-height: 1.7; }
 .coach-step { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 .tutorial-banner { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 16px; border-color: var(--candle); }
 .tutorial-done { color: var(--candle-2); border: 1px dashed var(--candle); border-radius: 8px; padding: 6px 12px; }
+@media (max-width: 600px) {
+  .hero-sub { font-size: 13px; padding: 0 8px; }
+  .lobby-head h2 { font-size: 22px; }
+  .page { padding: 14px 10px calc(30px + var(--safe-b)); }
+  .seat-grid { grid-template-columns: repeat(2, 1fr); }
+  .ex-grid { grid-template-columns: 1fr; }
+  .ex-art { width: 64px; height: 84px; }
+  .modal { padding: 14px; max-height: 92vh; }
+  .modal-bg { padding: 8px; align-items: end; }
+  .gcard { width: min(210px, 70vw); }
+  .card-grid .gcard.small { width: 84px; }
+  .trade-cols { grid-template-columns: 1fr; }
+  .dmg-row { grid-template-columns: 40px 1fr auto 20px auto; gap: 6px; }
+  .ov-box { padding: 14px; min-width: 0; width: 92vw; }
+  .ov-box.wide { min-width: 0; }
+  .haunt-box { padding: 18px; }
+  .haunt-title { font-size: 26px; }
+  .die { width: 32px; height: 32px; }
+  .seg button { padding: 6px 10px; font-size: 13px; }
+  .coach-bubble p { font-size: 13px; }
+  .g-top { gap: 6px; padding: 6px; }
+  .g-top .icon-btn { width: 32px; height: 32px; }
+  .room-list { grid-template-columns: 1fr; }
+}

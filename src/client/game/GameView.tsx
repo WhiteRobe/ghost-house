@@ -7,7 +7,7 @@ import { game, logLines, focusFloor, overlay, fast, setFast, animating } from '.
 import { CardView, PlayerList, TraitTracks, TraitChips, Portrait } from './parts';
 import { AttackModal, CardModal, ChooseModal, DamageModal, LootModal, MonsterBar, PlayerModal, RotateBar, TradeAskModal, TradeModal } from './Decisions';
 import { OverlayLayer } from './Overlays';
-import { Coach, setTipsOn, tipsOn } from './Coach';
+import { Coach, coachTarget, setTipsOn, tipsOn } from './Coach';
 import { roomName, seatName } from './describe';
 import { Modal, SoundButton, TimerRing } from '../ui/common';
 import { SIDE_NAME } from '../art';
@@ -92,7 +92,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
         {s.winner && !overlay.value && <button class="btn small" onClick={() => game.value && overlay.value === null && (overlay.value = { kind: 'end', e: { t: 'end', winner: s.winner! } })}>结局</button>}
         <button class={`icon-btn ${fast.value ? 'on' : ''}`} title="加速动画" onClick={() => setFast(!fast.value)}>⏩</button>
         <SoundButton />
-        <button class="icon-btn mobile-only" onClick={() => setDrawer(!drawer)}>☰</button>
+        <button class="icon-btn mobile-only" data-tour="drawer" onClick={() => setDrawer(!drawer)}>☰</button>
       </div>
 
       <div class="g-body">
@@ -136,7 +136,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
       {/* 底部：我的面板 + 行动 */}
       <div class="g-dock">
         {me ? (
-          <div class={`me-panel ${expand ? 'expanded' : ''}`} data-tour="me">
+          <div class={`me-panel ${expand || coachTarget.value === 'me' || coachTarget.value === 'cards' ? 'expanded' : ''}`} data-tour="me">
             <div class="me-head" onClick={() => setExpand(!expand)}>
               <Portrait explorer={me.explorer} size={44} dead={me.dead} />
               <div>

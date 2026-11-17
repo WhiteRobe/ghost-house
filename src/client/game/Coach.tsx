@@ -109,6 +109,9 @@ const TIPS: Tip[] = [
 const SEEN_KEY = 'ghost-tips-seen';
 const ON_KEY = 'ghost-tips';
 
+/** 当前提示圈中的目标（手机上据此展开折叠的面板） */
+export const coachTarget = signal<string | null>(null);
+
 export const tipsOn = signal<boolean>(localStorage.getItem(ON_KEY) !== 'off');
 export function setTipsOn(v: boolean) {
   tipsOn.value = v;
@@ -130,9 +133,19 @@ export function resetTips() {
 export function Coach({ ctx, tutorial }: { ctx: Ctx; tutorial: boolean }) {
   const [seen, setSeen] = useState<Set<string>>(() => (tutorial ? new Set() : loadSeen()));
   const [rect, setRect] = useState<DOMRect | null>(null);
+  /** 本局看过的提示（按顺序），用于「上一步」 */
+  const [history, setHistory] = useState<string[]>([]);
+  /** 正在回看 history 里的第几条；null 表示正常推进 */
+  const [back, setBack] = useState<number | null>(null);
   const active = tutorial || tipsOn.value;
   const busy = overlay.value != null;
-  const tip = active && !busy ? TIPS.find((t) => !seen.has(t.id) && t.when(ctx)) : undefined;
+  const live = active && !busy ? TIPS.find((t) => !seen.has(t.id) && t.when(ctx)) : undefined;
+  const tip = back != null ? TIPS.find((t) => t.id === history[back]) : live;
+
+  useEffect(() => {
+    coachTarget.value = tip?.target ?? null;
+    return () => { coachTarget.value = null; };
+  }, [tip?.id]);
 
   useEffect(() => {
     if (!tip?.target) {
@@ -141,7 +154,10 @@ export function Coach({ ctx, tutorial }: { ctx: Ctx; tutorial: boolean }) {
     }
     const measure = () => {
       const el = document.querySelector(`[data-tour="${tip.target}"]`) ?? (tip.target === 'modal' ? document.querySelector('.modal') : null);
-      setRect(el ? el.getBoundingClientRect() : null);
+      const r = el?.getBoundingClientRect();
+      // 目标不在屏幕里（比如手机上收起的侧栏）就不圈，气泡居中
+      const visible = r && r.width > 0 && r.right > 0 && r.bottom > 0 && r.left < window.innerWidth && r.top < window.innerHeight;
+      setRect(visible ? r : null);
     };
     measure();
     const t = setInterval(measure, 400);
@@ -154,6 +170,13 @@ export function Coach({ ctx, tutorial }: { ctx: Ctx; tutorial: boolean }) {
 
   if (!tip) return null;
   const done = (all = false) => {
+    if (back != null && !all) {
+      // 回看模式：往后翻，翻到头回到正常推进
+      setBack(back + 1 < history.length ? back + 1 : null);
+      return;
+    }
+    setBack(null);
+    if (!history.includes(tip.id)) setHistory([...history, tip.id]);
     const next = new Set(seen);
     if (all) for (const t of TIPS) next.add(t.id);
     else next.add(tip.id);
@@ -162,6 +185,8 @@ export function Coach({ ctx, tutorial }: { ctx: Ctx; tutorial: boolean }) {
     if (all && !tutorial) setTipsOn(false);
   };
   const idx = TIPS.indexOf(tip) + 1;
+  const prevIdx = back != null ? back - 1 : history.length - 1;
+  const prev = () => prevIdx >= 0 && setBack(prevIdx);
 
   // 气泡位置：目标下方放不下就放上方；没有目标就居中
   const vw = window.innerWidth;
@@ -186,6 +211,8 @@ export function Coach({ ctx, tutorial }: { ctx: Ctx; tutorial: boolean }) {
         <h4>{tip.title}</h4>
         <p>{typeof tip.text === 'function' ? tip.text(ctx) : tip.text}</p>
         <div class="row end">
+          <button class="btn small ghost" disabled={prevIdx < 0} onClick={prev}>上一步</button>
+          <span class="spacer" />
           <button class="btn small ghost" onClick={() => done(true)}>{tutorial ? '跳过教程' : '不再提示'}</button>
           <button class="btn small primary" onClick={() => done()}>知道了</button>
         </div>
