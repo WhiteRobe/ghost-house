@@ -437,3 +437,32 @@ p { line-height: 1.7; }
 .piece.monster.stunned .m-body { transform: rotate(90deg) scale(0.85); transition: transform 0.4s; }
 .piece.monster .m-body { transition: transform 0.4s; }
 @media (max-width: 600px) { .f-face { width: 58px; height: 58px; } .fighter { padding: 10px 4px; } .f-dmg { font-size: 32px; } }
+
+/* ---------- 凶兆计数 ---------- */
+.omen-meter { display: inline-flex; align-items: center; gap: 8px; padding: 3px 10px 3px 8px; border: 1px solid #6b2a20; border-radius: 999px; background: linear-gradient(90deg, #2a0f0b, #170c09); animation: omen-pop 0.6s; font-family: var(--sans); }
+.om-label { color: #ff9c8c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; }
+.om-pips { display: inline-flex; gap: 3px; }
+.om-pips i { width: 9px; height: 14px; border-radius: 3px; background: #3a2620; border: 1px solid #5a3a30; }
+.om-pips i.on { background: linear-gradient(#ff7a5a, #b0281c); border-color: #ff9c8c; box-shadow: 0 0 6px rgba(255, 90, 60, 0.7); }
+.om-count { font-family: var(--serif); font-size: 20px; color: #ffd6c8; line-height: 1; }
+.om-count small { font-size: 12px; color: var(--muted); }
+.om-chance { font-size: 12px; color: var(--candle-2); border-left: 1px solid #5a3a30; padding-left: 8px; }
+.omen-meter.mid { border-color: #a8402c; }
+.omen-meter.hi { border-color: #ff5a3c; box-shadow: 0 0 14px rgba(255, 70, 40, 0.45); }
+.omen-meter.hi .om-pips i.on { animation: pulse 1s infinite; }
+@keyframes omen-pop { 0% { transform: scale(1.25); filter: brightness(1.8); } 100% { transform: none; } }
+.round-chip { font-size: 13px; color: var(--paper-2); padding: 2px 9px; border: 1px solid var(--line); border-radius: 999px; background: #17120f; font-family: var(--sans); }
+@media (max-width: 600px) { .om-pips i { width: 6px; height: 11px; } .om-chance { display: none; } .om-label { font-size: 12px; } .om-count { font-size: 17px; } }
+
+/* ---------- 背叛者的怨气 ---------- */
+.aura-glow { fill: url(#auraGrad); transform-box: fill-box; transform-origin: center; animation: aura-pulse 1.8s ease-in-out infinite; }
+.aura-ring { fill: none; stroke: #ff3a2a; stroke-width: 1.5; stroke-dasharray: 3 4; transform-box: fill-box; transform-origin: center; animation: aura-spin 6s linear infinite; opacity: 0.8; }
+.traitor-ring { fill: none; stroke: #ff3a2a; stroke-width: 2.5; filter: drop-shadow(0 0 3px #ff2a1a); }
+.wisp { fill: #ff3a24; opacity: 0; filter: blur(1.2px); transform-box: fill-box; transform-origin: center bottom; animation: wisp 2.4s ease-out infinite; }
+.wisp.w1 { animation-delay: 0.35s; } .wisp.w2 { animation-delay: 0.7s; } .wisp.w3 { animation-delay: 1.05s; } .wisp.w4 { animation-delay: 1.4s; } .wisp.w5 { animation-delay: 1.75s; } .wisp.w6 { animation-delay: 2.1s; }
+@keyframes aura-pulse { 50% { transform: scale(1.25); opacity: 0.65; } }
+@keyframes aura-spin { to { transform: rotate(360deg); } }
+@keyframes wisp { 0% { opacity: 0; transform: translate(0, 8px) scale(0.7); } 20% { opacity: 0.95; } 100% { opacity: 0; transform: translate(4px, -38px) scale(1.5, 2.2); } }
+.traitor-mark { fill: #ff6a5a; font-size: 11px; text-anchor: middle; filter: drop-shadow(0 0 2px #000); }
+.prow.traitor { border-color: rgba(255, 70, 50, 0.6); background: linear-gradient(90deg, rgba(120, 20, 12, 0.35), transparent); box-shadow: inset 3px 0 0 #ff3a2a; }
+.prow.traitor .portrait { box-shadow: 0 0 0 2px #ff3a2a, 0 0 12px rgba(255, 50, 30, 0.7); animation: pulse 1.8s infinite; }

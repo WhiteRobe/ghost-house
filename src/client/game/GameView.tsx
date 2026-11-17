@@ -82,9 +82,10 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
       <div class="g-top">
         <button class="icon-btn" title="离开" onClick={onLeave}>←</button>
         <div class="g-title" data-tour="title">
-          {s.haunt ? <><span class="haunt-chip">异变</span> {s.haunt.title}</> : <>探索中 · 凶兆 {s.omensDrawn}/9</>}
+          {s.haunt ? <><span class="haunt-chip">异变</span> {s.haunt.title}</> : <OmenMeter n={s.omensDrawn} classic={s.mode === 'classic'} />}
           {s.haunt?.track && <span class="tag">{s.haunt.track.label} {s.haunt.track.value}{s.haunt.track.max != null ? '/' + s.haunt.track.max : ''}</span>}
-          <span class="muted small hide-m">第 {s.round} 轮{s.haunt ? ` · 异变第 ${s.haunt.round} 轮` : ''}</span>
+          <span class="round-chip">第 {s.round} 轮</span>
+          <span class="muted small hide-m">{s.haunt ? ` · 异变第 ${s.haunt.round} 轮` : ''}</span>
         </div>
         <div class="spacer" />
         {s.haunt && <button class="btn small primary" data-tour="brief" onClick={() => setModal('brief')}>📜 手册</button>}
@@ -266,3 +267,18 @@ function Inspect({ k, onClose }: { k: string; onClose: () => void }) {
 }
 
 export { toast };
+
+/** 下一张凶兆触发异变的概率（标准规则：掷「凶兆数」颗骰 ≥5） */
+const NEXT_CHANCE = [0, 0, 15, 38, 61, 77, 88, 94, 100];
+
+function OmenMeter({ n, classic }: { n: number; classic: boolean }) {
+  const danger = n >= 6 ? 'hi' : n >= 3 ? 'mid' : 'lo';
+  return (
+    <span class={`omen-meter ${danger}`} key={n} title="每出一张凶兆就要做一次异变检定">
+      <span class="om-label">凶兆</span>
+      <span class="om-pips">{Array.from({ length: 9 }, (_, i) => <i class={i < n ? 'on' : ''} />)}</span>
+      <b class="om-count">{n}<small>/9</small></b>
+      {!classic && n < 9 && <span class="om-chance">下一张触发 {NEXT_CHANCE[n]}%</span>}
+    </span>
+  );
+}

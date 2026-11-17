@@ -89,6 +89,7 @@ export function MapView(p: MapProps) {
       <div class="map" ref={box} onPointerDown={onDown as any} onPointerMove={onMoveP as any} onPointerUp={onUp} onPointerLeave={onUp}>
         <svg width={W * zoom} height={H * zoom} viewBox={`0 0 ${W} ${H}`} class={`floor-${floor}`}>
           <defs>
+            <radialGradient id="auraGrad"><stop offset="40%" stop-color="#ff2a1a" stop-opacity="0.8" /><stop offset="100%" stop-color="#ff2a1a" stop-opacity="0" /></radialGradient>
             <pattern id="grid" width={T} height={T} patternUnits="userSpaceOnUse">
               <rect width={T} height={T} fill="none" stroke="rgba(240,180,76,0.04)" />
             </pattern>
@@ -170,11 +171,19 @@ export function MapView(p: MapProps) {
                 return (
                   <g key={o.id} class={`piece ${pl.dead ? 'dead' : ''} ${s.turn === pl.seat ? 'active' : ''} ${o.seat === p.you ? 'me' : ''}`} style={{ transform: `translate(${x}px,${y}px)` }}>
                     <g class={hits.value['p' + o.seat] ? 'hit' : ''}>
+                    {pl.side === 'traitor' && !pl.dead && (
+                      <g class="aura">
+                        <circle r="27" class="aura-glow" />
+                        <circle r="18" class="aura-ring" />
+                        {[0, 1, 2, 3, 4, 5, 6].map((i) => <ellipse class={`wisp w${i}`} cx={(i - 3) * 4.5} cy="-10" rx="3.6" ry="7" />)}
+                      </g>
+                    )}
                     <circle r="14" fill={ex?.color ?? '#888'} />
                     <clipPath id={`pc${o.seat}`}><circle r="12" /></clipPath>
                     {art.explorer(pl.explorer) ? <image href={art.explorer(pl.explorer)} x="-12" y="-12" width="24" height="24" clip-path={`url(#pc${o.seat})`} preserveAspectRatio="xMidYMin slice" /> : <text y="5" class="p-letter">{ex?.name.slice(0, 1)}</text>}
                     <circle r="14" class="ring" />
-                    {pl.side === 'traitor' && <text y="-17" class="traitor-mark">☠</text>}
+                    {pl.side === 'traitor' && <circle r="14" class="traitor-ring" />}
+                    {pl.side === 'traitor' && <text y="-19" class="traitor-mark">☠</text>}
                     </g>
                     <title>{pl.name}</title>
                   </g>

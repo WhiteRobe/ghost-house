@@ -72,7 +72,7 @@ export function PlayerList({ s, you, seats, onPick, waiting }: { s: GameState; y
         const offline = seat?.kind === 'human' && !seat.online;
         const ex = EXPLORERS[p.explorer];
         return (
-          <div class={`prow ${s.turn === p.seat ? 'turn' : ''} ${p.dead ? 'dead' : ''} ${p.seat === you ? 'me' : ''}`} onClick={() => onPick?.(p.seat)}>
+          <div class={`prow ${s.turn === p.seat ? 'turn' : ''} ${p.dead ? 'dead' : ''} ${p.seat === you ? 'me' : ''} ${p.side === 'traitor' && s.phase !== 'explore' ? 'traitor' : ''}`} onClick={() => onPick?.(p.seat)}>
             <Portrait explorer={p.explorer} size={38} dead={p.dead} />
             <div class="prow-main">
               <div class="prow-name">
