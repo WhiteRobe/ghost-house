@@ -16,6 +16,8 @@ export class HouseDO extends DurableObject<Env> {
   private config: GameConfig | null = null;
   private game: Game | null = null;
   private timer: TimerState | null = null;
+  /** AI 下一个回合最早的开始时间：回合交接时停一下，让真人看清是谁在行动 */
+  private aiAt: number | null = null;
   private offline: Record<string, number> = {};
   private cleanupAt: number | null = null;
   private dirty = new Set<string>();
@@ -374,7 +376,8 @@ export class HouseDO extends DurableObject<Env> {
       }
       answers.push(first);
       events.push(...r.events);
-    }
+      this.pauseAfter(r.events, events);
+    } else this.pauseAfter(initial, initial);
     const more = this.autoLoop();
     answers.push(...more.answers);
     events.push(...more.events);
@@ -409,6 +412,8 @@ export class HouseDO extends DurableObject<Env> {
     const answers: Answer[] = [];
     const events: GameEvent[] = [];
     if (!game || this.info?.status !== 'playing') return { answers, events };
+    if (this.aiAt != null && Date.now() < this.aiAt - 50) return { answers, events };
+    this.aiAt = null;
     for (let guard = 0; guard < 3000 && game.pending; guard++) {
       const req = game.pending;
       if (!this.isAuto(req.seat)) break;
@@ -420,8 +425,18 @@ export class HouseDO extends DurableObject<Env> {
       }
       answers.push(a);
       events.push(...r.events);
+      if (this.pauseAfter(r.events, events)) break;
     }
     return { answers, events };
+  }
+
+  /** 刚开始了一个新回合（或怪物阶段），且接下来还是 AI：停一下再继续 */
+  private pauseAfter(stepEvents: GameEvent[], chunk: GameEvent[]): boolean {
+    const game = this.game;
+    if (!game?.pending || !this.isAuto(game.pending.seat) || !this.anyHumanOnline()) return false;
+    if (!stepEvents.some((e) => e.t === 'turn' || e.t === 'monsterPhase')) return false;
+    this.aiAt = Date.now() + Math.min(12000, 1500 + animEstimate(chunk));
+    return true;
   }
 
   private isAuto(seat: number): boolean {
@@ -460,6 +475,7 @@ export class HouseDO extends DurableObject<Env> {
     if (this.info?.status === 'playing' && req && this.anyHumanOnline()) {
       const d = this.seatDeadline(req.seat);
       if (d != null) times.push(d);
+      if (this.aiAt != null) times.push(this.aiAt);
     }
     const want = times.length ? Math.max(Math.min(...times), Date.now() + 100) : null;
     const cur = await this.ctx.storage.getAlarm();
@@ -491,6 +507,7 @@ export class HouseDO extends DurableObject<Env> {
         if (r.ok) {
           answers.push(a);
           events.push(...r.events);
+          this.pauseAfter(r.events, events);
           const more = this.autoLoop();
           answers.push(...more.answers);
           events.push(...more.events);

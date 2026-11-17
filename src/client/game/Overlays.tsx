@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'preact/hooks';
 import { TRAIT_NAME, type GameState } from '../../shared/types';
 import type { Brief, RoomInfo } from '../../shared/protocol';
-import { CARDS, SCENARIOS } from '../../content';
-import { CardView, Die } from './parts';
+import { CARDS, EXPLORERS, SCENARIOS } from '../../content';
+import { CardView, Die, Portrait } from './parts';
 import { dismissOverlay, overlay, fast } from './store';
 import { seatName, targetName } from './describe';
 import { art, SIDE_NAME } from '../art';
@@ -37,6 +37,27 @@ export function OverlayLayer({ s, you, side, brief, onOpenBrief, room, onRematch
   if (!o) return null;
   const close = () => dismissOverlay();
   switch (o.kind) {
+    case 'turn': {
+      const p = s.players[o.seat];
+      return (
+        <div class="ov ov-turn" onClick={close}>
+          <div class={`turn-banner ${o.mine ? 'mine' : ''}`}>
+            <Portrait explorer={p.explorer} size={56} dead={p.dead} />
+            <div>
+              <div class="muted tiny">第 {o.round} 轮</div>
+              <div class="turn-name">{o.mine ? '轮到你了' : `${p.name} 的回合`}</div>
+              <div class="muted small">{EXPLORERS[p.explorer]?.name}{p.ai ? ' · AI' : ''}{p.side && s.phase !== 'explore' ? ' · ' + SIDE_NAME[p.side] : ''}</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    case 'monsterTurn':
+      return (
+        <div class="ov ov-turn" onClick={close}>
+          <div class="turn-banner monster"><div class="turn-name">怪物行动</div></div>
+        </div>
+      );
     case 'roll': {
       const e = o.e;
       return (

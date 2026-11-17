@@ -7,6 +7,8 @@ import { sfx } from '../audio';
 export type GameMsg = Extract<ServerMsg, { type: 'game' }>;
 
 export type Overlay =
+  | { kind: 'turn'; seat: number; mine: boolean; round: number }
+  | { kind: 'monsterTurn' }
   | { kind: 'roll'; e: Extract<GameEvent, { t: 'roll' }> }
   | { kind: 'hauntRoll'; e: Extract<GameEvent, { t: 'hauntRoll' }> }
   | { kind: 'attack'; e: Extract<GameEvent, { t: 'attack' }> }
@@ -33,6 +35,8 @@ export function setFast(v: boolean) {
 function duration(o: Overlay): number | null {
   const k = fast.value ? 0.5 : 1;
   switch (o.kind) {
+    case 'turn': return (o.mine ? 1300 : 1100) * k;
+    case 'monsterTurn': return 1100 * k;
     case 'roll': return 1500 * k;
     case 'hauntRoll': return 2600 * k;
     case 'attack': return 2200 * k;
@@ -50,6 +54,7 @@ function playNext() {
   if (o.kind === 'roll' || o.kind === 'hauntRoll' || o.kind === 'attack') sfx('dice');
   if (o.kind === 'card') sfx('card');
   if (o.kind === 'haunt') sfx('haunt');
+  if (o.kind === 'turn' && o.mine) sfx('turn');
   const d = duration(o);
   if (d != null && !document.hidden) timer = setTimeout(playNext, d);
   else if (d != null) playNext();
@@ -68,10 +73,9 @@ export function resetGame() {
 }
 
 export function onGameMsg(m: GameMsg) {
-  const prev = game.value;
   game.value = m;
   const s = m.state;
-  if (m.full || !prev) {
+  if (m.full) {
     if (!logLines.value.length) logLines.value = [{ id: 0, text: '已连接到这栋房子。', tone: 'info' }];
     const me = m.you != null ? s.players[m.you] : null;
     focusFloor.value = me ? parseKey(me.tile).floor : 'G';
@@ -93,10 +97,11 @@ export function onGameMsg(m: GameMsg) {
       case 'card': if (e.how !== 'gain') queue.push({ kind: 'card', e }); break;
       case 'haunt': queue.push({ kind: 'haunt', e }); break;
       case 'end': queue.push({ kind: 'end', e }); break;
+      case 'monsterPhase': queue.push({ kind: 'monsterTurn' }); break;
       case 'turn': {
+        queue.push({ kind: 'turn', seat: e.seat, mine: e.seat === m.you, round: e.round });
         const p = s.players[e.seat];
         if (p) focusFloor.value = parseKey(p.tile).floor;
-        if (e.seat === m.you) sfx('turn');
         break;
       }
       case 'move': {
