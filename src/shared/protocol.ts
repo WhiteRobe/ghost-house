@@ -22,6 +22,8 @@ export type SeatInfo =
 export interface RoomSettings {
   scenario: string; // 缘起卡 id 或 'random'
   mode: RuleMode;
+  /** 新手教学局：固定一个简单的异变、新手不会当背叛者、不限时 */
+  tutorial?: boolean;
 }
 
 export interface RoomInfo {

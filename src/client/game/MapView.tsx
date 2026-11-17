@@ -130,10 +130,10 @@ export function MapView(p: MapProps) {
           })}
 
           {/* 可探索的门 */}
-          {exploreFrom && exploreFrom.floor === floor && p.explore?.map((d) => {
+          {exploreFrom && exploreFrom.floor === floor && p.explore?.map((d, i) => {
             const cx = px(exploreFrom.x + DX[d]) + T / 2, cy = py(exploreFrom.y + DY[d]) + T / 2;
             return (
-              <g class="explore" onClick={click(() => p.onExplore?.(d))} transform={`translate(${cx},${cy})`}>
+              <g class="explore" data-tour={i === 0 ? 'explore' : undefined} onClick={click(() => p.onExplore?.(d))} transform={`translate(${cx},${cy})`}>
                 <rect x={-T / 2 + 8} y={-T / 2 + 8} width={T - 16} height={T - 16} rx="10" />
                 <text y="-4">？</text>
                 <text y="20" class="small">探索</text>

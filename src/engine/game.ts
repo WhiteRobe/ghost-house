@@ -96,7 +96,7 @@ export class Game {
       decks: { item: 0, omen: 0, event: 0, rooms: { B: 0, G: 0, U: 0 } },
       omensDrawn: 0, scenario: config.scenario, mode: config.mode, haunt: null, winner: null, moveLeft: 0,
     };
-    this.roundStart = this.rng.int(n);
+    this.roundStart = config.firstSeat ?? this.rng.int(n);
     this.syncDecks();
     this.gen = this.main();
   }
@@ -193,6 +193,11 @@ export class Game {
   private *roundEnd(): Gen {
     const s = this.state;
     s.round++;
+    // 教学局：到了指定轮数还没触发，就由最后一个凶兆直接触发
+    if (s.phase === 'explore' && this.config.minHauntRound && s.round > this.config.minHauntRound + 2) {
+      yield* this.beginHaunt((this.roundStart + this.n - 1) % this.n, this.hauntFor(this.secret.lastOmen ?? OMEN_IDS[0]));
+      return;
+    }
     if (s.phase === 'haunt' && s.haunt) {
       s.haunt.round++;
       if (this.haunt?.onRoundEnd) yield* this.safe(this.haunt.onRoundEnd(this));
@@ -1294,7 +1299,8 @@ export class Game {
     const total = OMEN_IDS.length;
     const dice = this.rollDice(n);
     const sum = dice.reduce((a, b) => a + b, 0);
-    const ok = sum >= 5 || n >= total || (!!this.config.debugHaunt && n >= 2);
+    const early = this.state.round < (this.config.minHauntRound ?? 0);
+    const ok = !early && (sum >= 5 || n >= total || (!!this.config.debugHaunt && n >= 2));
     this.emit({ t: 'hauntRoll', seat, dice, total: sum, need: n >= total ? '最后一个凶兆，必定触发' : '5 点以上触发', ok });
     if (ok) yield* this.beginHaunt(seat, this.hauntFor(this.secret.lastOmen!));
     else this.log('房子还在沉睡……', 'haunt');
@@ -1339,6 +1345,17 @@ export class Game {
   }
 
   private pickTraitor(revealer: number): number | null {
+    const pick = this.pickTraitorRaw(revealer);
+    const protect = this.config.protect ?? [];
+    if (pick == null || !protect.includes(pick)) return pick;
+    for (let i = 1; i < this.n; i++) {
+      const s = (pick + i) % this.n;
+      if (!protect.includes(s)) return s;
+    }
+    return pick;
+  }
+
+  private pickTraitorRaw(revealer: number): number | null {
     const rule = this.haunt!.traitor;
     const order = Array.from({ length: this.n }, (_, i) => (revealer + i) % this.n);
     const best = (score: (s: number) => number, exclude = false) => {

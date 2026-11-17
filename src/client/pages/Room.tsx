@@ -53,6 +53,9 @@ export function Room({ id }: { id: string }) {
 function Waiting({ room, you, send, isHost, onLeave, status }: { room: RoomInfo; you: number | null; send: (m: ClientMsg) => void; isHost: boolean; onLeave: () => void; status: ConnStatus }) {
   const [picking, setPicking] = useState<number | null>(null);
   useEffect(() => startMusic('lobby'), []);
+  // 教学局：进门直接开始
+  useEffect(() => { if (room.settings.tutorial && isHost && status === 'open') send({ type: 'start' }); }, [status]);
+  if (room.settings.tutorial) return <><TopBar /><div class="page"><div class="empty-hint"><span class="big">🕯️</span>正在准备新手教程…</div></div></>;
   const filled = room.seats.filter((s) => s.kind !== 'empty').length;
   const link = `${location.origin}/#/room/${room.id}`;
   return (

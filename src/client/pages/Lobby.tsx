@@ -28,6 +28,16 @@ export function Lobby() {
     return w(a) - w(b) || b.updatedAt - a.updatedAt;
   });
 
+  async function startTutorial() {
+    try {
+      const { id } = await api.tutorial();
+      localStorage.setItem('ghost-tutorial-done', '1');
+      go(`/room/${id}`);
+    } catch (e: any) {
+      toast(e.message);
+    }
+  }
+
   async function joinCode() {
     if (!/^\w{4,8}$/.test(code.trim())) return toast('请输入房间码');
     try {
@@ -53,8 +63,20 @@ export function Lobby() {
               <button class="btn ghost" onClick={joinCode}>加入</button>
             </div>
           )}
+          <button class="btn ghost" onClick={startTutorial}>新手教程</button>
           <button class="btn primary" onClick={() => setCreating(true)}>{guest ? '和 AI 开一局' : '创建房间'}</button>
         </div>
+        {!localStorage.getItem('ghost-tutorial-done') && (
+          <div class="panel tutorial-banner">
+            <div>
+              <b>第一次来？</b> 先和两个 AI 玩一局新手教程（大约 10 分钟）。每一步都会告诉你该做什么，你不会当上背叛者，也没有时间限制。
+            </div>
+            <div class="row">
+              <button class="btn primary" onClick={startTutorial}>开始教程</button>
+              <button class="btn small ghost" onClick={(e) => { localStorage.setItem('ghost-tutorial-done', '1'); (e.currentTarget as HTMLElement).closest('.tutorial-banner')?.remove(); }}>以后再说</button>
+            </div>
+          </div>
+        )}
         {guest && (
           <div class="panel" style={{ marginBottom: '16px' }}>
             <b>游客模式</b>：可以和 AI 一起探索鬼屋。想和朋友一起？<a href="#/" onClick={async () => { await api.logout().catch(() => {}); me.value = null; }}>注册一个账号</a>。

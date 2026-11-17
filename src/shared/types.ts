@@ -29,8 +29,14 @@ export interface GameConfig {
   seats: { name: string; ai?: AiLevel; explorer: string }[];
   scenario: string; // 缘起卡 id
   mode: RuleMode; // standard = 第 3 版异变检定；classic = 第 2 版
-  /** 调试：抽到第 2 个凶兆时必定触发这个异变 */
+  /** 调试 / 教学：抽到第 2 个凶兆时必定触发这个异变 */
   debugHaunt?: number;
+  /** 这些座位不会成为背叛者（教学局保护新手） */
+  protect?: number[];
+  /** 教学局：异变最早在第几轮触发 */
+  minHauntRound?: number;
+  /** 指定先手座位 */
+  firstSeat?: number;
 }
 
 export interface PlacedTile {

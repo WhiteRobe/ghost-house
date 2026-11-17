@@ -346,3 +346,15 @@ p { line-height: 1.7; }
   .actionbar { padding: 6px 8px; }
   .ab-title { font-size: 14px; }
 }
+
+/* ---------- 新手引导 ---------- */
+.coach { position: fixed; inset: 0; z-index: 150; }
+.coach-dim { position: absolute; inset: 0; background: rgba(5, 3, 2, 0.6); }
+.coach-hole { position: absolute; border-radius: 10px; box-shadow: 0 0 0 9999px rgba(5, 3, 2, 0.62); border: 2px solid var(--candle); animation: pulse 1.4s infinite; pointer-events: none; transition: all 0.25s; }
+.coach-bubble { position: absolute; background: linear-gradient(#2e2318, #1b140e); border: 1px solid var(--candle); border-radius: 12px; padding: 12px 14px; box-shadow: 0 12px 40px #000; }
+.coach-bubble h4 { margin: 2px 0 4px; font-family: var(--serif); color: var(--candle-2); font-size: 17px; }
+.coach-bubble p { margin: 0; font-size: 14px; line-height: 1.7; }
+.coach-bubble .row.end { margin-top: 10px; }
+.coach-step { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+.tutorial-banner { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 16px; border-color: var(--candle); }
+.tutorial-done { color: var(--candle-2); border: 1px dashed var(--candle); border-radius: 8px; padding: 6px 12px; }

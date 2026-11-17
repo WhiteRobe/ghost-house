@@ -80,9 +80,12 @@ async function handleApi(req: Request, env: Env, path: string): Promise<Response
     const b = await readBody(req);
     const maxSeats = Math.min(6, Math.max(3, Math.floor(Number(b.maxSeats) || 4)));
     const name = (typeof b.name === 'string' && b.name.trim() ? b.name.trim() : `${user.name}的房间`).slice(0, 20);
-    const priv = user.guest || b.private === true;
-    const created = await lobbyStub(env).createRoom({ name, host: user.name, maxSeats, private: priv, guestOnly: user.guest });
-    await houseStub(env, created.id).init({ ...created, name, host: user, maxSeats, private: priv, guestOnly: user.guest });
+    const tutorial = b.tutorial === true;
+    const priv = user.guest || tutorial || b.private === true;
+    const seats = tutorial ? 3 : maxSeats;
+    const roomName = tutorial ? '新手教程' : name;
+    const created = await lobbyStub(env).createRoom({ name: roomName, host: user.name, maxSeats: seats, private: priv, guestOnly: user.guest || tutorial });
+    await houseStub(env, created.id).init({ ...created, name: roomName, host: user, maxSeats: seats, private: priv, guestOnly: user.guest || tutorial, tutorial });
     return json(created);
   }
 

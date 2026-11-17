@@ -132,6 +132,7 @@ function EndBox({ s, you, w, room, isHost, onRematch, onLeave, close }: {
             <h2 class="haunt-title">{w.title}</h2>
             {you != null && <div class={`haunt-side ${iWon ? 'good' : 'bad'}`}>{iWon ? '你活了下来' : w.side === 'none' ? '无人获胜' : '你输了'}</div>}
             <p class="haunt-intro">{w.text}</p>
+            {room.settings.tutorial && <div class="tutorial-done">🎓 新手教程完成！回到大厅就可以创建房间，邀请朋友一起玩了。</div>}
             <div class="muted">获胜：{w.seats.map((x) => seatName(s, x)).join('、') || '无'}</div>
             <div class="end-players">
               {s.players.map((p) => (

@@ -73,14 +73,18 @@ export class HouseDO extends DurableObject<Env> {
 
   // ---------- RPC ----------
 
-  async init(opts: { id: string; code: string; name: string; host: Identity; maxSeats: number; private: boolean; guestOnly: boolean }) {
+  async init(opts: { id: string; code: string; name: string; host: Identity; maxSeats: number; private: boolean; guestOnly: boolean; tutorial?: boolean }) {
     if (this.info) return;
     const seats: SeatInfo[] = Array.from({ length: opts.maxSeats }, () => ({ kind: 'empty' }) as SeatInfo);
-    seats[0] = { kind: 'human', userId: opts.host.id, name: opts.host.name, online: false, guest: opts.host.guest };
+    seats[0] = { kind: 'human', userId: opts.host.id, name: opts.host.name, online: false, guest: opts.host.guest, explorer: opts.tutorial ? 'zhao' : undefined };
     this.info = {
       id: opts.id, code: opts.code, name: opts.name, hostId: opts.host.id, private: opts.private, guestOnly: opts.guestOnly,
-      status: 'waiting', seats, settings: { scenario: 'random', mode: 'standard' },
+      status: 'waiting', seats, settings: { scenario: opts.tutorial ? 'live' : 'random', mode: 'standard', tutorial: opts.tutorial },
     };
+    if (opts.tutorial) {
+      seats[1] = { kind: 'ai', name: 'AI·小翠', explorer: 'su' };
+      seats[2] = { kind: 'ai', name: 'AI·石头', explorer: 'xiaoman' };
+    }
     this.cleanupAt = Date.now() + CLEANUP_MS;
     this.set('info');
     this.set('cleanup');
@@ -345,6 +349,7 @@ export class HouseDO extends DurableObject<Env> {
       seats: seats.map((s) => (s.kind === 'ai' ? { name: s.name, ai: 'normal' as const, explorer: s.explorer! } : { name: s.kind === 'human' ? s.name : '', explorer: s.kind === 'human' ? s.explorer! : '' })),
       scenario,
       mode: info.settings.mode,
+      ...(info.settings.tutorial ? { debugHaunt: 46, protect: seats.flatMap((s, i) => (s.kind === 'human' ? [i] : [])), minHauntRound: 4, firstSeat: 0 } : {}),
     };
     this.game = Game.create(this.config);
     this.timer = null;
@@ -442,6 +447,7 @@ export class HouseDO extends DurableObject<Env> {
   private seatDeadline(seat: number): number | null {
     const s = this.info?.seats[seat];
     if (!s || s.kind !== 'human' || !this.timer) return null;
+    if (this.info?.settings.tutorial && this.offline[s.userId] == null) return null; // 教学局不限时
     const since = this.offline[s.userId];
     if (since != null && this.anyHumanOnline()) return Math.min(this.timer.deadline, since + this.takeoverMs());
     return this.timer.deadline;

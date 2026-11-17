@@ -26,5 +26,6 @@ export const api = {
   logout: () => call<unknown>('POST', '/api/logout', {}),
   createRoom: (name: string, maxSeats: number, isPrivate: boolean) =>
     call<{ id: string }>('POST', '/api/rooms', { name, maxSeats, private: isPrivate }),
+  tutorial: () => call<{ id: string }>('POST', '/api/rooms', { tutorial: true }),
   joinByCode: (code: string) => call<{ id: string }>('POST', '/api/rooms/join', { code }),
 };

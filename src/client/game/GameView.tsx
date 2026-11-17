@@ -7,6 +7,7 @@ import { game, logLines, focusFloor, overlay, fast, setFast, animating } from '.
 import { CardView, PlayerList, TraitTracks, TraitChips, Portrait } from './parts';
 import { AttackModal, CardModal, ChooseModal, DamageModal, LootModal, MonsterBar, PlayerModal, RotateBar, TradeAskModal, TradeModal } from './Decisions';
 import { OverlayLayer } from './Overlays';
+import { Coach, setTipsOn, tipsOn } from './Coach';
 import { roomName, seatName } from './describe';
 import { Modal, SoundButton, TimerRing } from '../ui/common';
 import { SIDE_NAME } from '../art';
@@ -80,13 +81,14 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
     <div class={`game phase-${s.phase}`}>
       <div class="g-top">
         <button class="icon-btn" title="离开" onClick={onLeave}>←</button>
-        <div class="g-title">
+        <div class="g-title" data-tour="title">
           {s.haunt ? <><span class="haunt-chip">异变</span> {s.haunt.title}</> : <>探索中 · 凶兆 {s.omensDrawn}/9</>}
           {s.haunt?.track && <span class="tag">{s.haunt.track.label} {s.haunt.track.value}{s.haunt.track.max != null ? '/' + s.haunt.track.max : ''}</span>}
           <span class="muted small hide-m">第 {s.round} 轮{s.haunt ? ` · 异变第 ${s.haunt.round} 轮` : ''}</span>
         </div>
         <div class="spacer" />
-        {s.haunt && <button class="btn small primary" onClick={() => setModal('brief')}>📜 手册</button>}
+        {s.haunt && <button class="btn small primary" data-tour="brief" onClick={() => setModal('brief')}>📜 手册</button>}
+        {!room.settings.tutorial && <button class={`icon-btn ${tipsOn.value ? 'on' : ''}`} title={tipsOn.value ? '关闭新手提示' : '打开新手提示'} onClick={() => setTipsOn(!tipsOn.value)}>？</button>}
         {s.winner && !overlay.value && <button class="btn small" onClick={() => game.value && overlay.value === null && (overlay.value = { kind: 'end', e: { t: 'end', winner: s.winner! } })}>结局</button>}
         <button class={`icon-btn ${fast.value ? 'on' : ''}`} title="加速动画" onClick={() => setFast(!fast.value)}>⏩</button>
         <SoundButton />
@@ -94,7 +96,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
       </div>
 
       <div class="g-body">
-        <div class="g-map">
+        <div class="g-map" data-tour="map">
           <div class="floor-tabs">
             {[...FLOORS].reverse().map((f) => (
               <button class={f === floor ? 'on' : ''} onClick={() => (focusFloor.value = f)}>
@@ -112,7 +114,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
           )}
         </div>
 
-        <div class={`g-side ${drawer ? 'open' : ''}`}>
+        <div class={`g-side ${drawer ? 'open' : ''}`} data-tour="players">
           <div class="tabs">
             <button class={side === 'players' ? 'on' : ''} onClick={() => setSide('players')}>玩家</button>
             <button class={side === 'log' ? 'on' : ''} onClick={() => setSide('log')}>日志</button>
@@ -134,7 +136,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
       {/* 底部：我的面板 + 行动 */}
       <div class="g-dock">
         {me ? (
-          <div class={`me-panel ${expand ? 'expanded' : ''}`}>
+          <div class={`me-panel ${expand ? 'expanded' : ''}`} data-tour="me">
             <div class="me-head" onClick={() => setExpand(!expand)}>
               <Portrait explorer={me.explorer} size={44} dead={me.dead} />
               <div>
@@ -145,14 +147,14 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
               <div class="me-compact"><TraitChips p={me} /><span class="muted tiny">🃏{me.cards.length} {expand ? '▲' : '▼'}</span></div>
             </div>
             <TraitTracks p={me} />
-            <div class="me-cards">
+            <div class="me-cards" data-tour="cards">
               {me.cards.map((c) => <CardView id={c} small onClick={() => setInspect('card:' + c)} />)}
               {!me.cards.length && <span class="muted small">还没有物品</span>}
             </div>
           </div>
         ) : <div class="muted">你在观战</div>}
 
-        <div class="dock-actions">
+        <div class="dock-actions" data-tour="actions">
           {req?.kind === 'turn' && <TurnBar req={req} answer={answer} open={setModal} />}
           {req?.kind === 'rotate' && <RotateBar req={req} rot={rot} setRot={setRot} send={answer} />}
           {req?.kind === 'monster' && <MonsterBar s={s} req={req} send={answer} sel={monSel} setSel={setMonSel} />}
@@ -170,6 +172,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
       {req?.kind === 'turn' && modal === 'loot' && <LootModal s={s} req={req} send={answer} onClose={() => setModal(null)} />}
       {modal === 'brief' && <BriefModal onClose={() => setModal(null)} />}
       {inspect && <Inspect k={inspect} onClose={() => setInspect(null)} />}
+      {you != null && <Coach ctx={{ s, req, you, side: m.side }} tutorial={!!room.settings.tutorial} />}
       <OverlayLayer s={s} you={you} side={m.side} brief={m.brief} onOpenBrief={() => setModal('brief')} room={room} isHost={isHost}
         onRematch={() => send({ type: 'rematch' })} onLeave={onLeave} />
     </div>
@@ -188,11 +191,11 @@ function TurnBar({ req, answer, open }: { req: Extract<Request, { kind: 'turn' }
         {req.actions.map((a) => (
           <button class="btn small" title={a.desc} onClick={() => answer({ kind: 'turn', a: 'act', id: a.id })}>{a.label}</button>
         ))}
-        {req.attacks.length > 0 && <button class="btn small danger" onClick={() => open('attack')}>⚔ 攻击</button>}
+        {req.attacks.length > 0 && <button class="btn small danger" data-tour="attack" onClick={() => open('attack')}>⚔ 攻击</button>}
         {req.trades.length > 0 && <button class="btn small ghost" onClick={() => open('trade')}>交易</button>}
         {req.loot.length > 0 && <button class="btn small ghost" onClick={() => open('loot')}>搜刮遗体</button>}
         <span class="spacer" />
-        <button class="btn primary" onClick={() => answer({ kind: 'turn', a: 'end' })}>结束回合</button>
+        <button class="btn primary" data-tour="end" onClick={() => answer({ kind: 'turn', a: 'end' })}>结束回合</button>
       </div>
     </div>
   );
