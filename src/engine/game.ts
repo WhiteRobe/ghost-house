@@ -434,11 +434,9 @@ export class Game {
       const lk = this.findTile(link);
       if (lk && !out.includes(lk)) out.push(lk);
     }
-    for (const r of Object.values(ROOMS)) {
-      if (r.link === t.room) {
-        const lk = this.findTile(r.id);
-        if (lk && !out.includes(lk)) out.push(lk);
-      }
+    for (const rid of REVERSE_LINKS[t.room] ?? []) {
+      const lk = this.findTile(rid);
+      if (lk && !out.includes(lk)) out.push(lk);
     }
     for (const [a, b] of this.state.links) {
       if (a === key && !out.includes(b)) out.push(b);
@@ -487,21 +485,32 @@ export class Game {
     return best;
   }
 
-  /** 不限预算的最短步数（AI 与剧本用） */
+  private distCache = new Map<string, Map<string, number>>();
+  private distSig = '';
+
+  /** 不限预算的最短步数（AI 与剧本用）。按起点缓存整张 BFS 结果，地图变化时失效 */
   distance(from: string, to: string): number {
     if (from === to) return 0;
-    const seen = new Map<string, number>([[from, 0]]);
-    const q = [from];
-    while (q.length) {
-      const cur = q.shift()!;
-      for (const nk of this.neighbors(cur)) {
-        if (seen.has(nk)) continue;
-        seen.set(nk, seen.get(cur)! + 1);
-        if (nk === to) return seen.get(nk)!;
-        q.push(nk);
-      }
+    const sig = Object.keys(this.state.tiles).length + ':' + this.state.links.length;
+    if (sig !== this.distSig) {
+      this.distSig = sig;
+      this.distCache.clear();
     }
-    return Infinity;
+    let seen = this.distCache.get(from);
+    if (!seen) {
+      seen = new Map<string, number>([[from, 0]]);
+      const q = [from];
+      while (q.length) {
+        const cur = q.shift()!;
+        for (const nk of this.neighbors(cur)) {
+          if (seen.has(nk)) continue;
+          seen.set(nk, seen.get(cur)! + 1);
+          q.push(nk);
+        }
+      }
+      this.distCache.set(from, seen);
+    }
+    return seen.get(to) ?? Infinity;
   }
 
   /** 视线：同楼层、沿同一方向、每一步都穿过相连的门 */
@@ -644,6 +653,19 @@ export class Game {
     return tileKey(spot.floor, spot.x, spot.y);
   }
 
+  /** 保证三层楼互相可达：地下室走不到时，走廊尽头露出一道暗梯 */
+  ensureConnected() {
+    const hall = START_ROOMS[1][0];
+    const base = START_ROOMS[4][0];
+    if (this.distance(hall, base) === Infinity) {
+      this.link(hall, base);
+      this.log('走廊尽头的墙板松动了，后面是一道通往地下室的暗梯。', 'info');
+    }
+    for (const p of this.state.players) {
+      if (!p.dead && this.distance(p.tile, hall) === Infinity) this.link(p.tile, hall);
+    }
+  }
+
   /** 剧本临时连接两个格子 */
   link(a: string, b: string) {
     this.state.links.push([a, b]);
@@ -765,6 +787,22 @@ export class Game {
     return amount;
   }
 
+  /** 逃出房子：不再行动，手牌留在原地以外的地方（直接移出游戏），不算死亡 */
+  escape(seat: number, text?: string) {
+    const p = this.p(seat);
+    if (p.dead) return;
+    p.dead = true;
+    p.flags.escaped = true;
+    p.cards = [];
+    this.log(text ?? `${p.name} 逃出了这栋房子`, 'good', seat);
+    if (this.state.turn === seat) this.turnEnded = true;
+  }
+
+  /** 是否逃出 */
+  escaped(seat: number): boolean {
+    return !!this.p(seat).flags.escaped;
+  }
+
   *kill(seat: number, killer: number | null): Gen {
     const p = this.p(seat);
     if (p.dead) return;
@@ -852,9 +890,17 @@ export class Game {
       }
       if (!skip && def.run) yield* this.safe(def.run(this, seat));
       deck.push(id);
-      if (def.haunt && this.state.phase === 'explore' && !this.p(seat).dead) {
-        if (this.state.omensDrawn >= 3) yield* this.beginHaunt(seat, def.haunt);
-        else this.log('……房子低语着，但时机未到。', 'haunt');
+      if (def.haunt && this.state.phase === 'explore' && !this.p(seat).dead && !this.config.debugHaunt) {
+        // 事件引发的异变：至少 3 个凶兆后，掷「凶兆数」颗骰 5+ 才会成真
+        const n = this.state.omensDrawn;
+        if (n >= 3) {
+          const dice = this.rollDice(n);
+          const sum = dice.reduce((a, b) => a + b, 0);
+          const ok = sum >= 5;
+          this.emit({ t: 'hauntRoll', seat, dice, total: sum, need: `「${def.name}」· 5 点以上触发`, ok });
+          if (ok) yield* this.beginHaunt(seat, def.haunt);
+          else this.log('……房子低语着，但时机未到。', 'haunt');
+        } else this.log('……房子低语着，但时机未到。', 'haunt');
       }
       return id;
     }
@@ -1224,7 +1270,7 @@ export class Game {
       if (!attacked.has(m.id)) {
         for (const o of this.state.players) {
           if (o.dead || o.tile !== m.tile || this.isTraitor(o.seat)) continue;
-          if (this.haunt?.canAttack && !this.haunt.canAttack(this, -1, { seat: o.seat })) continue;
+          if (this.haunt?.canAttack && !this.haunt.canAttack(this, -1, { seat: o.seat }, m.id)) continue;
           attacks.push({ target: { seat: o.seat }, label: o.name, weapons: [] });
         }
       }
@@ -1285,7 +1331,9 @@ export class Game {
     this.log(`异变降临：${def.title}`, 'haunt');
     if (traitor != null) this.log(`${s.players[traitor].name} 成为了背叛者！`, 'haunt');
     else if (def.type === 'hidden') this.log('你们之中藏着一个背叛者……', 'haunt');
+    this.ensureConnected();
     if (def.setup) yield* this.safe(def.setup(this));
+    this.ensureConnected();
     const first = this.traitor() ?? revealer;
     this.forceNext = (first + 1) % this.n;
   }
@@ -1405,6 +1453,11 @@ export class Game {
     this.emit({ t: 'log', text, tone, seat, side });
   }
 
+  /** 只有某一名玩家能看到的消息 */
+  tell(seat: number, text: string, tone: 'good' | 'bad' | 'info' | 'haunt' = 'haunt') {
+    this.emit({ t: 'log', text: '（只有你知道）' + text, tone, seat, to: seat });
+  }
+
   /** 内容层出错时跳过，不让整局崩掉 */
   *safe<T>(g: Gen<T>): Gen<T | undefined> {
     try {
@@ -1437,8 +1490,10 @@ export class Game {
   }
 
   /** 事件是否对某个视角可见 */
-  static visible(e: GameEvent, side: Side | null): boolean {
-    return e.t !== 'log' || !e.side || e.side === side;
+  static visible(e: GameEvent, side: Side | null, seat: number | null = null): boolean {
+    if (e.t !== 'log') return true;
+    if (e.to != null && e.to !== seat) return false;
+    return !e.side || e.side === side;
   }
 
   /** 剧本 AI 提示 */
@@ -1457,6 +1512,10 @@ export class Game {
 }
 
 const FLOOR_LABEL: Record<Floor, string> = { B: '地下室', G: '一楼', U: '二楼' };
+
+/** 房间 id -> 以它为 link 目标的房间 */
+const REVERSE_LINKS: Record<string, string[]> = {};
+for (const r of Object.values(ROOMS)) if (r.link) (REVERSE_LINKS[r.link] ??= []).push(r.id);
 
 function fallbackHaunt(_omen: string): number {
   const ids = Object.keys(HAUNTS).map(Number).sort((a, b) => a - b);

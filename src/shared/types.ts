@@ -208,7 +208,7 @@ export type GameEvent =
   | { t: 'lose'; seat: number; card: string; to?: number }
   | { t: 'roll'; seat?: number; monster?: number; label: string; dice: number[]; total: number; need?: number; ok?: boolean }
   | { t: 'trait'; seat: number; trait: Trait; from: number; to: number }
-  | { t: 'log'; text: string; seat?: number; tone?: 'good' | 'bad' | 'info' | 'haunt'; side?: Side }
+  | { t: 'log'; text: string; seat?: number; tone?: 'good' | 'bad' | 'info' | 'haunt'; side?: Side; /** 只发给这个座位 */ to?: number }
   | { t: 'hauntRoll'; seat: number; dice: number[]; total: number; need: string; ok: boolean }
   | { t: 'haunt'; id: number; title: string; revealer: number; traitor: number | null }
   | { t: 'attack'; from: Target; to: Target; trait: Trait; a: number[]; d: number[]; damage: number; loser: Target | null }

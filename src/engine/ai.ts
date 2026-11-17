@@ -75,9 +75,13 @@ function frontierTiles(g: Game): string[] {
 }
 
 /** 在可达格中挑一个离目标最近、且比当前更近的格子 */
+/** 回合结束停在这些房间会被送走或受伤，AI 尽量不停在这里 */
+const TRAP = new Set(['laundry-chute', 'collapsed', 'furnace', 'dumbwaiter']);
+
 function stepToward(g: Game, here: string, moves: Record<string, number>, goals: string[]): string | null {
   if (!goals.length) return null;
-  const dist = (k: string) => Math.min(...goals.map((t) => g.distance(k, t)));
+  const trap = (k: string) => (!goals.includes(k) && TRAP.has(g.state.tiles[k]?.room ?? '') ? 0.6 : 0);
+  const dist = (k: string) => Math.min(...goals.map((t) => g.distance(k, t))) + trap(k);
   const cur = dist(here);
   let best: string | null = null;
   let bestD = cur;

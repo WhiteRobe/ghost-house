@@ -336,3 +336,13 @@ p { line-height: 1.7; }
   .wait-banner { top: 40px; font-size: 12px; }
 }
 .p-letter { fill: #fff; font-size: 13px; text-anchor: middle; font-family: var(--serif); font-weight: 700; }
+.me-compact { display: none; margin-left: auto; align-items: center; gap: 6px; }
+@media (max-width: 860px) {
+  .me-compact { display: flex; }
+  .me-head { cursor: pointer; }
+  .me-panel:not(.expanded) .tracks, .me-panel:not(.expanded) .me-cards { display: none; }
+  .hide-m { display: none; }
+  .g-dock { gap: 6px; padding: 6px 8px calc(6px + var(--safe-b)); }
+  .actionbar { padding: 6px 8px; }
+  .ab-title { font-size: 14px; }
+}

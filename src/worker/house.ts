@@ -548,7 +548,7 @@ export class HouseDO extends DurableObject<Env> {
     }
     return {
       type: 'game', seq: game.seq, full, you, pending,
-      events: events.filter((e) => Game.visible(e, view.side)),
+      events: events.filter((e) => Game.visible(e, view.side, you)),
       state: view.state, brief: view.brief, side: view.side,
     };
   }

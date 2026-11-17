@@ -4,7 +4,7 @@ import { FLOORS, FLOOR_NAME, parseKey, type Answer, type Floor, type Request } f
 import type { ClientMsg, RoomInfo } from '../../shared/protocol';
 import { MapView } from './MapView';
 import { game, logLines, focusFloor, overlay, fast, setFast, animating } from './store';
-import { CardView, PlayerList, TraitTracks, Portrait } from './parts';
+import { CardView, PlayerList, TraitTracks, TraitChips, Portrait } from './parts';
 import { AttackModal, CardModal, ChooseModal, DamageModal, LootModal, MonsterBar, PlayerModal, RotateBar, TradeAskModal, TradeModal } from './Decisions';
 import { OverlayLayer } from './Overlays';
 import { roomName, seatName } from './describe';
@@ -30,6 +30,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
   const [monSel, setMonSel] = useState<number | null>(null);
   const [side, setSide] = useState<'players' | 'log'>('players');
   const [drawer, setDrawer] = useState(false);
+  const [expand, setExpand] = useState(false);
   const floor = focusFloor.value;
 
   useEffect(() => startMusic(s.phase === 'haunt' ? 'haunt' : s.phase === 'end' ? null : 'explore'), [s.phase]);
@@ -82,7 +83,7 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
         <div class="g-title">
           {s.haunt ? <><span class="haunt-chip">异变</span> {s.haunt.title}</> : <>探索中 · 凶兆 {s.omensDrawn}/9</>}
           {s.haunt?.track && <span class="tag">{s.haunt.track.label} {s.haunt.track.value}{s.haunt.track.max != null ? '/' + s.haunt.track.max : ''}</span>}
-          <span class="muted small">第 {s.round} 轮{s.haunt ? ` · 异变第 ${s.haunt.round} 轮` : ''}</span>
+          <span class="muted small hide-m">第 {s.round} 轮{s.haunt ? ` · 异变第 ${s.haunt.round} 轮` : ''}</span>
         </div>
         <div class="spacer" />
         {s.haunt && <button class="btn small primary" onClick={() => setModal('brief')}>📜 手册</button>}
@@ -133,14 +134,15 @@ export function GameView({ room, send, isHost, onLeave }: { room: RoomInfo; send
       {/* 底部：我的面板 + 行动 */}
       <div class="g-dock">
         {me ? (
-          <div class="me-panel">
-            <div class="me-head">
+          <div class={`me-panel ${expand ? 'expanded' : ''}`}>
+            <div class="me-head" onClick={() => setExpand(!expand)}>
               <Portrait explorer={me.explorer} size={44} dead={me.dead} />
               <div>
                 <b>{me.name}</b>
                 {m.side && s.phase !== 'explore' && <span class={`tag tiny side-${m.side}`}>{SIDE_NAME[m.side]}</span>}
                 <div class="muted tiny">在「{roomName(s, me.tile)}」{s.turn === you && s.phase !== 'end' ? ` · 剩余移动 ${s.moveLeft}` : ''}</div>
               </div>
+              <div class="me-compact"><TraitChips p={me} /><span class="muted tiny">🃏{me.cards.length} {expand ? '▲' : '▼'}</span></div>
             </div>
             <TraitTracks p={me} />
             <div class="me-cards">

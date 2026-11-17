@@ -37,6 +37,8 @@
 | `yield* g.hurt(target, n, trait, by)` | 直接造成伤害 |
 | `yield* g.kill(seat, killer)` | 异变后直接杀死 |
 | `g.endTurn()` | 结束当前回合 |
+| `g.escape(seat, text?)` / `g.escaped(seat)` | 玩家逃出房子（不再行动，不算死亡；界面显示「已逃出」） |
+| `g.tell(seat, text)` | 只有这一名玩家能看到的消息（隐藏身份类剧本用） |
 | `g.win('hero'\|'traitor'\|'none'\|'solo', text?, seats?)` | 立即判定胜负（一般用 `checkWin` 更好） |
 | `g.hv` / `g.hs` | 剧本公开变量 / 秘密变量（对象，可直接读写） |
 | `g.setTrack(label, value, max?)` | 公开计数轨 |
@@ -108,6 +110,7 @@
 - `hero` 写给幸存者、`traitorSide` 写给背叛者（coop 可省略；ffa 时所有人看 `traitorSide`）。每份都要写清楚：目标、特殊规则、特殊行动、胜利文本。
 - 胜负尽量写在 `checkWin`，每步之后都会检查。默认规则：所有幸存者死亡则背叛者胜（coop 除外）。超过 40 轮强制平局，所以要保证 AI 互打一般 15 轮内能分胜负。
 - 必须写 `ai` 提示，让 AI 知道该去哪、做什么：`{ goals: 格子[], actions: [行动 id], attack?: boolean, targets?: [...] }`。
+- 异变开始时（setup 前后）引擎会保证地下室可达：走不到时自动把走廊和地下室楼梯口连起来。
 - 剧本需要的房间如果还没出现，用 `g.placeRoom('well')` 放出来（返回 null 时要有退路，比如改用 `g.p(traitor).tile`）。
 - 怪物可以设 `hp`（扣血）或 `stun: false`（无法伤害），默认受伤眩晕。
 - 测试：`npx vitest run test/haunts.test.ts -t "h12 "`（会跑 6 局不同人数的 AI 互打，检查无报错、能结束、可重放）。

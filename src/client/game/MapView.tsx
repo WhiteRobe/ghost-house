@@ -27,7 +27,7 @@ export interface MapProps {
 export function MapView(p: MapProps) {
   const { s, floor } = p;
   const box = useRef<HTMLDivElement>(null);
-  const [zoom, setZoom] = useState(() => (window.innerWidth < 700 ? 0.7 : 1));
+  const [zoom, setZoom] = useState(() => (window.innerWidth < 700 ? 0.65 : 1));
   const tiles = Object.entries(s.tiles).filter(([, t]) => t.floor === floor);
   let minX = 0, maxX = 0, minY = 0, maxY = 0;
   for (const [, t] of tiles) {
@@ -79,7 +79,7 @@ export function MapView(p: MapProps) {
     return [T / 2 + (c - (cols - 1) / 2) * gap, T / 2 - 6 + (r - (rows - 1) / 2) * gap];
   };
   const occupants: Record<string, { id: string; kind: 'p' | 'm'; seat?: number; mid?: number }[]> = {};
-  for (const pl of s.players) (occupants[pl.tile] ??= []).push({ id: 'p' + pl.seat, kind: 'p', seat: pl.seat });
+  for (const pl of s.players) if (!pl.flags.escaped) (occupants[pl.tile] ??= []).push({ id: 'p' + pl.seat, kind: 'p', seat: pl.seat });
   for (const m of s.monsters) (occupants[m.tile] ??= []).push({ id: 'm' + m.id, kind: 'm', mid: m.id });
 
   const exploreFrom = p.exploreFrom ? parseKey(p.exploreFrom) : null;

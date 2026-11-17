@@ -164,7 +164,7 @@ export interface HauntDef {
   /** 掷骰加成 */
   rollBonus?: (g: Game, seat: number, trait: Trait, purpose: RollPurpose) => number;
   /** 是否可以攻击目标（默认按阵营） */
-  canAttack?: (g: Game, seat: number, target: { seat?: number; monster?: number }) => boolean;
+  canAttack?: (g: Game, seat: number, target: { seat?: number; monster?: number }, attackerMonster?: number) => boolean;
   /** 每步之后检查胜负 */
   checkWin?: (g: Game) => { side: Side | 'none' | 'solo'; seats?: number[]; text?: string } | null;
   ai?: {

@@ -80,6 +80,7 @@ export function PlayerList({ s, you, seats, onPick, waiting }: { s: GameState; y
                 {p.ai && <span class="tag tiny">AI</span>}
                 {offline && <span class="tag tiny warn">离线</span>}
                 {p.side && s.phase !== 'explore' && <span class={`tag tiny side-${p.side}`}>{SIDE_NAME[p.side]}</span>}
+                {p.flags.escaped && <span class="tag tiny ok">已逃出</span>}
                 {waiting === p.seat && <span class="thinking">…</span>}
               </div>
               <div class="muted tiny">{ex?.name} · 🃏{p.cards.length}</div>
